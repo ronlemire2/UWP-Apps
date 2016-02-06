@@ -1,0 +1,111 @@
+﻿<UserControl
+    x:Class="FeedReader.Views.FeedsUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FeedReader.Views"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Name="FeedsViewSource"
+                              Source="{Binding Feeds}" />
+
+        <SolidColorBrush x:Key="BlockBackgroundBrush" Color="#FF557EB9"/>
+
+        <Style x:Key="GridTitleTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BasicTextStyle}">
+            <Setter Property="FontSize" Value="26.667"/>
+            <Setter Property="Margin" Value="12,0,12,2"/>
+        </Style>
+
+        <Style x:Key="GridDescriptionTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BasicTextStyle}">
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="12,0,12,60"/>
+        </Style>
+
+        <DataTemplate x:Key="DefaultGridViewItemTemplate">
+            <Grid HorizontalAlignment="Left" 
+                  Width="200" 
+                  Height="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0"
+                    Background="CadetBlue">
+                    <TextBlock Text="{Binding FeedName}" Style="{StaticResource GridTitleTextStyle}"/>
+                </Border>
+                <Border Grid.Row="1"
+                        Background="Black">
+                    <TextBlock Text="{Binding Link}"
+                        Style="{StaticResource CaptionTextBlockStyle}" 
+                        Foreground="White" 
+                        FontSize="12"
+                        Padding="5"
+                        TextWrapping="Wrap"/>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DefaultListViewItemTemplate">
+            <Border Background="CadetBlue"
+                    Width="380"
+                    Height="80" 
+                    Padding="5"
+                    Margin="5">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                            Foreground="White"
+                            FontSize="20" 
+                            TextWrapping="Wrap">
+                        <Run Text="{Binding FeedName}"/> Feed
+                    </TextBlock>
+                    <Border Grid.Row="1"
+                            Background="Black">
+                        <TextBlock               
+                            Text="{Binding Link}" 
+                            TextWrapping="Wrap"
+                            Foreground="White"
+                            FontSize="14" />
+                    </Border>
+                </Grid>
+            </Border>
+            <!--<Border Background="CadetBlue"
+                    Height="80"
+                    Margin="0,5,0,5">
+                <StackPanel HorizontalAlignment="Left" 
+                            Margin="12,8,0,0">
+                    <TextBlock Text="{Binding FeedName}" 
+                               MaxHeight="56" 
+                               TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Link}" />
+                </StackPanel>
+            </Border>-->
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <!-- http://stackoverflow.com/questions/27195232/how-to-prevent-listbox-from-autoselecting-first-item-when-using-collectionviewso -->
+        <GridView x:Name="FeedsGridView"
+                  ItemsSource="{Binding Source={StaticResource FeedsViewSource}}"
+                  IsItemClickEnabled="True"
+                  IsSynchronizedWithCurrentItem="False"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedFeed, Mode=TwoWay}"
+                  ItemTemplate="{StaticResource DefaultGridViewItemTemplate}"
+                  SelectionChanged="FeedsGridView_SelectionChanged">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding GridViewSelectionChangedCommand}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+        </GridView>
+    </Grid>
+</UserControl>
+

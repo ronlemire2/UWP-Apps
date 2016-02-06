@@ -1,0 +1,64 @@
+﻿{
+  "Feeds": [
+    {
+      "Id": "1",
+      "Name": "CNN",
+      "Link": "http://rss.cnn.com/rss/cnn_topstories.rss",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "2",
+      "Name": "FoxNews",
+      "Link": "http://feeds.foxnews.com/foxnews/latest",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "3",
+      "Name": "PBS",
+      "Link": "http://feeds.feedburner.com/pbs/qMdg",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "4",
+      "Name": "AP",
+      "Link": "http://hosted.ap.org/lineups/POLITICSHEADS.rss?SITE=AP&SECTION=HOME",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "5",
+      "Name": "NYTimes",
+      "Link": "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "6",
+      "Name": "USAToday",
+      "Link": "http://rssfeeds.usatoday.com/usatoday-NewsTopStories",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "7",
+      "Name": "Reuters",
+      "Link": "http://feeds.reuters.com/reuters/topNews",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "8",
+      "Name": "Aljazeera",
+      "Link": "http://feeds.aljazeera.net/podcasts/thestream",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "9",
+      "Name": "LATimes",
+      "Link": "http://www.latimes.com/local/politics/rss2.0.xml",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "10",
+      "Name": "Cartoons",
+      "Link": "http://editorialcartoonists.com/rss/daily.xml",
+      "LastUpdated": " "
+    }
+  ]
+}

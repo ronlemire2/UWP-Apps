@@ -1,0 +1,53 @@
+﻿{
+  "Feeds": [
+    {
+      "Id": "1",
+      "Name": "WindowsAppDev",
+      "Link": "http://blogs.msdn.com/b/windowsappdev/atom.aspx",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "2",
+      "Name": "ZDNet",
+      "Link": "http://zdnet.com.feedsportal.com/c/35462/f/675633/index.rss",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "3",
+      "Name": "CNET",
+      "Link": "http://www.cnet.com/rss/news/",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "4",
+      "Name": "Wired",
+      "Link": "http://feeds.wired.com/wired/index",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "5",
+      "Name": "TechChrunch",
+      "Link": "http://feeds.feedburner.com/TechCrunch/",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "6",
+      "Name": "TechRadar",
+      "Link": "http://feeds.webservice.techradar.com/us/rss",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "7",
+      "Name": "MSDN",
+      "Link": "https://sxpdata.microsoft.com/feeds/3.0/msdntn/MSDNMagazine_enus",
+      "LastUpdated": " "
+    },
+    {
+      "Id": "8",
+      "Name": "VisualStudio",
+      "Link": "https://visualstudiomagazine.com/rss-feeds/blogs.aspx",
+      "LastUpdated": " "
+    }
+
+  ]
+}

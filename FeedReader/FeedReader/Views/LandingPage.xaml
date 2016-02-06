@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="FeedReader.Views.LandingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FeedReader.Views"
+    xmlns:controls="using:FeedReader.Controls"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    FontSize="20"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="WhiteSmoke"
+                BorderThickness="5"
+                Margin="5,0,15,0">
+            <Border.Background>
+                <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Images/ocean.jpg"/>
+            </Border.Background>
+            <TextBlock x:Name="title"
+                       Text="FEED READER"
+                       FontSize="24"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"
+                       Foreground="Black" 
+                       FontWeight="Bold"/>
+        </Border>
+
+        <Border Grid.Row="1"
+                BorderBrush="WhiteSmoke"
+                BorderThickness="5"
+                Margin="5,5,15,0">
+            <ScrollViewer  
+                      EntranceNavigationTransitionInfo.IsTargetElement="True">
+                <StackPanel Background="AliceBlue">
+                    <Grid Padding="0,10,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" TextWrapping="Wrap" Text="Comics:" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" TextWrapping="Wrap" Text="http://www.comicsyndicate.org/"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" TextWrapping="Wrap" Text="Politics:" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" TextWrapping="Wrap" Text="CNN, FoxNews, NYTimes, AP, USAToday etc."/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,0,0,0" TextWrapping="Wrap" Text="Tech:" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="10,0,0,0" TextWrapping="Wrap" Text="WindowsAppDev, ZDNet, TechCrunch, Wired, CNET etc."/>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+    </Grid>
+</Page>
