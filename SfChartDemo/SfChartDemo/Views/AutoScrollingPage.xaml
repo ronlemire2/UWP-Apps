@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="SfChartDemo.Views.AutoScrollingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SfChartDemo.Views"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:chart="using:Syncfusion.UI.Xaml.Charts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="1050">
+        <Grid>
+            <Grid.DataContext>
+                <local:ProductDetails />
+            </Grid.DataContext>
+
+            <Grid.Resources>
+                <!--Template for Strip line text-->
+                <DataTemplate x:Key="yStripText">
+                    <TextBlock Text="{Binding}" Foreground="#333333" FontSize="12"/>
+                </DataTemplate>
+            </Grid.Resources>
+
+            <chart:SfChart x:Name="Chart1" Margin="25" 
+                           HorizontalAlignment="Left" VerticalAlignment="Center">
+
+                <chart:SfChart.Header>
+                    <TextBlock Text="Human Heart Pulse" FontSize="20" FontFamily="Segoe UI" Margin="0,20,0,10"/>
+                </chart:SfChart.Header>
+
+                <!--PrimaryAxis with label customization-->
+                <chart:SfChart.PrimaryAxis>
+                    <chart:CategoryAxis x:Name="XAxis"
+                                        EnableScrollBarResizing="False" EnableTouchMode="True" 
+                                        EnableScrollBar="True" Header="Time" LabelFormat="HH:mm" Foreground="Black" 
+                                        FontWeight="SemiBold"  EdgeLabelsDrawingMode="Fit"/>
+                </chart:SfChart.PrimaryAxis>
+
+                <!--Secondary Axis with Strip lines customization-->
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis x:Name="SecondaryAxis" Interval="30" Minimum="60" Maximum="300" 
+                                         Foreground="Black" FontWeight="SemiBold"  Header="Heart Pulse Rate in bpm">
+
+                        <chart:NumericalAxis.StripLines>
+                            <chart:ChartStripLine Label="Low" LabelTemplate="{StaticResource yStripText}" 
+                                              Width="31" Start="89" Background="#b4e8f3"/>
+                            <chart:ChartStripLine Label="High" LabelTemplate="{StaticResource yStripText}" 
+                                              Width="31" Start="239" Background="#efc7c7"/>
+                        </chart:NumericalAxis.StripLines>
+                    </chart:NumericalAxis>
+                </chart:SfChart.SecondaryAxis>
+
+                <chart:SplineSeries x:Name="Series1" StrokeThickness="2" ItemsSource="{Binding}" 
+                                    XBindingPath="Speed" YBindingPath="Rate"/>
+            </chart:SfChart>
+        </Grid>
+    </Grid>
+</Page>
