@@ -1,0 +1,18 @@
+﻿<windows:PrismUnityApplication
+    x:Class="YouTubePlayer.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:YouTubePlayer"
+    xmlns:windows="using:Prism.Unity.Windows"
+    RequestedTheme="Light">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Common/StandardStyles.xaml" />
+                <ResourceDictionary>
+                    <x:String x:Key="AppName">YouTubePlayer</x:String>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</windows:PrismUnityApplication>
