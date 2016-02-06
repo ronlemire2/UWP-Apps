@@ -1,0 +1,133 @@
+﻿<Page x:Name="Sorting"
+    x:Class="SfDataGridDemo.Views.SortingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SfDataGridDemo.Views"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:converters="using:SfDataGridDemo.Converters"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Grid"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:SortClickActionConverter x:Key="sortClickActionConveter" />
+            <converters:DateFormatConverter x:Key="dateFormatConverter" />
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="3,0,3,0" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <ToggleButton x:Name="optionsButton"
+                Content="Options"
+                Margin="10,0,0,0"
+                Click="optionsButton_Click"
+                HorizontalAlignment="Left" />
+        
+        <syncfusion:SfDataGrid x:Name="sfDataGrid" 
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="10,5,10,15"
+                        ItemsSource="{Binding EmployeeVMs}"
+                        AllowSorting="{Binding IsChecked,
+                                                ElementName=ckbAllowSort}"
+                        AllowTriStateSorting="{Binding IsChecked,
+                                                        ElementName=ckbEnableTriStateSorting}"
+                        AutoGenerateColumns="False"
+                        ColumnSizer="SizeToHeader"
+                        FrozenColumnCount="1"
+                        ScrollViewer.VerticalScrollMode="Enabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        ScrollViewer.HorizontalScrollMode="Enabled"
+                        ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                        NavigationMode="Row"
+                        ShowSortNumbers="{Binding IsChecked,
+                                                    ElementName=ckbShowSortNumbers}"
+                        SortClickAction="{Binding SelectedIndex,
+                                                    ElementName=cmbSortClickAction,
+                                                         Converter={StaticResource sortClickActionConveter}}">
+
+            <syncfusion:SfDataGrid.SortColumnDescriptions>
+                <syncfusion:SortColumnDescription ColumnName="Name" />
+            </syncfusion:SfDataGrid.SortColumnDescriptions>
+
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridTextColumn AllowSorting="True" MappingName="EmployeeId" />
+                <syncfusion:GridTextColumn AllowSorting="True"
+                                   HeaderText="Employee Name"
+                                   MappingName="Name" />
+                <syncfusion:GridTextColumn MappingName="Gender" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding HireDate,
+                                                                    Converter={StaticResource dateFormatConverter}}"
+                                   HeaderText="Hire Date"
+                                   TextAlignment="Right" />
+                <syncfusion:GridTextColumn HeaderText="Designation"
+                                   MappingName="Title"
+                                   MinimumWidth="240" />
+            </syncfusion:SfDataGrid.Columns>
+
+        </syncfusion:SfDataGrid>
+
+        <StackPanel x:Name="optionsStackPanel"
+                    Margin="10,13,10,15" 
+                    Visibility="Visible"
+                    Grid.Row="1"
+                    Grid.Column="1">
+            <CheckBox x:Name="ckbAllowSort"
+                Margin="5"
+                Content="Allow Sort"
+                IsChecked="True" />
+            <CheckBox x:Name="ckbEnableTriStateSorting"
+                Margin="5"
+                Content="Allow TriState Sorting"
+                IsChecked="True"
+                IsEnabled="{Binding IsChecked,
+                                          ElementName=ckbAllowSort}" />
+            <CheckBox x:Name="ckbShowSortNumbers"
+                Margin="5"
+                Content="Show Sort Numbers"
+                IsChecked="False"
+                IsEnabled="{Binding IsChecked,
+                                          ElementName=ckbAllowSort}" />
+            <ComboBox x:Name="cmbSortClickAction"
+                Margin="5"
+                IsEnabled="{Binding IsChecked,
+                                          ElementName=ckbAllowSort}"
+                SelectedIndex="0">
+                <ComboBoxItem Content="SingleClick" />
+                <ComboBoxItem Content="DoubleClick" />
+            </ComboBox>
+
+            <TextBlock Margin="5" Text="Allow Sort for Columns:" />
+
+            <CheckBox x:Name="ckbEmployeeID"
+                DataContext="{Binding ElementName=sfDataGrid}"
+                Margin="5" IsChecked="{Binding Path=Columns[0].AllowSorting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                
+                Content="Allow Sort Employee Id Column"                
+                IsEnabled="{Binding IsChecked,
+                                          ElementName=ckbAllowSort}" />
+
+            <CheckBox x:Name="ckbName"
+                DataContext="{Binding ElementName=sfDataGrid}"
+                IsChecked="{Binding Path=Columns[1].AllowSorting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                
+                Margin="5"
+                Content="Allow Sort Employee Name Column"                
+                IsEnabled="{Binding IsChecked,
+                                          ElementName=ckbAllowSort}" />
+
+        </StackPanel>
+    </Grid>
+</Page>

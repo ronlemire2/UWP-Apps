@@ -1,0 +1,65 @@
+﻿<Page x:Name="Grouping"
+    x:Class="SfDataGridDemo.Views.GroupingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SfDataGridDemo.Views"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:converters="using:SfDataGridDemo.Converters"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Grid"     
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:CurrencyFormatConverter x:Key="currencyFormatConverter" />
+        </ResourceDictionary>    
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <syncfusion:SfDataGrid x:Name="sfGrid"
+                               Margin="10,13,10,15"
+                               ItemsSource="{Binding YearlySalesDetails}"
+                               AllowFrozenGroupHeaders="True"
+                               AllowGrouping="True"
+                               Grid.Column="0"
+                               AllowResizingColumns="True"
+                               AutoExpandGroups="True"
+                               AutoGenerateColumns="False"
+                               ColumnSizer="Star"
+                               NavigationMode="Row"
+                               ShowColumnWhenGrouped="True"
+                               ShowGroupDropArea="True">
+
+            <syncfusion:SfDataGrid.GroupColumnDescriptions>
+                <syncfusion:GroupColumnDescription ColumnName="Year" />
+            </syncfusion:SfDataGrid.GroupColumnDescriptions>
+
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridTextColumn MappingName="Name" />
+                <syncfusion:GridTextColumn HorizontalHeaderContentAlignment="Center" MappingName="Year" TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding QS1,
+                                                                    Converter={StaticResource currencyFormatConverter}}"
+                                           HeaderText="Sales in Quarter1"
+                                           TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding QS2,
+                                                                    Converter={StaticResource currencyFormatConverter}}"
+                                           HeaderText="Sales in Quarter2"
+                                           TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding QS3,
+                                                                    Converter={StaticResource currencyFormatConverter}}"
+                                           HeaderText="Sales in Quarter3"
+                                           TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding QS4,
+                                                                    Converter={StaticResource currencyFormatConverter}}"
+                                           HeaderText="Sales in Quarter4"
+                                           TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding Total,
+                                                                    Converter={StaticResource currencyFormatConverter}}"
+                                           HeaderText="Total Sales in Year"
+                                           TextAlignment="Right" />
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+    </Grid>
+</Page>

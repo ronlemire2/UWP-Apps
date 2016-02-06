@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{942201CF-8EA7-46ED-B06D-24E4DE0A3568}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SfDataGridDemo</RootNamespace>
+    <AssemblyName>SfDataGridDemo</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>PrismTemplate_TemporaryKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppShell.xaml.cs">
+      <DependentUpon>AppShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Attributes\LaterThanPropertyAttribute.cs" />
+    <Compile Include="Attributes\NumericAttribute.cs" />
+    <Compile Include="Behaviors\BehaviorBase.cs" />
+    <Compile Include="Behaviors\HighlightFormFieldOnErrors.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Controls\NavMenuListView.cs" />
+    <Compile Include="Controls\PageHeader.xaml.cs">
+      <DependentUpon>PageHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BooleanConverter.cs" />
+    <Compile Include="Converters\BooleanNegationConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Helpers\AvgAggregateGroupComparer.cs" />
+    <Compile Include="Helpers\CustomGroupDateTimeComparer.cs" />
+    <Compile Include="Converters\DateTimeConverter.cs" />
+    <Compile Include="Converters\DateTimeToDateTimeOffsetConverter.cs" />
+    <Compile Include="Converters\DecimalToStringConverter.cs" />
+    <Compile Include="Converters\FirstErrorConverter.cs" />
+    <Compile Include="Converters\GroupConverters.cs" />
+    <Compile Include="Converters\SortClickActionConverter.cs" />
+    <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\StringToDecimalConverter.cs" />
+    <Compile Include="Converters\SyncfusionConverters.cs" />
+    <Compile Include="Converters\TextToHeaderVisibilityConverter.cs" />
+    <Compile Include="Events\BackgroundSubscriber.cs" />
+    <Compile Include="Helpers\StyleSelectors.cs" />
+    <Compile Include="Helpers\SumAggregateGroupComparer.cs" />
+    <Compile Include="NavMenuItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CountryRepository.cs" />
+    <Compile Include="Services\ICountryRepository.cs" />
+    <Compile Include="ViewModels\AddNewRowPageViewModel.cs" />
+    <Compile Include="Services\CountryList.cs" />
+    <Compile Include="Services\CustomerRepository.cs" />
+    <Compile Include="Services\EmployeeRepository.cs" />
+    <Compile Include="Services\ICustomerRepository.cs" />
+    <Compile Include="Services\IEmployeeRepository.cs" />
+    <Compile Include="Services\IOrder2Repository.cs" />
+    <Compile Include="Services\IOrderRepository.cs" />
+    <Compile Include="Services\IProductRepository.cs" />
+    <Compile Include="Services\ISalesRepository.cs" />
+    <Compile Include="Services\IUserRepository.cs" />
+    <Compile Include="Services\Order2Repository.cs" />
+    <Compile Include="Services\OrderRepository.cs" />
+    <Compile Include="Services\ProductRepository.cs" />
+    <Compile Include="Services\SalesRepository.cs" />
+    <Compile Include="Services\UserRepository.cs" />
+    <Compile Include="ViewModels\AdvancedFilteringPageViewModel.cs" />
+    <Compile Include="ViewModels\AutoCellMergePageViewModel.cs" />
+    <Compile Include="ViewModels\AutoRowHeightPageViewModel.cs" />
+    <Compile Include="ViewModels\BasicFilteringPageViewModel.cs" />
+    <Compile Include="ViewModels\CellMergePageViewModel.cs" />
+    <Compile Include="ViewModels\CellSelectionPageViewModel.cs" />
+    <Compile Include="ViewModels\ColumnSizingPageViewModel.cs" />
+    <Compile Include="ViewModels\CountryViewModel.cs" />
+    <Compile Include="ViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\DataBindingPageViewModel.cs" />
+    <Compile Include="ViewModels\DataValidationPageViewModel.cs" />
+    <Compile Include="ViewModels\DataVirtualizationPageViewModel.cs" />
+    <Compile Include="ViewModels\EconomicGrowthViewModel.cs" />
+    <Compile Include="ViewModels\EditingPageViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\ExcelExportingPageViewModel.cs" />
+    <Compile Include="ViewModels\FreezePanesPageViewModel.cs" />
+    <Compile Include="ViewModels\GettingStartedPageViewModel.cs" />
+    <Compile Include="ViewModels\GroupingPageViewModel.cs" />
+    <Compile Include="ViewModels\GroupSummariesPageViewModel.cs" />
+    <Compile Include="ViewModels\IncrementalLoadingPageViewModel.cs" />
+    <Compile Include="ViewModels\IntervalGroupingPageViewModel.cs" />
+    <Compile Include="ViewModels\LandingPageViewModel.cs" />
+    <Compile Include="ViewModels\MasterDetailPageViewModel.cs" />
+    <Compile Include="ViewModels\NestedGridsPageViewModel.cs" />
+    <Compile Include="ViewModels\NestedPropertyBindingPageViewModel.cs" />
+    <Compile Include="ViewModels\OnDemandPagingViewModel.cs" />
+    <Compile Include="ViewModels\Order2DetailViewModel.cs" />
+    <Compile Include="ViewModels\Order2ViewModel.cs" />
+    <Compile Include="ViewModels\OrderInfoViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\PagingPageViewModel.cs" />
+    <Compile Include="ViewModels\PdfExportingPageViewModel.cs" />
+    <Compile Include="ViewModels\PrintingPageViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\SalesByDateViewModel.cs" />
+    <Compile Include="ViewModels\SalesByYearViewModel.cs" />
+    <Compile Include="ViewModels\SerializationPageViewModel.cs" />
+    <Compile Include="ViewModels\SortBySummaryPageViewModel.cs" />
+    <Compile Include="ViewModels\SortingPageViewModel.cs" />
+    <Compile Include="ViewModels\StackedHeadersPageViewModel.cs" />
+    <Compile Include="ViewModels\StylingPageViewModel.cs" />
+    <Compile Include="ViewModels\UnboundColumnPageViewModel.cs" />
+    <Compile Include="ViewModels\UnboundRowPageViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="Views\AddNewRowPage.xaml.cs">
+      <DependentUpon>AddNewRowPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdvancedFilteringPage.xaml.cs">
+      <DependentUpon>AdvancedFilteringPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AutoCellMergePage.xaml.cs">
+      <DependentUpon>AutoCellMergePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AutoRowHeightPage.xaml.cs">
+      <DependentUpon>AutoRowHeightPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BasicFilteringPage.xaml.cs">
+      <DependentUpon>BasicFilteringPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CellMergePage.xaml.cs">
+      <DependentUpon>CellMergePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CellSelectionPage.xaml.cs">
+      <DependentUpon>CellSelectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ColumnSizingPage.xaml.cs">
+      <DependentUpon>ColumnSizingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataBindingPage.xaml.cs">
+      <DependentUpon>DataBindingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataValidationPage.xaml.cs">
+      <DependentUpon>DataValidationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataVirtualizationPage.xaml.cs">
+      <DependentUpon>DataVirtualizationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditingPage.xaml.cs">
+      <DependentUpon>EditingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExcelExportingPage.xaml.cs">
+      <DependentUpon>ExcelExportingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FreezePanesPage.xaml.cs">
+      <DependentUpon>FreezePanesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GettingStartedPage.xaml.cs">
+      <DependentUpon>GettingStartedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GroupingPage.xaml.cs">
+      <DependentUpon>GroupingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GroupSummariesPage.xaml.cs">
+      <DependentUpon>GroupSummariesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IncrementalLoadingPage.xaml.cs">
+      <DependentUpon>IncrementalLoadingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IntervalGroupingPage.xaml.cs">
+      <DependentUpon>IntervalGroupingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LandingPage.xaml.cs">
+      <DependentUpon>LandingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListBindingUC.xaml.cs">
+      <DependentUpon>ListBindingUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MasterDetailPage.xaml.cs">
+      <DependentUpon>MasterDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NestedGridsPage.xaml.cs">
+      <DependentUpon>NestedGridsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NestedPropertyBindingPage.xaml.cs">
+      <DependentUpon>NestedPropertyBindingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ObservableCollectionBindingUC.xaml.cs">
+      <DependentUpon>ObservableCollectionBindingUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OnDemandPagingPage.xaml.cs">
+      <DependentUpon>OnDemandPagingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PagingPage.xaml.cs">
+      <DependentUpon>PagingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PdfExportingPage.xaml.cs">
+      <DependentUpon>PdfExportingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PrintingPage.xaml.cs">
+      <DependentUpon>PrintingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProgressRingUC.xaml.cs">
+      <DependentUpon>ProgressRingUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Behaviors\SearchConditionBehavior.cs" />
+    <Compile Include="Views\SerializationPage.xaml.cs">
+      <DependentUpon>SerializationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SortBySummaryPage.xaml.cs">
+      <DependentUpon>SortBySummaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SortingPage.xaml.cs">
+      <DependentUpon>SortingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Behaviors\TextChangedBehavior.cs" />
+    <Compile Include="Views\StackedHeadersPage.xaml.cs">
+      <DependentUpon>StackedHeadersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StylingPage.xaml.cs">
+      <DependentUpon>StylingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnboundColumnPage.xaml.cs">
+      <DependentUpon>UnboundColumnPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnboundRowPage.xaml.cs">
+      <DependentUpon>UnboundRowPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="PrismTemplate_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\8x.png" />
+    <Content Include="Assets\Advantage_Runner.png" />
+    <Content Include="Assets\Aquaracer.png" />
+    <Content Include="Assets\Aquil.png" />
+    <Content Include="Assets\Argentina.png" />
+    <Content Include="Assets\Austria.png" />
+    <Content Include="Assets\Axis_XT.png" />
+    <Content Include="Assets\Banner.jpg" />
+    <Content Include="Assets\Belgium.png" />
+    <Content Include="Assets\Brazil.png" />
+    <Content Include="Assets\Canada.png" />
+    <Content Include="Assets\Carrera.png" />
+    <Content Include="Assets\Denmark.png" />
+    <Content Include="Assets\Envy_X2.png" />
+    <Content Include="Assets\Fastrack.png" />
+    <Content Include="Assets\FieldEffect.png" />
+    <Content Include="Assets\Finland.png" />
+    <Content Include="Assets\FOLKO.png" />
+    <Content Include="Assets\Footer.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\France.png" />
+    <Content Include="Assets\FRANS.png" />
+    <Content Include="Assets\FURIB.png" />
+    <Content Include="Assets\G-Shock.png" />
+    <Content Include="Assets\Germany.png" />
+    <Content Include="Assets\Header.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\icon_add.png" />
+    <Content Include="Assets\icon_percentage.png" />
+    <Content Include="Assets\icon_sum.png" />
+    <Content Include="Assets\icon_total.png" />
+    <Content Include="Assets\Iphone5.png" />
+    <Content Include="Assets\Italy.png" />
+    <Content Include="Assets\LINOD.png" />
+    <Content Include="Assets\Lumia_800.png" />
+    <Content Include="Assets\Lumia_920.png" />
+    <Content Include="Assets\Macbook_Air.png" />
+    <Content Include="Assets\MacBook_Pro2.png" />
+    <Content Include="Assets\Men_Black.png" />
+    <Content Include="Assets\MEREP.png" />
+    <Content Include="Assets\Mexico.png" />
+    <Content Include="Assets\Monaco.png" />
+    <Content Include="Assets\no.png" />
+    <Content Include="Assets\Norway.png" />
+    <Content Include="Assets\One_X.png" />
+    <Content Include="Assets\Pavilion_G6.png" />
+    <Content Include="Assets\PICCO.png" />
+    <Content Include="Assets\Population.jpg" />
+    <Content Include="Assets\Portugal.png" />
+    <Content Include="Assets\RunCruise.png" />
+    <Content Include="Assets\S3.png" />
+    <Content Include="Assets\Sea_Dweller Deepsea.png" />
+    <Content Include="Assets\SEVES.png" />
+    <Content Include="Assets\SIMOB.png" />
+    <Content Include="Assets\Spain.png" />
+    <Content Include="Assets\Submariner.png" />
+    <Content Include="Assets\Sweden.png" />
+    <Content Include="Assets\Switzerland.png" />
+    <Content Include="Assets\Transformer.png" />
+    <Content Include="Assets\UK.png" />
+    <Content Include="Assets\USA.png" />
+    <Content Include="Assets\VAFFE.png" />
+    <Content Include="Assets\Vaio.png" />
+    <Content Include="Assets\Venezuela.png" />
+    <Content Include="Assets\WARTH.png" />
+    <Content Include="Assets\Xperia_Tipo.png" />
+    <Content Include="Assets\Xperia_Z.png" />
+    <Content Include="Assets\XPS12.png" />
+    <Content Include="Assets\XPS15.png" />
+    <Content Include="Assets\yes.png" />
+    <Content Include="Assets\Yoga.png" />
+    <Content Include="Binaries\Microsoft.Xaml.Interactions.dll" />
+    <Content Include="Binaries\Microsoft.Xaml.Interactivity.dll" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Strings\en-US\" />
+    <Folder Include="Styles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="AppShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\StandardStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PageHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddNewRowPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdvancedFilteringPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AutoCellMergePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AutoRowHeightPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BasicFilteringPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CellMergePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CellSelectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ColumnSizingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataBindingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataValidationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataVirtualizationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExcelExportingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FreezePanesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GettingStartedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GroupingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GroupSummariesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IncrementalLoadingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IntervalGroupingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LandingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListBindingUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MasterDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NestedGridsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NestedPropertyBindingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ObservableCollectionBindingUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OnDemandPagingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PagingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PdfExportingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PrintingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProgressRingUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SerializationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SortBySummaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SortingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StackedHeadersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StylingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnboundColumnPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnboundRowPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xaml.Interactions, Version=12.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Binaries\Microsoft.Xaml.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Interactivity, Version=12.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Binaries\Microsoft.Xaml.Interactivity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Syncfusion Controls for UWP XAML, Version=13.4.0.53">
+      <Name>Syncfusion Controls for UWP XAML</Name>
+    </SDKReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

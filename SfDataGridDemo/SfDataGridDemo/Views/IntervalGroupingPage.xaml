@@ -1,0 +1,133 @@
+﻿<Page x:Name="IntervalGrouping"
+    x:Class="SfDataGridDemo.Views.IntervalGroupingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SfDataGridDemo.Views"
+    xmlns:converters="using:SfDataGridDemo.Converters"
+    xmlns:helpers="using:SfDataGridDemo.Helpers"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Grid"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:GridDateTimeRangeConverter GroupMode="Month" x:Key="CustomConverter" />
+            <helpers:CustomGroupDateTimeComparer GroupMode="Month" x:Key="CustomComparer" />
+            <converters:CurrencyFormatConverter x:Key="currencyFormatConverter" />
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="600"/>
+        </Grid.ColumnDefinitions>
+        <syncfusion:SfDataGrid x:Name="sfGrid"
+                           Margin="10,13,10,15"
+                           Grid.Column="0"
+                           AllowEditing="True"
+                           AllowDraggingColumns="True"
+                           ColumnSizer="Star"
+                           AutoGenerateColumns="False"
+                           ItemsSource="{Binding OrderVMs}"
+                           NavigationMode="Cell"
+                           ShowGroupDropArea="True">
+
+            <syncfusion:SfDataGrid.GroupColumnDescriptions>
+                <syncfusion:GroupColumnDescription ColumnName="ShipDate" Converter="{StaticResource CustomConverter}" Comparer="{StaticResource CustomComparer}"/>
+            </syncfusion:SfDataGrid.GroupColumnDescriptions>
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridNumericColumn HeaderText="Order Id"
+                                           MappingName="OrderId"
+                                           TextAlignment="Right" />
+                <syncfusion:GridTextColumn AllowSorting="True"
+                                           HeaderText="Customer Id"
+                                           MappingName="CustomerId" />
+
+                <syncfusion:GridDateTimeColumn AllowSorting="True" FormatString="dd/MM/yy"
+                                               HeaderText="Order Date"
+                                               MappingName="OrderDate"
+                                               TextAlignment="Left" />
+
+                <syncfusion:GridDateTimeColumn HeaderText="Ship Date" FormatString="dd/MM/yy"
+                                               MappingName="ShipDate"
+                                               TextAlignment="Left" />
+
+                <syncfusion:GridTextColumn HeaderText="Ship Country" 
+                                           MappingName="ShipCountry" />
+
+                <syncfusion:GridTextColumn DisplayBinding="{Binding Freight,Converter={StaticResource currencyFormatConverter}}"
+                                           HeaderText="Freight"
+                                           MappingName="Freight"
+                                           TextAlignment="Right" />
+
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+
+        <StackPanel Margin="10,13,10,15" Grid.Column="1">
+            <TextBlock Text="Order ID, Freight Column"
+                         Margin="0.5"
+                         HorizontalAlignment="Left"
+                         TextWrapping="Wrap"
+                         FontSize="14"
+                         FontWeight="Bold"
+                               >
+            </TextBlock>
+            <TextBlock Text="Groups based on intervals"
+                         Margin="0.5"
+                         HorizontalAlignment="Left"
+                         TextWrapping="Wrap"
+                         FontSize="12"
+                         FontWeight="Normal"
+                               >
+            </TextBlock>
+            <TextBlock Grid.Row="2">
+            </TextBlock>
+            <TextBlock Text="Customer ID, Ship Country Column"
+                         Margin="0.5"
+                         HorizontalAlignment="Left"
+                         TextWrapping="Wrap"
+                         FontSize="14"
+                         FontWeight="Bold"
+                               >
+            </TextBlock>
+            <TextBlock  Text="Groups based on starting letter"
+                         Margin="0.5"
+                         HorizontalAlignment="Left"
+                         TextWrapping="Wrap"
+                         FontSize="12"
+                         FontWeight="Normal"
+                               >
+            </TextBlock>
+            <TextBlock >
+            </TextBlock>
+            <TextBlock Text="Order Date, Ship Date column"
+                         Margin="0.5"
+                         HorizontalAlignment="Left"
+                         TextWrapping="Wrap"
+                         FontSize="14"
+                         FontWeight="Bold"
+                               >
+            </TextBlock>
+            <TextBlock Text="Order Date - Groups based on date range"
+                         Margin="0.5"
+                         HorizontalAlignment="Left"
+                         TextWrapping="Wrap"
+                         FontSize="12"
+                         FontWeight="Normal"
+                               >
+            </TextBlock>
+            <TextBlock Text="Ship Date - Groups based on month"
+                         Margin="0.5"
+                         HorizontalAlignment="Left"
+                         TextWrapping="Wrap"
+                         FontSize="12"
+                         FontWeight="Normal"
+                               >
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>

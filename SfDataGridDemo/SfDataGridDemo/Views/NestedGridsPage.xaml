@@ -1,0 +1,86 @@
+﻿<Page x:Name="NestedGrids"
+    x:Class="SfDataGridDemo.Views.NestedGridsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SfDataGridDemo.Views"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:converters="using:SfDataGridDemo.Converters"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Grid"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:DateFormatConverter x:Key="dateFormatConverter" />
+            <converters:CurrencyFormatConverter x:Key="currencyFormatConverter" />
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <syncfusion:SfDataGrid x:Name="sfDataGrid"
+                           Margin="10,13,10,15"
+                           ItemsSource="{Binding Order2VMs}"
+                           AutoGenerateColumns="False"
+                           HideEmptyGridViewDefinition="True"
+                           NavigationMode="Cell"
+                           ColumnSizer="Star"
+                           ShowGroupDropArea="True">
+            <syncfusion:SfDataGrid.DetailsViewDefinition>
+                <syncfusion:GridViewDefinition RelationalColumn="Order2DetailVMs">
+                    <syncfusion:GridViewDefinition.DataGrid>
+                        <syncfusion:SfDataGrid x:Name="FirstDetailsViewGrid" AutoGenerateColumns="false">
+                            <syncfusion:SfDataGrid.Columns>
+                                <syncfusion:GridTextColumn HeaderText="Order Id" 
+                                                           MappingName="OrderId" />
+                                <syncfusion:GridTextColumn HeaderText="Customer Id" 
+                                                           MappingName="CustomerId" />
+                                <syncfusion:GridTextColumn HeaderText="Product Id"
+                                           MappingName="ProductId"
+                                           TextAlignment="Right" />
+                                <syncfusion:GridTextColumn DisplayBinding="{Binding UnitPrice,
+                                                                                    Converter={StaticResource currencyFormatConverter}}"
+                                           HeaderText="Unit Price"
+                                           TextAlignment="Right" />
+                                <syncfusion:GridTextColumn MappingName="Quantity" TextAlignment="Right" />
+                                <syncfusion:GridNumericColumn FormatString="p"
+                                              MappingName="Discount"
+                                              ParsingMode="Double"
+                                              TextAlignment="Right" />
+                                <syncfusion:GridTextColumn DisplayBinding="{Binding OrderDate,
+                                                                                    Converter={StaticResource dateFormatConverter}}"
+                                           HeaderText="Order Date"
+                                           TextAlignment="Right" />
+                            </syncfusion:SfDataGrid.Columns>
+                        </syncfusion:SfDataGrid>
+                    </syncfusion:GridViewDefinition.DataGrid>
+                </syncfusion:GridViewDefinition>
+            </syncfusion:SfDataGrid.DetailsViewDefinition>
+
+
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridTextColumn HeaderText="Order Id" 
+                                           MappingName="OrderId" />
+                <syncfusion:GridTextColumn HeaderText="Customer Id" 
+                                           MappingName="CustomerId" />
+                <syncfusion:GridTextColumn 
+                                       DisplayBinding="{Binding ShipDate,
+                                                                    Converter={StaticResource dateFormatConverter}}"
+                                       HeaderText="Ship Date"
+                                       MappingName="ShipDate"
+                                       TextAlignment="Right" />
+                <syncfusion:GridTextColumn HeaderText="Employee Id"
+                                       MappingName="EmployeeId"
+                                       TextAlignment="Right" />
+                <syncfusion:GridTextColumn HeaderText="Ship City" MappingName="ShipCity" />
+                <syncfusion:GridTextColumn HeaderText="Ship Country" MappingName="ShipCountry" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding Freight,
+                                                                    Converter={StaticResource currencyFormatConverter}}"
+                                       MappingName="Freight"
+                                       TextAlignment="Right" />
+                <syncfusion:GridCheckBoxColumn MappingName="IsClosed" />
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+    </Grid>
+</Page>

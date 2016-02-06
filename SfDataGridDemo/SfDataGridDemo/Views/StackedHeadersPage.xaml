@@ -1,0 +1,56 @@
+﻿<Page x:Name="StackedHeaders"
+    x:Class="SfDataGridDemo.Views.StackedHeadersPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SfDataGridDemo.Views"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:converters="using:SfDataGridDemo.Converters"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Grid"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:CurrencyFormatConverter x:Key="currencyFormatConverter" />
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <syncfusion:SfDataGrid x:Name="sfDataGrid"
+                           Grid.Column="0"
+                           Margin="10,13,10,15"
+                           ItemsSource="{Binding OrderVMs}"
+                           AllowDraggingColumns="True"
+                           ColumnSizer="Star"
+                           AutoGenerateColumns="False"
+                           NavigationMode="Row">
+            <syncfusion:SfDataGrid.StackedHeaderRows>
+                <syncfusion:StackedHeaderRow>
+                    <syncfusion:StackedHeaderRow.StackedColumns>
+                        <syncfusion:StackedColumn ChildColumns="OrderId,CustomerId,EmployeeId,ShipCity,ShipCountry,Freight,OrderedDate,ShipPostalCode" HeaderText="Order Shipment Details" />
+                    </syncfusion:StackedHeaderRow.StackedColumns>
+                </syncfusion:StackedHeaderRow>
+                <syncfusion:StackedHeaderRow>
+                    <syncfusion:StackedHeaderRow.StackedColumns>
+                        <syncfusion:StackedColumn ChildColumns="OrderId,CustomerId,Freight,EmployeeId" HeaderText="Order Details" />
+                        <syncfusion:StackedColumn ChildColumns="ShipCity,ShipCountry,ShipPostalCode" HeaderText="Ship Details" />
+                    </syncfusion:StackedHeaderRow.StackedColumns>
+                </syncfusion:StackedHeaderRow>
+            </syncfusion:SfDataGrid.StackedHeaderRows>
+
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridTextColumn MappingName="OrderId" HeaderText="Order Id" />
+                <syncfusion:GridTextColumn MappingName="CustomerId" HeaderText="Customer Id"/>
+                <syncfusion:GridTextColumn DisplayBinding="{Binding Path=Freight,
+                                                                    Converter={StaticResource currencyFormatConverter}}"
+                                   TextAlignment="Right" />
+                <syncfusion:GridTextColumn MappingName="EmployeeId" HeaderText="Employee Id"/>
+                <syncfusion:GridTextColumn HeaderText="Ship City" MappingName="ShipCity" />
+                <syncfusion:GridTextColumn HeaderText="Ship Country" MappingName="ShipCountry" />
+                <syncfusion:GridTextColumn HeaderText="Ship PostalCode" MappingName="ShipPostalCode" />
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+    </Grid>
+</Page>

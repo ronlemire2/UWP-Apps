@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="SfDataGridDemo.Views.LandingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SfDataGridDemo.Views"
+    xmlns:controls="using:SfDataGridDemo.Controls"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <controls:PageHeader x:Name="pageHeader">
+            <controls:PageHeader.HeaderContent>
+                <TextBlock x:Name="title" Style="{ThemeResource PageTitleTextBlockStyle}" Text="APP OVERVIEW"/>
+            </controls:PageHeader.HeaderContent>
+        </controls:PageHeader>
+
+        <ScrollViewer Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="12,4,0,0">
+            <StackPanel >
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> AddNewRow - Top or Bottom, Validation, Edit control to match data type.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> Advanced Filtering - ExcelLikeFiltering with Options panel.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> AutoCellMerge - Merge a range of adjacent cells, vertical or horizontal based on the content.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> AutoRowHeight - Customize row height based on all columns or certain columns data.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> Basic Filtering - Find from columns: single or multiple, Find by conditiion: Contains, StartsWith, EndsWith.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> CellMerge - Merge a range of adjacent cells, vertical or horizontal.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> CellSelection - Single, Multiple, Extended.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> ColumnSizing - Star, SizeToHeader, SizeToCell, Auto, AutoLastColumnFill, AutWithLastColumnFill.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> ComplexPropertyBinding - Binding to nested objects using dot notation.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> DataBinding - Dynamic UserControl loading into ContentPresenter, Generate Columns manually.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> DataVirtualization - Limit amount of data retrieved to reduce memory consumption for large data object.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> DataValidation - Uses DataAnnotations with ValidatableBindableBase.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> Editing - Various cell types, OnTap/OnDoubleTap activation.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> ExcelExporting - Export data to Excel.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> FreezePanes - Freeze rows and columns at top and bottom similiar to Excel Freeze panes.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> GettingStarted - Sorting, ExcelLikeFiltering, DragAndDrop Multi-Level Grouping, Horizontal Scrolling.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> Grouping - DragAndDrop Grouping.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> GroupSummaries - Table, Group and Caption summaries.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> IncrementalLoading - Throttle loading for increased performance.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> IntervalGrouping - Custom grouping by intervals.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> MasterDetail - Details for selected SfDataGrid row displayed below SfDataGrid, ColorPicker to change row selection color.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> OnDemandPaging - Loads data to the current page dynamicall into DataPager.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> NestedGrids - Hierarchical data displayed in collapsible nested grids.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> Paging - Loads entire data collection into DataPager.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> PdfExporting - Export data to PDF file.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> Printing - Print the data in the grid. Supports orientations, sizes, margins etc.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> Serialization - Serialize/Deserialize SfDataGrid data. Supports customization using SerializationController.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> Sorting - AllowSorting, AllowSortingForColumn, AllowTriStateShorting, ShowSortNumbers, SortClickAction.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> SortBySummary - Sort Groups by Summary Row Group Functions: Sum, Avg etc.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> StackedHeaders - Hierarchical header levels.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> Styling - Styles and templates for consistent appearance.</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> UnboundColumn - Expressions, values calculated from multiple fields, controls like buttons or checkboxes</TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,8"> UnboundRow - Calculated fields, Buttons, CheckBoxes</TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

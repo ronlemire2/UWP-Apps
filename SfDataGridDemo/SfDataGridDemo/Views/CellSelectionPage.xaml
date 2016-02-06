@@ -1,0 +1,124 @@
+﻿<Page x:Name="CellSelection"
+    x:Class="SfDataGridDemo.Views.CellSelectionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SfDataGridDemo.Views"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:converters="using:SfDataGridDemo.Converters"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Grid"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:CurrencyFormatConverter x:Key="currencyFormatConverter" />
+            <converters:SelectionModeConverter x:Key="selectionModeConverter" />
+            <converters:CurrencyConverter x:Key="currencyConverter" />
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <ToggleButton x:Name="optionsButton"
+                Grid.Row="0"
+                Grid.Column="0"
+                Content="Options"
+                Margin="10,0,0,0"
+                Click="optionsButton_Click"
+                HorizontalAlignment="Left" />
+
+        <syncfusion:SfDataGrid x:Name="sfDataGrid"
+                Grid.Row="1"
+                Grid.Column="0"   
+                Margin="10,5,0,0"
+                ItemsSource="{Binding ProductVMs}"
+                AllowFiltering="True"
+                AllowGrouping="True"
+                AllowSelectionOnPointerPressed="{Binding IsChecked,
+                                                        ElementName=ckbSelectionOnPointerPressed}"
+                AllowSorting="True"
+                AutoGenerateColumns="False"
+                ColumnSizer="Star"
+                SelectionMode="{Binding SelectedIndex,
+                                Converter={StaticResource selectionModeConverter},
+                                ElementName=cmbSelectionMode}"
+                SelectionUnit="Cell"
+                ShowGroupDropArea="True">
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridTextColumn MappingName="ProductName" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding Year2008,
+                                                                        Converter={StaticResource currencyFormatConverter}}"
+                                               HeaderText="2008"
+                                               TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding Year2009,
+                                                                        Converter={StaticResource currencyFormatConverter}}"
+                                               HeaderText="2009"
+                                               TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding Year2010,
+                                                                        Converter={StaticResource currencyFormatConverter}}"
+                                               HeaderText="2010"
+                                               TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding Year2011,
+                                                                        Converter={StaticResource currencyFormatConverter}}"
+                                               HeaderText="2011"
+                                               TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding Year2012,
+                                                                        Converter={StaticResource currencyFormatConverter}}"
+                                               HeaderText="2012"
+                                               TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding Year2013,
+                                                                        Converter={StaticResource currencyFormatConverter}}"
+                                               HeaderText="2013"
+                                               TextAlignment="Right" />
+                <syncfusion:GridTextColumn DisplayBinding="{Binding TotalSales,
+                                                                        Converter={StaticResource currencyFormatConverter}}"
+                                               HeaderText="Total Sales"
+                                               TextAlignment="Right" />
+            </syncfusion:SfDataGrid.Columns>
+            <syncfusion:SfDataGrid.StackedHeaderRows>
+                <syncfusion:StackedHeaderRow>
+                    <syncfusion:StackedHeaderRow.StackedColumns>
+                        <syncfusion:StackedColumn ChildColumns="Year2008,Year2009,Year2010,Year2011,Year2012,Year2013" HeaderText="Amount of Sales by Year" />
+                    </syncfusion:StackedHeaderRow.StackedColumns>
+                </syncfusion:StackedHeaderRow>
+            </syncfusion:SfDataGrid.StackedHeaderRows>
+        </syncfusion:SfDataGrid>
+
+        <StackPanel x:Name="optionsStackPanel"
+                    Margin="10,13,10,15" 
+                    Grid.Row="1"
+                    Grid.Column="1">
+            <TextBlock Margin="5,5,0,5"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"
+                       Text="Selection Mode:" />
+            <ComboBox x:Name="cmbSelectionMode"
+                      Margin="20,10,10,10"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center"
+                      SelectedIndex="2">
+                <ComboBoxItem Content="Single" />
+                <ComboBoxItem Content="Multiple" />
+                <ComboBoxItem Content="Extended" />
+                <ComboBoxItem Content="None" />
+            </ComboBox>
+            <CheckBox x:Name="ckbSelectionOnPointerPressed"
+                      Margin="5,10,10,10"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Content="Allow Selection On Pointer Pressed"
+                      IsChecked="False" />
+        </StackPanel>
+    </Grid>
+</Page>

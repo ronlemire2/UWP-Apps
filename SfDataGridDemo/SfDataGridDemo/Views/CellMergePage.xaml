@@ -1,0 +1,91 @@
+﻿<Page x:Name="CellMerge"
+    x:Class="SfDataGridDemo.Views.CellMergePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SfDataGridDemo.Views"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:converters="using:SfDataGridDemo.Converters"
+    xmlns:services="using:SfDataGridDemo.Services"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Grid"      
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:CurrencyFormatConverter x:Key="currencyFormatConverter" />
+            <services:CountryList x:Key="countryComboBox" />
+            <converters:RangeConverter x:Key="RangeConverter"/>
+            <converters:MergedCellImageConverter x:Key="ImageConverter" />
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <syncfusion:SfDataGrid x:Name="sfDataGrid"  Grid.Column="0"       
+                               Margin="10,13,10,15"
+                               ItemsSource="{Binding OrderVMs}"
+                               AllowEditing="False"
+                               AutoGenerateColumns="False"
+                               SelectionUnit="Cell"
+                               ColumnSizer="Star"
+                               AutoExpandGroups="True"
+                               NavigationMode="Cell"                                     
+                               >
+            <syncfusion:SfDataGrid.GroupColumnDescriptions>
+                <syncfusion:GroupColumnDescription ColumnName="CustomerId"/>
+            </syncfusion:SfDataGrid.GroupColumnDescriptions>
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridTemplateColumn HeaderText="Customer Id" MappingName="CustomerId" AllowFocus="False" Width="200">
+                    <syncfusion:GridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=CustomerId, Converter={StaticResource ImageConverter}}" />
+                        </DataTemplate>
+                    </syncfusion:GridTemplateColumn.CellTemplate>
+                </syncfusion:GridTemplateColumn>
+                <syncfusion:GridTextColumn HeaderText="Order Id" 
+                                           MappingName="OrderId" />
+                <syncfusion:GridTextColumn HeaderText="Employee Id"
+                                           MappingName="EmployeeId"
+                                           TextAlignment="Center" />
+                <syncfusion:GridDateTimeColumn Width="150"
+                                               FormatString="d"
+                                               HeaderText="Shipping Date"
+                                               MappingName="ShipDate"
+                                               Padding="5"
+                                               TextAlignment="Right" />
+                <syncfusion:GridComboBoxColumn HeaderText="Ship Country"
+                                               ItemsSource="{StaticResource countryComboBox}"
+                                               MappingName="ShipCountry"
+                                               Padding="5" />
+                <syncfusion:GridNumericColumn DisplayBinding="{Binding Freight,Converter={StaticResource currencyFormatConverter}}"
+                                              MappingName="Freight"
+                                              Padding="5">
+                    <syncfusion:GridNumericColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <ProgressBar x:Name="progressBar"
+                                             Width="120"
+                                             Height="40"
+                                             Background="Transparent"
+                                             BorderThickness="0"
+                                             Foreground="#FF8F4DFC"
+                                             Maximum="1000"
+                                             Visibility="Visible"
+                                             Value="{Binding Freight}" />
+                                <TextBlock HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding Freight}"
+                                           TextAlignment="Right" />
+                            </Grid>
+                        </DataTemplate>
+                    </syncfusion:GridNumericColumn.CellTemplate>
+                </syncfusion:GridNumericColumn>
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+    </Grid>
+</Page>
