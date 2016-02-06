@@ -1,0 +1,83 @@
+﻿<Page x:Name="BrowsePlanet"
+    x:Class="PrismBasicsDemo.Views.PlanetBrowsePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PrismBasicsDemo.Views"
+    xmlns:converters="using:PrismBasicsDemo.Converters"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Dark"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Page.Resources>
+        <converters:BooleanNegationConverter x:Key="BooleanNegationConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" IsReversed="True" />
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+        <converters:StringToDecimalConverter x:Key="StringToDecimalConverter" />
+        <converters:FirstErrorConverter x:Key="FirstErrorConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Edit Buttons -->
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Visibility="{Binding IsInEditMode, Converter={StaticResource ReverseBooleanToVisibilityConverter}}">
+            <AppBarButton Command="{Binding CancelCommand}"
+                          Icon="Back"
+                          Label="Back" />
+            <AppBarButton Command="{Binding EditCommand}"
+                          Icon="Edit"
+                          Label="Edit" />
+            <AppBarButton Command="{Binding DeleteCommand}"
+                          Icon="Delete"
+                          Label="Delete" />
+        </StackPanel>
+
+        <!-- Browse -->
+        <Border Grid.Row="1"
+                Visibility="{Binding IsInEditMode, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"  
+                Margin="75,20,20,20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <!-- Name -->
+                <TextBox Grid.Row="0"
+                             Grid.Column="0"
+                             Margin="0,0,0,20"
+                             Header="Name: "
+                             IsEnabled="False"
+                             Text="{Binding SelectedPlanetVM.Name}"
+                             FontSize="20"/>
+                <!-- Number Of Moons -->
+                <TextBox Grid.Row="1"
+                             Grid.Column="0"
+                             Margin="0,0,0,20"
+                             Header="Number Of Moons: "
+                             IsEnabled="False"
+                             Text="{Binding SelectedPlanetVM.NumberOfMoons}"
+                             FontSize="20"/>
+                <!-- Distance From Sun -->
+                <TextBox Grid.Row="2"
+                             Grid.Column="0"
+                             Margin="0,0,0,20"
+                             Header="Distance From Sun: "
+                             IsEnabled="False"
+                             Text="{Binding SelectedPlanetVM.DistanceFromSun}"
+                             FontSize="20"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

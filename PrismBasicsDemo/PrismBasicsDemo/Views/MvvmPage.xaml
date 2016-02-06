@@ -1,0 +1,119 @@
+﻿<Page
+    x:Class="PrismBasicsDemo.Views.MvvmPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PrismBasicsDemo.Views"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:controls="using:CoverFlowUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Dark"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <controls:CoverFlow x:Name="PlanetCoverFlow"
+                            Grid.Row="0"
+                            Height="200"
+                            Margin="0,30,0,0"
+                            SelectedItemChanged="PlanetCoverFlow_SelectedItemChanged"
+                            ItemsSource="{Binding PlanetVMs}"
+                            SelectedItem="{Binding SelectedPlanetVM, Mode=TwoWay}">
+            <controls:CoverFlow.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="{Binding PlanetImage}"
+                               Height="150"
+                               Width="150" />
+                        <TextBlock Text="{Binding Name}"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,10,0,10" />
+                    </StackPanel>
+                </DataTemplate>
+            </controls:CoverFlow.ItemTemplate>
+        </controls:CoverFlow>
+
+        <!-- Planet Facts Header -->
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Padding="20"
+                    Margin="0,20,0,0">
+            <StackPanel.Background>
+                <SolidColorBrush Color="AliceBlue" Opacity="0"/>
+            </StackPanel.Background>
+            <TextBlock Text="Facts about"
+                       Margin="0,0,3,0"/>
+            <TextBlock Text="{Binding SelectedPlanetVM.Name}"/>
+        </StackPanel>
+        <Grid Grid.Row="2"
+              HorizontalAlignment="Center"
+              Padding="15, 10, 10, 20">
+            <Grid.Background>
+                <SolidColorBrush Color="AliceBlue" Opacity="0"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="75" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Mass: " Grid.Row="0" Grid.Column="0" />
+            <TextBlock Text="Diameter: " Grid.Row="1" Grid.Column="0" />
+            <TextBlock Text="Gravity: " Grid.Row="2" Grid.Column="0" />
+            <TextBlock Text="LengthOfDay: " Grid.Row="3" Grid.Column="0" />
+            <TextBlock Text="DistanceFromSun: " Grid.Row="4" Grid.Column="0" />
+            <TextBlock Text="OrbitalPeriod: " Grid.Row="5" Grid.Column="0" />
+            <TextBlock Text="MeanTemperature: " Grid.Row="6" Grid.Column="0" />
+            <TextBlock Text="NumberOfMoons: " Grid.Row="7" Grid.Column="0" />
+
+            <TextBlock Text="{Binding SelectedPlanetVM.Mass}" Grid.Row="0" Grid.Column="1" />
+            <TextBlock Text="{Binding SelectedPlanetVM.Diameter}" Grid.Row="1" Grid.Column="1" />
+            <TextBlock Text="{Binding SelectedPlanetVM.Gravity}" Grid.Row="2" Grid.Column="1" />
+            <TextBlock Text="{Binding SelectedPlanetVM.LengthOfDay}" Grid.Row="3" Grid.Column="1" />
+            <TextBlock Text="{Binding SelectedPlanetVM.DistanceFromSun}" Grid.Row="4" Grid.Column="1" />
+            <TextBlock Text="{Binding SelectedPlanetVM.OrbitalPeriod}" Grid.Row="5" Grid.Column="1" />
+            <TextBlock Text="{Binding SelectedPlanetVM.MeanTemperature}" Grid.Row="6" Grid.Column="1" />
+            <TextBlock Text="{Binding SelectedPlanetVM.NumberOfMoons}" Grid.Row="7" Grid.Column="1" />
+
+            <TextBlock Text="10*24 kg" Grid.Row="0" Grid.Column="2" />
+            <TextBlock Text="km" Grid.Row="1" Grid.Column="2" />
+            <TextBlock Text="m/s2" Grid.Row="2" Grid.Column="2" />
+            <TextBlock Text="hours" Grid.Row="3" Grid.Column="2" />
+            <TextBlock Text="10*6 km" Grid.Row="4" Grid.Column="2" />
+            <TextBlock Text="days" Grid.Row="5" Grid.Column="2" />
+            <TextBlock Text="C" Grid.Row="6" Grid.Column="2" />
+            <TextBlock Text="units" Grid.Row="7" Grid.Column="2" />
+        </Grid>
+
+        <Slider x:Name="PlanetCoverFlowSlider"
+                IsThumbToolTipEnabled="False"
+                Grid.Row="3" 
+                Width="300"
+                Margin="0,30,0,0"
+                Value="{Binding SelectedIndex, ElementName=PlanetCoverFlow, Mode=TwoWay}"
+                TickFrequency="1"
+                TickPlacement="None"
+                Maximum="{Binding PlanetCount}"
+                Minimum="0" TabIndex="1"
+                />
+    </Grid>
+</Page>

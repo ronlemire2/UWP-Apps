@@ -1,0 +1,79 @@
+﻿<Page x:Name="Commanding"
+    x:Class="PrismBasicsDemo.Views.CommandingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PrismBasicsDemo.Views"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:models="using:PrismBasicsDemo.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid Margin="15" Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Button x:Name="PopulateButton"
+                Grid.Row="0"
+                HorizontalAlignment="Center"
+                Margin="0,50,0,0"
+                Foreground="White"
+                Command="{Binding PopulateListViewCommand}" >
+                <Button.Background>
+                    <SolidColorBrush Color="AliceBlue" Opacity="0.2"/>
+                </Button.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Text="Populate ListView with Planet Names"
+                               HorizontalAlignment="Center" />
+                    <TextBlock Grid.Row="1"
+                               Text="(Button Command)"
+                               HorizontalAlignment="Center" />
+                </Grid>
+            </Button>
+        </StackPanel>
+        <Border Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,20,0,0"
+                Width="200"
+                Height="450"                
+                BorderBrush="Black"
+                BorderThickness="1">
+            <ListView x:Name="PlanetsListView"
+                    IsItemClickEnabled="True"
+                    SelectionMode="Single"
+                    ItemsSource="{Binding Planets}"
+                    SelectedItem="{Binding SelectedPlanet, Mode=TwoWay}">
+                <ListView.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.2"/>
+                </ListView.Background>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{Binding PlanetsListViewSelectionChangedCommand}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Planet">
+                        <TextBlock Text="{Binding Name}"
+                                   Foreground="White"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Border>
+    </Grid>
+</Page>
