@@ -1,5 +1,14 @@
 # UWP-Apps
 
+
+**AdventureWorks (work in progress)**
+
+1. HumanResources
+2. Production (future)
+3. Purchasing (future)
+4. Sales (future)
+
+
 **BingSearcher**
 
 1. Images
@@ -10,7 +19,7 @@
 
 **FeedReader**
 
-1. Comics (about 300 feeds with SemanticZoom)
+1. Comics (about 300 feeds, uses SemanticZoom)
 2. Politics (includes Political Cartoons)
 3. Tech 
 
