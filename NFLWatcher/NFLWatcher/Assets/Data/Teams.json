@@ -1,0 +1,260 @@
+{
+  "Teams": [
+    {
+      "Id": "1",
+      "Abbr": "ARI",
+      "City": "Arizona",
+      "NickName": "Cardinals",
+      "FullName": "Arizona Cardinals",
+      "ImagePath": "/Assets/Logos/ari.png"
+    },
+    {
+      "Id": "2",
+      "Abbr": "ATL",
+      "City": "Atlanta",
+      "NickName": "Falcons",
+      "FullName": "Atlanta Falcons",
+      "ImagePath": "/Assets/Logos/atl.png"
+    },
+    {
+      "Id": "3",
+      "Abbr": "BAL",
+      "City": "Baltimore",
+      "NickName": "Ravens",
+      "FullName": "Baltimore Ravens",
+      "ImagePath": "/Assets/Logos/bal.png"
+    },
+    {
+      "Id": "4",
+      "Abbr": "BUF",
+      "City": "Buffalo",
+      "NickName": "Bills",
+      "FullName": "Buffalo Bills",
+      "ImagePath": "/Assets/Logos/buf.png"
+    },
+    {
+      "Id": "5",
+      "Abbr": "CAR",
+      "City": "Carolina",
+      "NickName": "Panthers",
+      "FullName": "Carolina Panthers",
+      "ImagePath": "/Assets/Logos/car.png"
+    },
+    {
+      "Id": "6",
+      "Abbr": "CHI",
+      "City": "Chicago",
+      "NickName": "Bears",
+      "FullName": "Chicago Bears",
+      "ImagePath": "/Assets/Logos/chi.png"
+    },
+    {
+      "Id": "7",
+      "Abbr": "CIN",
+      "City": "Cincinnati",
+      "NickName": "Bengals",
+      "FullName": "Cincinnati Bengals",
+      "ImagePath": "/Assets/Logos/cin.png"
+    },
+    {
+      "Id": "9",
+      "Abbr": "CLE",
+      "City": "Cleveland",
+      "NickName": "Browns",
+      "FullName": "Cleveland Browns",
+      "ImagePath": "/Assets/Logos/cle.png"
+    },
+    {
+      "Id": "9",
+      "Abbr": "DAL",
+      "City": "Dallas",
+      "NickName": "Cowboys",
+      "FullName": "Dallas Cowboys",
+      "ImagePath": "/Assets/Logos/dal.png"
+    },
+    {
+      "Id": "10",
+      "Abbr": "DEN",
+      "City": "Denver",
+      "NickName": "Broncos",
+      "FullName": "Denver Broncos",
+      "ImagePath": "/Assets/Logos/den.png"
+    },
+    {
+      "Id": "11",
+      "Abbr": "DET",
+      "City": "Detroit",
+      "NickName": "Lions",
+      "FullName": "Detroit Lions",
+      "ImagePath": "/Assets/Logos/det.png"
+    },
+    {
+      "Id": "12",
+      "Abbr": "GB",
+      "City": "GreenBay",
+      "NickName": "Packers",
+      "FullName": "GreenBay Packers",
+      "ImagePath": "/Assets/Logos/gb.png"
+    },
+    {
+      "Id": "13",
+      "Abbr": "HOU",
+      "City": "Houston",
+      "NickName": "Texans",
+      "FullName": "Houston Texans",
+      "ImagePath": "/Assets/Logos/hou.png"
+    },
+    {
+      "Id": "14",
+      "Abbr": "IND",
+      "City": "Indianapolis",
+      "NickName": "Colts",
+      "FullName": "Indianapolis Colts",
+      "ImagePath": "/Assets/Logos/ind.png"
+    },
+    {
+      "Id": "15",
+      "Abbr": "JAC",
+      "City": "Jacksonville",
+      "NickName": "Jaguars",
+      "FullName": "Jacksonville Jaguars",
+      "ImagePath": "/Assets/Logos/jac.png"
+    },
+    {
+      "Id": "16",
+      "Abbr": "KC",
+      "City": "KansasCity",
+      "NickName": "Chiefs",
+      "FullName": "Kansas City Chiefs",
+      "ImagePath": "/Assets/Logos/kc.png"
+    },
+    {
+      "Id": "17",
+      "Abbr": "MIA",
+      "City": "Miami",
+      "NickName": "Dolphins",
+      "FullName": "Miami Dolphins",
+      "ImagePath": "/Assets/Logos/mia.png"
+    },
+    {
+      "Id": "18",
+      "Abbr": "MIN",
+      "City": "Minnesota",
+      "NickName": "Vikings",
+      "FullName": "Minnesota Vikings",
+      "ImagePath": "/Assets/Logos/min.png"
+    },
+    {
+      "Id": "19",
+      "Abbr": "NE",
+      "City": "NewEngland",
+      "NickName": "Patriots",
+      "FullName": "NewEngland Patriots",
+      "ImagePath": "/Assets/Logos/ne.png"
+    },
+    {
+      "Id": "20",
+      "Abbr": "NO",
+      "City": "NewOrleans",
+      "NickName": "Saints",
+      "FullName": "New Orleans Saints",
+      "ImagePath": "/Assets/Logos/no.png"
+    },
+    {
+      "Id": "21",
+      "Abbr": "NYG",
+      "City": "NewYork",
+      "NickName": "Giants",
+      "FullName": "New York Giants",
+      "ImagePath": "/Assets/Logos/nyg.png"
+    },
+    {
+      "Id": "22",
+      "Abbr": "NYJ",
+      "City": "NewYork",
+      "NickName": "Jets",
+      "FullName": "New York Jets",
+      "ImagePath": "/Assets/Logos/nyj.png"
+    },
+    {
+      "Id": "23",
+      "Abbr": "OAK",
+      "City": "Oakland",
+      "NickName": "Raiders",
+      "FullName": "Oakland Raiders",
+      "ImagePath": "/Assets/Logos/oak.png"
+    },
+    {
+      "Id": "24",
+      "Abbr": "PHI",
+      "City": "Philadelphia",
+      "NickName": "Eagles",
+      "FullName": "Philadelphia Eagles",
+      "ImagePath": "/Assets/Logos/phi.png"
+    },
+    {
+      "Id": "25",
+      "Abbr": "PIT",
+      "City": "Pittsburgh",
+      "NickName": "Steelers",
+      "FullName": "Pittsburgh Steelers",
+      "ImagePath": "/Assets/Logos/pit.png"
+    },
+    {
+      "Id": "26",
+      "Abbr": "SD",
+      "City": "SanDiego",
+      "NickName": "Chargers",
+      "FullName": "San Diego Chargers",
+      "ImagePath": "/Assets/Logos/sd.png"
+    },
+    {
+      "Id": "27",
+      "Abbr": "SEA",
+      "City": "Seattle",
+      "NickName": "Seahawks",
+      "FullName": "Seattle Seahawks",
+      "ImagePath": "/Assets/Logos/sea.png"
+    },
+    {
+      "Id": "28",
+      "Abbr": "SF",
+      "City": "SanFrancisco",
+      "NickName": "49ers",
+      "FullName": "San Francisco 49ers",
+      "ImagePath": "/Assets/Logos/sf.png"
+    },
+    {
+      "Id": "29",
+      "Abbr": "STL",
+      "City": "St.Louis",
+      "NickName": "Rams",
+      "FullName": "St.Louis Rams",
+      "ImagePath": "/Assets/Logos/stl.png"
+    },
+    {
+      "Id": "30",
+      "Abbr": "TB",
+      "City": "TampaBay",
+      "NickName": "Buccaneers",
+      "FullName": "Tampa Bay Buccaneers",
+      "ImagePath": "/Assets/Logos/tb.png"
+    },
+    {
+      "Id": "31",
+      "Abbr": "TEN",
+      "City": "Tennessee",
+      "NickName": "Titans",
+      "FullName": "Tennessee Titans",
+      "ImagePath": "/Assets/Logos/ten.png"
+    },
+    {
+      "Id": "32",
+      "Abbr": "WAS",
+      "City": "Washington",
+      "NickName": "Redskins",
+      "FullName": "Washington Redskins",
+      "ImagePath": "/Assets/Logos/was.png"
+    }
+  ]
+}

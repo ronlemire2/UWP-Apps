@@ -1,0 +1,299 @@
+﻿<Page
+    x:Class="NFLWatcher.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NFLWatcher.Views"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:viewmodels="using:NFLWatcher.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    RequestedTheme="Dark"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <Grid x:Name="WeekViewGrid"
+          Background="#FF252526">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--<VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Width640">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="WeekViewGrid.ColumnDefinitions[1].Width"
+                                Value="640" />
+                        <Setter Target="GameViewModels.Width"
+                                Value="640" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Width432">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="432" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="WeekViewGrid.ColumnDefinitions[1].Width"
+                                Value="432" />
+                        <Setter Target="GameViewModels.Width"
+                                Value="432" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Width360">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="360" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="WeekViewGrid.ColumnDefinitions[1].Width"
+                                Value="360" />
+                        <Setter Target="GameViewModels.Width"
+                                Value="360" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Width320">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="WeekViewGrid.ColumnDefinitions[1].Width"
+                                Value="320" />
+                        <Setter Target="GameViewModels.Width"
+                                Value="320" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>-->
+
+        <!--Title-->
+        <TextBlock x:Name="Title"
+                   Text="{Binding Title}"
+                   Style="{StaticResource HeaderTextBlockStyle}"
+                   VerticalAlignment="Center"
+                   Width="Auto"
+                   HorizontalAlignment="Center"
+                   Margin="0" />
+
+        <!--Year/Season/Week ComboBoxes-->
+        <Grid HorizontalAlignment="Center"
+              Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="60" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Year"
+                           Margin="0,0,0,5"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource SubtitleTextBlockStyle}"
+                           FontSize="18.667" />
+                <ComboBox Grid.Row="1"
+                          x:Name="YearItems"
+                          ItemsSource="{Binding YearItems, Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedYearItem, Mode=TwoWay}"
+                          FontSize="21.333"
+                          HorizontalAlignment="Stretch"
+                          Margin="0,0,10,0"
+                          Background="#FF252526">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="SelectionChanged">
+                            <core:InvokeCommandAction Command="{Binding YearItemsSelectionChangedCommand}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </ComboBox>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Season"
+                           Margin="0,0,0,5"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource SubtitleTextBlockStyle}"
+                           FontSize="18.667" />
+                <ComboBox Grid.Row="1"
+                          x:Name="SeasonItems"
+                          ItemsSource="{Binding SeasonItems, Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedSeasonItem, Mode=TwoWay}"
+                          FontSize="21.333"
+                          Margin="0,0,10,0"
+                          Background="#FF252526"
+                          HorizontalAlignment="Stretch">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="SelectionChanged">
+                            <core:InvokeCommandAction Command="{Binding SeasonItemsSelectionChangedCommand}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </ComboBox>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Week"
+                           Margin="0,0,0,5"
+                           Style="{StaticResource SubtitleTextBlockStyle}"
+                           HorizontalAlignment="Center"
+                           FontSize="18.667" />
+                <ComboBox x:Name="WeekItems"
+                          Grid.Row="1"
+                          ItemsSource="{Binding WeekItems, Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedWeekItem, Mode=TwoWay}"
+                          FontSize="21.333"
+                          Background="#FF252526"
+                          HorizontalAlignment="Stretch">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="SelectionChanged">
+                            <core:InvokeCommandAction Command="{Binding WeekItemsSelectionChangedCommand}"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </ComboBox>
+            </Grid>
+            <Button Grid.Column="3"
+                    Height="40"
+                    Margin="10,10,0,0"
+                    Content="&#xE14A;"
+                    Command="{Binding RefreshCommand}" 
+                                FontSize="21.333" 
+                                Width="50" 
+                                FontFamily="Segoe UI Symbol" />
+        </Grid>
+
+        <!--Games List-->
+        <ListView x:Name="GameViewModels"
+                  Grid.Row="2"
+                  Grid.RowSpan="1"
+                  Width="500"
+                  HorizontalAlignment="Center"
+                  SelectionMode="Single"
+                  IsItemClickEnabled="True"
+                  ItemsSource="{Binding GamePageVMs, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedGamePageVM, Mode=TwoWay}">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding GameViewModelsSelectionChangedCommand}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:GameViewModel">
+                    <Grid x:Name="GameViewGrid"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="120" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Grid.Row 0 -->
+                        <Image  Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.RowSpan="3"
+                            Source="{Binding VisitorImagePath}"
+                            AutomationProperties.Name="{Binding VisitorImagePath}"
+                            Stretch="Uniform"
+                            Margin="3,0" />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding VisitorAbbr}"
+                                   HorizontalAlignment="Left" />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="2"
+                                   Text="{Binding GameDate}"
+                                   HorizontalAlignment="Center" />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="3"
+                                    Text="{Binding HomeAbbr}"
+                                    HorizontalAlignment="Right" />
+
+                        <Image Grid.Row="0"
+                               Grid.Column="4"
+                               Grid.RowSpan="3"
+                               Source="{Binding HomeImagePath}"
+                               AutomationProperties.Name="{Binding HomeImagePath}"
+                               Margin="3,0" />
+
+                        <!-- Grid.Row 1 -->
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding VisitorNickName}"
+                                   HorizontalAlignment="Left" />
+
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="2"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding Day}"
+                                    Margin="0,0,5,0" />
+                            <TextBlock Text="{Binding Time}" />
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="3"
+                                Text="{Binding HomeNickName}"
+                                HorizontalAlignment="Right" />
+
+                        <!-- Grid.Row 2 -->
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="{Binding AwayCurrentScore}"
+                                   HorizontalAlignment="Left" />
+
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="2"
+                                   Text="{Binding Qtr}"
+                                   HorizontalAlignment="Center" />
+
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="3"
+                               Text="{Binding HomeCurrentScore}"
+                               HorizontalAlignment="Right" />
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+        <!--<GridView x:Name="GameViewModels"
+                  Margin="0,137,0,0"
+                  Padding="116,0,116,46"
+                  SelectionMode="None"
+                  IsItemClickEnabled="True"
+                  caliburn:Message.Attach="[Event ItemClick] = [GameScheduleSelected($eventArgs)]"
+                  Grid.RowSpan="2" />-->
+    </Grid>
+</Page>
