@@ -11,7 +11,7 @@
 **FeedReader**
 
 1. Comics (about 300 feeds with SemanticZoom)
-2. Politics 
+2. Politics (includes Political Cartoons)
 3. Tech 
 
 **NFLWatcher**
