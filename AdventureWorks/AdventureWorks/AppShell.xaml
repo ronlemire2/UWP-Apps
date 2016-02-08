@@ -99,7 +99,7 @@
         <SplitView x:Name="splitView"
                    Grid.Row="1"
                    DisplayMode="Inline"
-                   OpenPaneLength="175"
+                   OpenPaneLength="200"
                    IsTabStop="False">
             <SplitView.Pane>
                 <!-- A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event. -->
