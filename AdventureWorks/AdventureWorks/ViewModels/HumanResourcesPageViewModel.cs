@@ -20,7 +20,9 @@ namespace AdventureWorks.ViewModels {
         }
 
         public async override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState) {
+            Loading = true;
             PersonVMs = new ObservableCollection<PersonVM>(await personRepository.GetPeopleAsync());
+            Loading = false;
             base.OnNavigatedTo(e, viewModelState);
         }
 
@@ -33,6 +35,14 @@ namespace AdventureWorks.ViewModels {
             get { return personVMs; }
             set {
                 SetProperty<ObservableCollection<PersonVM>>(ref personVMs, value);
+            }
+        }
+
+        private bool loading;
+        public bool Loading {
+            get { return loading; }
+            set {
+                SetProperty<bool>(ref loading, value);
             }
         }
 

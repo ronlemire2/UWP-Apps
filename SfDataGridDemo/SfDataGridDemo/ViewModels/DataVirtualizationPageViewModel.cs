@@ -19,7 +19,6 @@ namespace SfDataGridDemo.ViewModels {
         }
 
         public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState) {
-            //EmployeeVMs = employeeRepository.GetEmployeesVMs(200);
             base.OnNavigatedTo(e, viewModelState);
         }
 

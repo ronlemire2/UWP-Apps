@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SfDataGridDemo.ViewModels {
+
     public class EmployeeViewModel : ValidatableBindableBase {
         private int employeeId;
         public int EmployeeId {
@@ -99,4 +100,93 @@ namespace SfDataGridDemo.ViewModels {
         }
 
     }
+
+    //public class EmployeeViewModel : ValidatableBindableBase {
+    //    private int employeeId;
+    //    public int EmployeeId {
+    //        get { return employeeId; }
+    //        set { employeeId = value; }
+
+    //    }
+
+    //    private string name;
+    //    public string Name {
+    //        get { return name; }
+    //        set { name = value; }
+    //    }
+
+    //    private long nationalIdNumber;
+    //    public long NationalIdNumber {
+    //        get { return nationalIdNumber; }
+    //        set { nationalIdNumber = value; }
+    //    }
+
+    //    private int contactId;
+    //    public int ContactId {
+    //        get { return contactId; }
+    //        set { contactId = value; }
+    //    }
+
+    //    private string loginId;
+    //    public string LoginId {
+    //        get { return loginId; }
+    //        set { loginId = value; }
+    //    }
+
+    //    private int managerId;
+    //    public int ManagerId {
+    //        get { return managerId; }
+    //        set { managerId = value; }
+    //    }
+
+    //    private string title;
+    //    public string Title {
+    //        get { return title; }
+    //        set { title = value; }
+    //    }
+
+    //    private DateTime birthDate;
+    //    public DateTime BirthDate {
+    //        get { return birthDate; }
+    //        set { birthDate = value; }
+    //    }
+
+    //    private string maritalStatus;
+    //    public string MaritalStatus {
+    //        get { return maritalStatus; }
+    //        set { maritalStatus = value; }
+    //    }
+
+    //    private string gender;
+    //    public string Gender {
+    //        get { return gender; }
+    //        set { gender = value; }
+    //    }
+
+    //    private DateTime hireDate;
+    //    public DateTime HireDate {
+    //        get { return hireDate; }
+    //        set { hireDate = value; }
+    //    }
+
+    //    private int sickLeaveHours;
+    //    public int SickLeaveHours {
+    //        get { return sickLeaveHours; }
+    //        set { sickLeaveHours = value; }
+    //    }
+
+    //    private decimal salary;
+    //    public decimal Salary {
+    //        get { return salary; }
+    //        set { salary = value; }
+    //    }
+
+    //    private bool employeeStatus;
+    //    public bool EmployeeStatus {
+    //        get { return employeeStatus; }
+    //        set { employeeStatus = value; }
+    //    }
+
+    //}
 }
+

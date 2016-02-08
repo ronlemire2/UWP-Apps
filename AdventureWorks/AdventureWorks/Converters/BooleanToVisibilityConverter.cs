@@ -7,6 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 namespace AdventureWorks.Converters {
+    // http://blogs.u2u.be/diederik/post/2011/11/14/null.aspx
     public class BooleanToVisibilityConverter : IValueConverter {
         public bool IsReversed { get; set; }
 
