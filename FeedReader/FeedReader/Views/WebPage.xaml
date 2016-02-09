@@ -16,11 +16,19 @@
     </Page.Resources>
     
     <Grid>
-        <ProgressBar x:Name="progressBar"
+        <!--<ProgressBar x:Name="progressBar"
                      Grid.Row="0"
                          VerticalAlignment="Top"
                          IsIndeterminate="True"
-                         Visibility="{Binding IsBusy, Converter={StaticResource TrueToVisibleConverter}}" />
+                         Visibility="{Binding IsBusy, Converter={StaticResource TrueToVisibleConverter}}" />-->
+
+        <ProgressRing x:Name="progressRing"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Foreground="Black"
+                      Height="100"
+                      Width="100" />
+
 
         <Grid x:Name="webGrid">
             <Grid.RowDefinitions>

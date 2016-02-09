@@ -33,12 +33,14 @@ namespace FeedReader.Views {
         #region EventHandlers
 
         private void ContentView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args) {
-            progressBar.Visibility = Visibility.Visible;
+            progressRing.Visibility = Visibility.Visible;
+            progressRing.IsActive = true;
             webGrid.Visibility = Visibility.Collapsed;
         }
 
         private void ContentView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args) {
-            progressBar.Visibility = Visibility.Collapsed;
+            progressRing.Visibility = Visibility.Collapsed;
+            progressRing.IsActive = false;
             webGrid.Visibility = Visibility.Visible;
         }
 
