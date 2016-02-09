@@ -66,7 +66,7 @@ A UWP Client written in C# XAML that is based on the MVVM pattern. In order to r
 4. Sales (future)
 
 
-**BingSearcher**
+**BingSearcher (work in progress)**
 
 1. Images
 2. Videos (future)
