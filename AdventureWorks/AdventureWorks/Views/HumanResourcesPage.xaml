@@ -18,12 +18,20 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ProgressBar x:Name="progressBar"
+        <!--<ProgressBar x:Name="progressBar"
                          VerticalAlignment="Top"
                          IsIndeterminate="True"
-                         Visibility="{Binding Loading, Converter={StaticResource TrueToVisibleConverter}}" />
-
+                         Visibility="{Binding Loading, Converter={StaticResource TrueToVisibleConverter}}" />-->
         
+        <ProgressRing x:Name="progressRing"
+                      Visibility="{Binding Loading, Converter={StaticResource TrueToVisibleConverter}}"
+                      IsActive="{Binding Loading}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Foreground="Black"
+                      Height="100"
+                      Width="100" />
+
         <syncfusion:SfDataGrid x:Name="sfDataGrid"
                         Grid.Column="0"
                         Margin="10,13,10,15"
