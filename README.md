@@ -1,22 +1,5 @@
 # UWP-Apps
 
-
-**AdventureWorks (work in progress)**
-
-1. HumanResources
-2. Production (future)
-3. Purchasing (future)
-4. Sales (future)
-
-
-**BingSearcher**
-
-1. Images
-2. Videos (future)
-3. News (future)
-4. Maps (future)
-
-
 **FeedReader**
 
 1. Comics (about 300 feeds, uses SemanticZoom)
@@ -74,3 +57,20 @@ All the SfDataGridDemo examples come from Syncfusion's SampleBrowser_2015 Grid f
 4. Screenshots at: ronlemire2/Testers/YouTubePlayer/YouTubePlayer/Screenshots 
 
 A UWP Client written in C# XAML that is based on the MVVM pattern. In order to run the YouTubePlayer you must enter your YouTube API key into the SearchYouTube method of the MyYouTubeService class.      To get a free YouTube API Key go to: https://developers.google.com/youtube/v3/getting-started. There is a usage limit on the free account.
+
+**AdventureWorks (work in progress)**
+
+1. HumanResources
+2. Production (future)
+3. Purchasing (future)
+4. Sales (future)
+
+
+**BingSearcher**
+
+1. Images
+2. Videos (future)
+3. News (future)
+4. Maps (future)
+
+
