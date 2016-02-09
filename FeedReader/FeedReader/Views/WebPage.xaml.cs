@@ -1,4 +1,5 @@
 ﻿using FeedReader.Models;
+using FeedReader.ViewModels;
 using Prism.Windows.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,26 @@ namespace FeedReader.Views {
     public sealed partial class WebPage : SessionStateAwarePage {
         public WebPage() {
             this.InitializeComponent();
+            this.contentView.NavigationCompleted += ContentView_NavigationCompleted;
+            this.contentView.NavigationStarting += ContentView_NavigationStarting;
+            this.contentView.NavigationFailed += ContentView_NavigationFailed;
         }
 
         #region EventHandlers
+
+        private void ContentView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args) {
+            progressBar.Visibility = Visibility.Visible;
+            webGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void ContentView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args) {
+            progressBar.Visibility = Visibility.Collapsed;
+            webGrid.Visibility = Visibility.Visible;
+        }
+
+        private void ContentView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e) {
+
+        }
 
         protected override void LoadState(object navigationParameter, Dictionary<string, object> pageState) {
             FeedItem selectedFeedItem = (FeedItem)navigationParameter;
@@ -38,10 +56,6 @@ namespace FeedReader.Views {
         protected override void SaveState(Dictionary<string, object> pageState) {
             this.contentView.NavigateToString("");
             base.SaveState(pageState);
-        }
-
-        private void ContentView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e) {
-
         }
 
         #endregion

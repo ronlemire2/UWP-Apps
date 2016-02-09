@@ -22,6 +22,7 @@ namespace FeedReader.ViewModels {
         }
 
         public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState) {
+            IsBusy = true;
             FeedType = "Comic";
             List<Feed> feeds = null;
             Task.Run(async () => {
@@ -30,6 +31,7 @@ namespace FeedReader.ViewModels {
             feeds.Add(new Feed { FeedName = "0 Political Cartoons", Link = "http://editorialcartoonists.com/rss/daily.xml", LastUpdated = "" });
             Feeds = new ObservableCollection<Feed>(feeds);
             FeedGroups = ((ComicsService)comicsService).GetFeedGroups(Feeds.ToList());
+            IsBusy = false;
             base.OnNavigatedTo(e, viewModelState);
         }
     }

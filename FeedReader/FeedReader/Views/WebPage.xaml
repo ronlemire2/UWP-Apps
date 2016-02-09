@@ -3,31 +3,49 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:FeedReader.Views"
+    xmlns:converters="using:FeedReader.Converters"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True">
 
+    <Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="TrueToVisibleConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="FalseToVisibleConverter" IsReversed="True" />
+    </Page.Resources>
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Button x:Name="back"
+        <ProgressBar x:Name="progressBar"
+                     Grid.Row="0"
+                         VerticalAlignment="Top"
+                         IsIndeterminate="True"
+                         Visibility="{Binding IsBusy, Converter={StaticResource TrueToVisibleConverter}}" />
+
+        <Grid x:Name="webGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button x:Name="back"
                 Grid.Row="0"      
                 Margin="0,0,5,0"
                 Content="Browser Back"
                 HorizontalAlignment="Right"
                 Click="back_Click" />
-        <Border x:Name="contentViewBorder" 
+
+            <Border x:Name="contentViewBorder" 
                 Grid.Row="1"
                 BorderBrush="Gray" 
                 BorderThickness="2" 
+                Visibility="{Binding IsBusy, Converter={StaticResource FalseToVisibleConverter}}"
                 Margin="5">
-            <WebView x:Name="contentView" 
+                <WebView x:Name="contentView" 
                      NavigationFailed="ContentView_NavigationFailed"/>
-        </Border>
+            </Border>
+        </Grid>
+
     </Grid>
 </mvvm:SessionStateAwarePage>
 

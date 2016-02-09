@@ -350,7 +350,7 @@
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions> 
 
-        <ProgressBar x:Name="progrssBar"
+        <ProgressBar x:Name="progressBar"
                          VerticalAlignment="Top"
                          IsIndeterminate="True"
                          Visibility="Collapsed" />

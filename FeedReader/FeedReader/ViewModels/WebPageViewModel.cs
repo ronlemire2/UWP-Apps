@@ -9,13 +9,13 @@ using FeedReader.Models;
 using Prism.Commands;
 
 namespace FeedReader.ViewModels {
-    public class WebPageViewModel : ViewModelBase {
-        INavigationService navigationService;
+    public class WebPageViewModel : BasePageViewModel {
+        //INavigationService navigationService;
         public DelegateCommand GoBackCommand { get; set; }
 
         #region Constructors
 
-        public WebPageViewModel(INavigationService navigationService) {
+        public WebPageViewModel(INavigationService navigationService) : base("") {
             this.navigationService = navigationService;
             GoBackCommand = new DelegateCommand(ExecuteGoBackCommand, CanExecuteGoBackCommand);
         }

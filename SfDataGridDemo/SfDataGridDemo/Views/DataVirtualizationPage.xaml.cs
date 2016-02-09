@@ -67,7 +67,7 @@ namespace SfDataGridDemo.Views {
             //    this.mainGrid.Visibility = Visibility.Visible;
             //    optionbutton.Content = "Options";
             //}
-            progrssBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            progressBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
             await Task.Delay(50);
             Stopwatch watch = new Stopwatch();
             watch.Start();
@@ -81,7 +81,7 @@ namespace SfDataGridDemo.Views {
             watch.Stop();
             LoadingTime.Text = watch.ElapsedMilliseconds.ToString() + " ms";
             GridView.Visibility = Visibility.Visible;
-            progrssBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            progressBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
     }
 }
