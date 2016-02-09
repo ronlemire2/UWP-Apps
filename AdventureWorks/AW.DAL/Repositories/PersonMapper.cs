@@ -9,10 +9,10 @@ using AutoMapper;
 
 namespace AW.DAL.Repositories {
     public class PersonMapper {
-
+        static MapperConfiguration config;
 
         static PersonMapper() {
-            Mapper.CreateMap<Person, PersonPOCO>()
+            config = new MapperConfiguration(cfg => cfg.CreateMap<Person, PersonPOCO>()
                 .ForMember(dest => dest.NameStyle, opt => opt.MapFrom(src => src.NameStyle.ToString()))
                 .ForMember(dest => dest.EmailPromotion, opt => opt.MapFrom(src => src.EmailPromotion.ToString()))
                 .ForMember(dest => dest.rowguid, opt => opt.MapFrom(src => src.rowguid.ToString()))
@@ -21,7 +21,8 @@ namespace AW.DAL.Repositories {
                 .ForMember(dest => dest.NameStyle, opt => opt.MapFrom(src => bool.Parse(src.NameStyle)))
                 .ForMember(dest => dest.EmailPromotion, opt => opt.MapFrom(src => int.Parse(src.EmailPromotion)))
                 .ForMember(dest => dest.rowguid, opt => opt.MapFrom(src => Guid.Parse(src.rowguid)))
-                .ForMember(dest => dest.ModifiedDate, opt => opt.MapFrom(src => DateTime.Parse(src.ModifiedDate)));
+                .ForMember(dest => dest.ModifiedDate, opt => opt.MapFrom(src => DateTime.Parse(src.ModifiedDate)))
+            );
         }
 
         #region Map EF to DAL
@@ -36,11 +37,9 @@ namespace AW.DAL.Repositories {
             return dalPeople;
         }
 
-        // TODO: Use AutoMapper
         public static PersonPOCO MapOneEFtoDAL(Person efPerson) {
-
-            var dalPersonPOCO = AutoMapper.Mapper.Map<PersonPOCO>(efPerson);
-
+            var mapper = config.CreateMapper();
+            PersonPOCO dalPersonPOCO = mapper.Map<PersonPOCO>(efPerson);
             return dalPersonPOCO;
         }
 
@@ -49,22 +48,8 @@ namespace AW.DAL.Repositories {
         #region Map DAL to EF
 
         public static Person MapOneDALtoEF(PersonPOCO dalPersonPOCO) {
-            Person efPerson = new Person();
-
-            efPerson.BusinessEntityID = dalPersonPOCO.BusinessEntityID;
-            efPerson.PersonType = dalPersonPOCO.PersonType;
-            efPerson.NameStyle = bool.Parse(dalPersonPOCO.NameStyle);
-            efPerson.Title = dalPersonPOCO.Title;
-            efPerson.FirstName = dalPersonPOCO.FirstName;
-            efPerson.MiddleName = dalPersonPOCO.MiddleName;
-            efPerson.LastName = dalPersonPOCO.LastName;
-            efPerson.Suffix = dalPersonPOCO.Suffix;
-            efPerson.EmailPromotion = int.Parse(dalPersonPOCO.EmailPromotion);
-            efPerson.AdditionalContactInfo = dalPersonPOCO.AdditionalContactInfo;
-            efPerson.Demographics = dalPersonPOCO.Demographics;
-            efPerson.rowguid = Guid.Parse(dalPersonPOCO.rowguid);
-            efPerson.ModifiedDate = DateTime.Parse(dalPersonPOCO.ModifiedDate);
-
+            var mapper = config.CreateMapper();
+            Person efPerson = mapper.Map<Person>(dalPersonPOCO);
             return efPerson;
         }
 
