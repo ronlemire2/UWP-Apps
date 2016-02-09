@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AW.DAL.VMs {
+namespace AW.DAL.POCOs {
     public class PersonPOCO : IEntityWithCrudState {
         public PersonPOCO() {
             //this.BusinessEntityContacts = new List<BusinessEntityContact>();

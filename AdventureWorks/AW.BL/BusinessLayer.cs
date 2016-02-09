@@ -1,5 +1,5 @@
 ﻿using AW.DAL.Repositories;
-using AW.DAL.VMs;
+using AW.DAL.POCOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

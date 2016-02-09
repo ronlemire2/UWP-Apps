@@ -1,4 +1,4 @@
-﻿using AW.DAL.VMs;
+﻿using AW.DAL.POCOs;
 using AW.EF;
 using System;
 using System.Collections.Generic;
