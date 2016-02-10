@@ -80,201 +80,201 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL\BusinessLayer.cs">
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BL\BusinessLayer.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BusinessLayer.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BL\IBusinessLayer.cs">
+    </None>
+    <None Include="BL\IBusinessLayer.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IBusinessLayer.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\Address.cs">
+    </None>
+    <None Include="DAL\Models\Address.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Address.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\AddressType.cs">
+    </None>
+    <None Include="DAL\Models\AddressType.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressType.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\BusinessEntity.cs">
+    </None>
+    <None Include="DAL\Models\BusinessEntity.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BusinessEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\BusinessEntityAddress.cs">
+    </None>
+    <None Include="DAL\Models\BusinessEntityAddress.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BusinessEntityAddress.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\CountryRegion.cs">
+    </None>
+    <None Include="DAL\Models\CountryRegion.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CountryRegion.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\EmailAddress.cs">
+    </None>
+    <None Include="DAL\Models\EmailAddress.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmailAddress.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\Employee.cs">
+    </None>
+    <None Include="DAL\Models\Employee.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Employee.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\IEntityWithCrudState.cs">
+    </None>
+    <None Include="DAL\Models\IEntityWithCrudState.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IEntityWithCrudState.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\Password.cs">
+    </None>
+    <None Include="DAL\Models\Password.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Password.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\Person.cs">
+    </None>
+    <None Include="DAL\Models\Person.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Person.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\PersonFilter.cs">
+    </None>
+    <None Include="DAL\Models\PersonFilter.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PersonFilter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\PersonPhone.cs">
+    </None>
+    <None Include="DAL\Models\PersonPhone.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PersonPhone.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\PhoneNumberType.cs">
+    </None>
+    <None Include="DAL\Models\PhoneNumberType.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PhoneNumberType.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\StateProvince.cs">
+    </None>
+    <None Include="DAL\Models\StateProvince.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StateProvince.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Repositories\DbContextExtensions.cs">
+    </None>
+    <None Include="DAL\Repositories\DbContextExtensions.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DbContextExtensions.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Repositories\EFPersonMapper.cs">
+    </None>
+    <None Include="DAL\Repositories\EFPersonMapper.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EFPersonMapper.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Repositories\EFPersonRepository.cs">
+    </None>
+    <None Include="DAL\Repositories\EFPersonRepository.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EFPersonRepository.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Repositories\IPersonRepository.cs">
+    </None>
+    <None Include="DAL\Repositories\IPersonRepository.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IPersonRepository.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebAPI\PersonController.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PersonController.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    </None>
     <None Include="UWP\EditPersonPageViewModel.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EditPersonPageViewModel.tt</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="WebAPI\PersonController.csharp">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PersonController.tt</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BL\BusinessLayer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BusinessLayer.cs</LastGenOutput>
+      <LastGenOutput>BusinessLayer.csharp</LastGenOutput>
     </Content>
     <Content Include="BL\IBusinessLayer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IBusinessLayer.cs</LastGenOutput>
+      <LastGenOutput>IBusinessLayer.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\Address.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Address.cs</LastGenOutput>
+      <LastGenOutput>Address.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\AddressType.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AddressType.cs</LastGenOutput>
+      <LastGenOutput>AddressType.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\BusinessEntity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BusinessEntity.cs</LastGenOutput>
+      <LastGenOutput>BusinessEntity.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\BusinessEntityAddress.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BusinessEntityAddress.cs</LastGenOutput>
+      <LastGenOutput>BusinessEntityAddress.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\CountryRegion.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CountryRegion.cs</LastGenOutput>
+      <LastGenOutput>CountryRegion.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\EmailAddress.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EmailAddress.cs</LastGenOutput>
+      <LastGenOutput>EmailAddress.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\Employee.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Employee.cs</LastGenOutput>
+      <LastGenOutput>Employee.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\IEntityWithCrudState.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IEntityWithCrudState.cs</LastGenOutput>
+      <LastGenOutput>IEntityWithCrudState.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\Password.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Password.cs</LastGenOutput>
+      <LastGenOutput>Password.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\Person.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Person.cs</LastGenOutput>
+      <LastGenOutput>Person.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\PersonFilter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PersonFilter.cs</LastGenOutput>
+      <LastGenOutput>PersonFilter.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\PersonPhone.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PersonPhone.cs</LastGenOutput>
+      <LastGenOutput>PersonPhone.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\PhoneNumberType.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PhoneNumberType.cs</LastGenOutput>
+      <LastGenOutput>PhoneNumberType.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Models\StateProvince.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>StateProvince.cs</LastGenOutput>
+      <LastGenOutput>StateProvince.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Repositories\DbContextExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DbContextExtensions.cs</LastGenOutput>
+      <LastGenOutput>DbContextExtensions.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Repositories\EFPersonMapper.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EFPersonMapper.cs</LastGenOutput>
+      <LastGenOutput>EFPersonMapper.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Repositories\EFPersonRepository.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EFPersonRepository.cs</LastGenOutput>
+      <LastGenOutput>EFPersonRepository.csharp</LastGenOutput>
     </Content>
     <Content Include="DAL\Repositories\IPersonRepository.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IPersonRepository.cs</LastGenOutput>
+      <LastGenOutput>IPersonRepository.csharp</LastGenOutput>
     </Content>
     <Content Include="UWP\EditPersonPage.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -286,7 +286,7 @@
     </Content>
     <Content Include="WebAPI\PersonController.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PersonController.cs</LastGenOutput>
+      <LastGenOutput>PersonController.csharp</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

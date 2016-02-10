@@ -1,5 +1,5 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#"
-#><#@ output extension=".cs"
+#><#@ output extension=".csharp"
 #><#@ Assembly name="System.Core"
 #><#@ Assembly Name="System.Xml"
 #><#@ Assembly name="Microsoft.SqlServer.ConnectionInfo"
