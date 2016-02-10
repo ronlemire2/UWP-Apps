@@ -1,0 +1,98 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#"
+#><#@ output extension=".cs"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ Assembly name="Microsoft.SqlServer.ConnectionInfo"
+#><#@ Assembly name="Microsoft.SqlServer.Smo"
+#><#@ Assembly Name="Microsoft.SqlServer.Management.Sdk.Sfc"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="Microsoft.SqlServer.Management.Smo"
+#><#string EntityName = "Person";
+	string EntityNamePlural = "People";
+	string EntityParameterName = "person";
+	string EntityParameterNamePlural = "people";
+	string EntityKey = "BusinessEntityID";
+	string EntityKeyParam = "businessEntityID";
+	string BLNamespace = "AW.BL";
+	string DALModelsNamespace = "AW.DAL.Models";
+	string WebAPIControllersNamespace = "AW.WebAPI2";
+#>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using <#= BLNamespace #>;
+using <#= DALModelsNamespace #>;
+
+namespace <#= WebAPIControllersNamespace #>
+{
+    public class <#= EntityName #>Controller : ApiController
+    {
+        private IBusinessLayer businessLayer;
+
+        public <#= EntityName #>Controller() : this(new <#= BLNamespace #>.BusinessLayer()) { }
+
+        public <#= EntityName #>Controller(IBusinessLayer businessLayer) {
+            this.businessLayer = businessLayer;
+        }
+
+        public HttpResponseMessage Get() {
+            try {
+                IList<<#= EntityName #>> <#= EntityParameterNamePlural #> = businessLayer.Get<#= EntityNamePlural #>();
+                return Request.CreateResponse<IList<<#= EntityName #>>>(HttpStatusCode.OK, <#= EntityParameterNamePlural #>);
+            }
+            catch (Exception ex) {
+                return Request.CreateErrorResponse(HttpStatusCode.NoContent, ex.Message);
+            }
+        }
+
+        public HttpResponseMessage Get(int <#= EntityKeyParam #>) {
+            try {
+                <#= EntityName #> <#= EntityParameterName #> = businessLayer.Get<#= EntityName #>(<#= EntityKeyParam #>);
+                return Request.CreateResponse<<#= EntityName #>>(HttpStatusCode.OK, <#= EntityParameterName #>);
+            }
+            catch (Exception ex) {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+        }
+
+        // For Edit and Delete
+        public HttpResponseMessage Put(<#= EntityName #> <#= EntityParameterName #>) {
+            if (ModelState.IsValid) {
+                try {
+                    int numRowsAffected = businessLayer.SaveGraph(<#= EntityParameterName #>);
+                    var response = Request.CreateResponse<int>(HttpStatusCode.OK, numRowsAffected);
+                    return response;
+                }
+                catch (Exception ex) {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotModified, ex.Message);
+                }
+            }
+            else {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
+
+        // For Add
+        public HttpResponseMessage Post(<#= EntityName #> <#= EntityParameterName #>) {
+            if (ModelState.IsValid) {
+                try {
+                    int numRowsAffected = businessLayer.SaveGraph(<#= EntityParameterName #>);
+                    var response = Request.CreateResponse<int>(HttpStatusCode.OK, numRowsAffected);
+                    string uri = Url.Link("DefaultApi", new { <#= EntityKey #> = <#= EntityParameterName #>.<#= EntityKey #> });
+                    response.Headers.Location = new Uri(uri);
+                    return response;
+                }
+                catch (Exception ex) {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotModified, ex.Message);
+                }
+            }
+            else {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
+    }
+}

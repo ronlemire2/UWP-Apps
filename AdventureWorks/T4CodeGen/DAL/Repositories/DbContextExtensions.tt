@@ -1,0 +1,28 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#"
+#><#@ output extension=".cs"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ Assembly name="Microsoft.SqlServer.ConnectionInfo"
+#><#@ Assembly name="Microsoft.SqlServer.Smo"
+#><#@ Assembly Name="Microsoft.SqlServer.Management.Sdk.Sfc"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="Microsoft.SqlServer.Management.Smo"
+#><#string DALModelsNamespace = "AW.DAL.Models";
+#>using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace <#= DALModelsNamespace #> {
+    public static class DbContextExtensions {
+        public static ObjectContext ToObjectContext(this DbContext dbContext) {
+            return (dbContext as IObjectContextAdapter).ObjectContext;
+        }
+    }
+}

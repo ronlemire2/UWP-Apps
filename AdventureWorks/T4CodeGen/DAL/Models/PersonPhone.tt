@@ -1,0 +1,46 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#"
+#><#@ output extension=".cs"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ Assembly name="Microsoft.SqlServer.ConnectionInfo"
+#><#@ Assembly name="Microsoft.SqlServer.Smo"
+#><#@ Assembly Name="Microsoft.SqlServer.Management.Sdk.Sfc"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="Microsoft.SqlServer.Management.Smo"
+#><#string DALModelsNamespace = "AW.DAL.Models";
+string EntityName = "PersonPhone";
+string EntityTableName = "PersonPhone";
+Server server = new Server("Dell7110");
+Database database = new Database(server, "AdventureWorks2012");
+Table table = new Table(database, "PersonPhone", "Person");
+table.Refresh();
+#>using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace <#= DALModelsNamespace #> 
+{
+    public partial class <#= EntityName #> : IEntityWithCrudState
+    { 
+        public <#= EntityName #>() {
+        }
+
+		<#
+		PushIndent("\t\t");
+		foreach (Column column in table.Columns)
+		{
+			WriteLine("[Required]");
+			WriteLine(string.Format(@"public {0} {1} {{ get; set; }}", column.Name == "BusinessEntityID" ? "int" : "string", column.Name));
+			WriteLine(string.Empty);
+		}      
+		WriteLine("public CrudState CrudState { get; set; }");
+		PopIndent();
+		#>
+    }
+}

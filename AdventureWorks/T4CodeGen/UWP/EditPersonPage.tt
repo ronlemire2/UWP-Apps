@@ -74,6 +74,7 @@ foreach (Column column in table.Columns)
 	if (column.Name != "rowguid" && column.Name != "ModifiedDate") {
 #>
 	<RowDefinition Height="auto" />
+	<RowDefinition Height="auto" />
 <#
 	}
 }      
@@ -84,13 +85,14 @@ PopIndent();
 
 <#
 PushIndent("\t\t\t\t\t");
+int rowNumber = 0;
 foreach (Column column in table.Columns)
 {
 	if (column.Name != "rowguid" && column.Name != "ModifiedDate") {
 #>
 <!-- <#= column.Name #> -->
 <TextBox 
-        Grid.Row="0"
+        Grid.Row="<#= rowNumber.ToString() #>"
         Header="<#= column.Name #>"
         Text="{Binding Selected<#= EntityName #>VM.<#= column.Name #>, Mode=TwoWay}"
         FontSize="20">
@@ -99,7 +101,7 @@ foreach (Column column in table.Columns)
     </interactivity:Interaction.Behaviors>
 </TextBox>
 <TextBlock x:Name="Errors<#= column.Name #>"
-            Grid.Row="1"
+            Grid.Row="<#= (rowNumber+1).ToString() #>"
             Margin="0,0,0,20"
             Style="{StaticResource ErrorMessageStyle}"
             Text="{Binding Selected<#= EntityName #>VM.Errors[<#= column.Name #>],Converter={StaticResource FirstErrorConverter}}"
@@ -107,6 +109,7 @@ foreach (Column column in table.Columns)
 
 <#
 	}
+	rowNumber = rowNumber + 2;
 }      
 PopIndent();
 #>

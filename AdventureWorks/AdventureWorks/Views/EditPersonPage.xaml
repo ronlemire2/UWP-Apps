@@ -59,6 +59,17 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
@@ -81,7 +92,7 @@
 
                     <!-- PersonType -->
                     <TextBox 
-					        Grid.Row="0"
+					        Grid.Row="2"
 					        Header="PersonType"
 					        Text="{Binding SelectedPersonVM.PersonType, Mode=TwoWay}"
 					        FontSize="20">
@@ -90,7 +101,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <TextBlock x:Name="ErrorsPersonType"
-					            Grid.Row="1"
+					            Grid.Row="3"
 					            Margin="0,0,0,20"
 					            Style="{StaticResource ErrorMessageStyle}"
 					            Text="{Binding SelectedPersonVM.Errors[PersonType],Converter={StaticResource FirstErrorConverter}}"
@@ -98,7 +109,7 @@
 
                     <!-- NameStyle -->
                     <TextBox 
-					        Grid.Row="0"
+					        Grid.Row="4"
 					        Header="NameStyle"
 					        Text="{Binding SelectedPersonVM.NameStyle, Mode=TwoWay}"
 					        FontSize="20">
@@ -107,7 +118,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <TextBlock x:Name="ErrorsNameStyle"
-					            Grid.Row="1"
+					            Grid.Row="5"
 					            Margin="0,0,0,20"
 					            Style="{StaticResource ErrorMessageStyle}"
 					            Text="{Binding SelectedPersonVM.Errors[NameStyle],Converter={StaticResource FirstErrorConverter}}"
@@ -115,7 +126,7 @@
 
                     <!-- Title -->
                     <TextBox 
-					        Grid.Row="0"
+					        Grid.Row="6"
 					        Header="Title"
 					        Text="{Binding SelectedPersonVM.Title, Mode=TwoWay}"
 					        FontSize="20">
@@ -124,7 +135,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <TextBlock x:Name="ErrorsTitle"
-					            Grid.Row="1"
+					            Grid.Row="7"
 					            Margin="0,0,0,20"
 					            Style="{StaticResource ErrorMessageStyle}"
 					            Text="{Binding SelectedPersonVM.Errors[Title],Converter={StaticResource FirstErrorConverter}}"
@@ -132,7 +143,7 @@
 
                     <!-- FirstName -->
                     <TextBox 
-					        Grid.Row="0"
+					        Grid.Row="8"
 					        Header="FirstName"
 					        Text="{Binding SelectedPersonVM.FirstName, Mode=TwoWay}"
 					        FontSize="20">
@@ -141,7 +152,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <TextBlock x:Name="ErrorsFirstName"
-					            Grid.Row="1"
+					            Grid.Row="9"
 					            Margin="0,0,0,20"
 					            Style="{StaticResource ErrorMessageStyle}"
 					            Text="{Binding SelectedPersonVM.Errors[FirstName],Converter={StaticResource FirstErrorConverter}}"
@@ -149,7 +160,7 @@
 
                     <!-- MiddleName -->
                     <TextBox 
-					        Grid.Row="0"
+					        Grid.Row="10"
 					        Header="MiddleName"
 					        Text="{Binding SelectedPersonVM.MiddleName, Mode=TwoWay}"
 					        FontSize="20">
@@ -158,7 +169,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <TextBlock x:Name="ErrorsMiddleName"
-					            Grid.Row="1"
+					            Grid.Row="11"
 					            Margin="0,0,0,20"
 					            Style="{StaticResource ErrorMessageStyle}"
 					            Text="{Binding SelectedPersonVM.Errors[MiddleName],Converter={StaticResource FirstErrorConverter}}"
@@ -166,7 +177,7 @@
 
                     <!-- LastName -->
                     <TextBox 
-					        Grid.Row="0"
+					        Grid.Row="12"
 					        Header="LastName"
 					        Text="{Binding SelectedPersonVM.LastName, Mode=TwoWay}"
 					        FontSize="20">
@@ -175,7 +186,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <TextBlock x:Name="ErrorsLastName"
-					            Grid.Row="1"
+					            Grid.Row="13"
 					            Margin="0,0,0,20"
 					            Style="{StaticResource ErrorMessageStyle}"
 					            Text="{Binding SelectedPersonVM.Errors[LastName],Converter={StaticResource FirstErrorConverter}}"
@@ -183,7 +194,7 @@
 
                     <!-- Suffix -->
                     <TextBox 
-					        Grid.Row="0"
+					        Grid.Row="14"
 					        Header="Suffix"
 					        Text="{Binding SelectedPersonVM.Suffix, Mode=TwoWay}"
 					        FontSize="20">
@@ -192,7 +203,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <TextBlock x:Name="ErrorsSuffix"
-					            Grid.Row="1"
+					            Grid.Row="15"
 					            Margin="0,0,0,20"
 					            Style="{StaticResource ErrorMessageStyle}"
 					            Text="{Binding SelectedPersonVM.Errors[Suffix],Converter={StaticResource FirstErrorConverter}}"
@@ -200,7 +211,7 @@
 
                     <!-- EmailPromotion -->
                     <TextBox 
-					        Grid.Row="0"
+					        Grid.Row="16"
 					        Header="EmailPromotion"
 					        Text="{Binding SelectedPersonVM.EmailPromotion, Mode=TwoWay}"
 					        FontSize="20">
@@ -209,7 +220,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <TextBlock x:Name="ErrorsEmailPromotion"
-					            Grid.Row="1"
+					            Grid.Row="17"
 					            Margin="0,0,0,20"
 					            Style="{StaticResource ErrorMessageStyle}"
 					            Text="{Binding SelectedPersonVM.Errors[EmailPromotion],Converter={StaticResource FirstErrorConverter}}"
@@ -217,7 +228,7 @@
 
                     <!-- AdditionalContactInfo -->
                     <TextBox 
-					        Grid.Row="0"
+					        Grid.Row="18"
 					        Header="AdditionalContactInfo"
 					        Text="{Binding SelectedPersonVM.AdditionalContactInfo, Mode=TwoWay}"
 					        FontSize="20">
@@ -226,7 +237,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <TextBlock x:Name="ErrorsAdditionalContactInfo"
-					            Grid.Row="1"
+					            Grid.Row="19"
 					            Margin="0,0,0,20"
 					            Style="{StaticResource ErrorMessageStyle}"
 					            Text="{Binding SelectedPersonVM.Errors[AdditionalContactInfo],Converter={StaticResource FirstErrorConverter}}"
@@ -234,7 +245,7 @@
 
                     <!-- Demographics -->
                     <TextBox 
-					        Grid.Row="0"
+					        Grid.Row="20"
 					        Header="Demographics"
 					        Text="{Binding SelectedPersonVM.Demographics, Mode=TwoWay}"
 					        FontSize="20">
@@ -243,7 +254,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <TextBlock x:Name="ErrorsDemographics"
-					            Grid.Row="1"
+					            Grid.Row="21"
 					            Margin="0,0,0,20"
 					            Style="{StaticResource ErrorMessageStyle}"
 					            Text="{Binding SelectedPersonVM.Errors[Demographics],Converter={StaticResource FirstErrorConverter}}"
@@ -262,5 +273,4 @@
         </StackPanel>
     </Grid>
 </Page>
-
 

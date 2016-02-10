@@ -1,0 +1,22 @@
+﻿<#@template debug="true" hostspecific="false" language="C#"
+#><#@output extension=".cs"
+#><#string DALModelsNamespace = "AW.DAL.Models";
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace <#= DALModelsNamespace #> {
+    public interface IEntityWithCrudState {
+        CrudState CrudState { get; set; }
+    }
+
+    public enum CrudState {
+        Added,
+        Unchanged,
+        Modified,
+        Deleted
+    }
+}

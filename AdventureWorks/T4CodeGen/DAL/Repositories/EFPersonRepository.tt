@@ -1,0 +1,100 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#"
+#><#@ output extension=".cs"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ Assembly name="Microsoft.SqlServer.ConnectionInfo"
+#><#@ Assembly name="Microsoft.SqlServer.Smo"
+#><#@ Assembly Name="Microsoft.SqlServer.Management.Sdk.Sfc"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="Microsoft.SqlServer.Management.Smo"
+#><#string EntityName = "Person";
+	string EntityNamePlural = "People";
+	string EntityKey = "BusinessEntityID";
+	string EntityKeyParam = "businessEntityID";
+	string EFNamespace = "AW.EF";
+	string DALModelsNamespace = "AW.DAL.Models";
+	string DALRepositoriesNamespace = "AW.DAL.Repositories";
+	string DataContextName = "AdventureWorks2012Entities";
+#>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
+using <#= DALModelsNamespace #>;
+using <#= EFNamespace #>;
+
+namespace <#= DALRepositoriesNamespace #> {
+    public class EF<#= EntityName #>Repository : I<#= EntityName #>Repository {
+        public IList<<#= DALModelsNamespace #>.<#= EntityName #>> Get<#= EntityNamePlural #>() {
+            List<<#= EFNamespace #>.<#= EntityName #>> ef<#= EntityNamePlural #>;
+            using (var context = new <#= DataContextName #>()) {
+                IQueryable<<#= EFNamespace #>.<#= EntityName #>> dbQuery = context.<#= EntityNamePlural #>;
+                ef<#= EntityNamePlural #> = dbQuery
+                    .AsNoTracking()
+                    .ToList();
+            }
+
+            List<<#= DALModelsNamespace #>.<#= EntityName #>> dal<#= EntityNamePlural #>;
+            dal<#= EntityNamePlural #> = EF<#= EntityName #>Mapper.MapAllEFtoDAL(ef<#= EntityNamePlural #>).ToList();
+
+            return dal<#= EntityNamePlural #>;
+        }
+
+        public <#= DALModelsNamespace #>.<#= EntityName #> Get<#= EntityName #>(int <#= EntityKeyParam #>) {
+            <#= EFNamespace #>.<#= EntityName #> ef<#= EntityName #>;
+            using (var context = new <#= DataContextName #>()) {
+                ef<#= EntityName #> = context.<#= EntityNamePlural #>.Where(p => p.<#= EntityKey #> == <#= EntityKeyParam #>)
+                    .AsNoTracking()
+                    .FirstOrDefault();
+            }
+
+            <#= DALModelsNamespace #>.<#= EntityName #> dal<#= EntityName #>;
+            dal<#= EntityName #> = EF<#= EntityName #>Mapper.MapOneEFtoDAL(ef<#= EntityName #>);
+            return dal<#= EntityName #>;
+        }
+
+        public int SaveGraph(<#= DALModelsNamespace #>.<#= EntityName #> dal<#= EntityName #>) {
+            int numRowsAffected = 0;
+
+            <#= EFNamespace #>.<#= EntityName #> ef<#= EntityName #> = EF<#= EntityName #>Mapper.MapOneDALtoEF(dal<#= EntityName #>);
+            try {
+                using (var context = new <#= DataContextName #>()) {
+                    context.Set<<#= EFNamespace #>.<#= EntityName #>>().Add(ef<#= EntityName #>);
+                    var entry = context.ChangeTracker.Entries<<#= EFNamespace #>.<#= EntityName #>>().Where(e => e.Entity.<#= EntityKey #> == dal<#= EntityName #>.<#= EntityKey #>).FirstOrDefault();
+                    entry.State = ConvertState(dal<#= EntityName #>.CrudState);
+                    if (dal<#= EntityName #>.CrudState == CrudState.Unchanged) {
+                        var databaseValues = entry.GetDatabaseValues();
+                        entry.OriginalValues.SetValues(databaseValues);
+                    }
+
+                    numRowsAffected = context.SaveChanges();
+                }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException ex) {
+                if (ex.InnerException != null && ex.InnerException is System.Data.SqlClient.SqlException
+                   && ((System.Data.SqlClient.SqlException)ex.InnerException).ErrorCode == 8152)
+                    throw ex.InnerException;
+                else
+                    throw ex;
+            }
+
+            return numRowsAffected;
+        }
+
+        public EntityState ConvertState(CrudState crudState) {
+            switch (crudState) {
+                case CrudState.Added:
+                    return EntityState.Added;
+                case CrudState.Modified:
+                    return EntityState.Modified;
+                case CrudState.Deleted:
+                    return EntityState.Deleted;
+                default:
+                    return EntityState.Unchanged;
+            }
+        }
+    }
+}

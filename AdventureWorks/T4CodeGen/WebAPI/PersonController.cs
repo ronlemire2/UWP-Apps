@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using AW.BL;
+using AW.DAL.Models;
+
+namespace AW.WebAPI2
+{
+    public class PersonController : ApiController
+    {
+        private IBusinessLayer businessLayer;
+
+        public PersonController() : this(new AW.BL.BusinessLayer()) { }
+
+        public PersonController(IBusinessLayer businessLayer) {
+            this.businessLayer = businessLayer;
+        }
+
+        public HttpResponseMessage Get() {
+            try {
+                IList<Person> people = businessLayer.GetPeople();
+                return Request.CreateResponse<IList<Person>>(HttpStatusCode.OK, people);
+            }
+            catch (Exception ex) {
+                return Request.CreateErrorResponse(HttpStatusCode.NoContent, ex.Message);
+            }
+        }
+
+        public HttpResponseMessage Get(int businessEntityID) {
+            try {
+                Person person = businessLayer.GetPerson(businessEntityID);
+                return Request.CreateResponse<Person>(HttpStatusCode.OK, person);
+            }
+            catch (Exception ex) {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+        }
+
+        // For Edit and Delete
+        public HttpResponseMessage Put(Person person) {
+            if (ModelState.IsValid) {
+                try {
+                    int numRowsAffected = businessLayer.SaveGraph(person);
+                    var response = Request.CreateResponse<int>(HttpStatusCode.OK, numRowsAffected);
+                    return response;
+                }
+                catch (Exception ex) {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotModified, ex.Message);
+                }
+            }
+            else {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
+
+        // For Add
+        public HttpResponseMessage Post(Person person) {
+            if (ModelState.IsValid) {
+                try {
+                    int numRowsAffected = businessLayer.SaveGraph(person);
+                    var response = Request.CreateResponse<int>(HttpStatusCode.OK, numRowsAffected);
+                    string uri = Url.Link("DefaultApi", new { BusinessEntityID = person.BusinessEntityID });
+                    response.Headers.Location = new Uri(uri);
+                    return response;
+                }
+                catch (Exception ex) {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotModified, ex.Message);
+                }
+            }
+            else {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
+    }
+}

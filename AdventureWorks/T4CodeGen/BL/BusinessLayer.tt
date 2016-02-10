@@ -1,0 +1,60 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#"
+#><#@ output extension=".cs"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ Assembly name="Microsoft.SqlServer.ConnectionInfo"
+#><#@ Assembly name="Microsoft.SqlServer.Smo"
+#><#@ Assembly Name="Microsoft.SqlServer.Management.Sdk.Sfc"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="Microsoft.SqlServer.Management.Smo"
+#><#string Entity1Name = "Person";
+	string Entity1NamePlural = "People";
+	string Entity1ParameterName = "person";
+	string Entity1ParameterNamePlural = "people";
+	string BLNamespace = "AW.BL";
+	string DALModelsNamespace = "AW.DAL.Models";
+	string DALRepositoriesNamespace = "AW.DAL.Repositories";
+#>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using <#= DALModelsNamespace #>;
+using <#= DALRepositoriesNamespace #>;
+
+namespace <#= BLNamespace #> {
+    public class BusinessLayer : IBusinessLayer {
+
+        private readonly I<#= Entity1Name #>Repository <#= Entity1ParameterName #>Repository;
+
+        public BusinessLayer() {
+            <#= Entity1ParameterName #>Repository = new EF<#= Entity1Name #>Repository();
+        }
+
+        public BusinessLayer(I<#= Entity1Name #>Repository <#= Entity1ParameterName #>Repository) {
+            this.<#= Entity1ParameterName #>Repository = <#= Entity1ParameterName #>Repository;
+        }
+
+        #region <#= Entity1Name #>
+
+        public IList<<#= Entity1Name #>> Get<#= Entity1NamePlural #>() {
+            IList<<#= Entity1Name #>> <#= Entity1ParameterNamePlural #> = null;
+            <#= Entity1ParameterNamePlural #> = <#= Entity1ParameterName #>Repository.Get<#= Entity1NamePlural #>();
+            return <#= Entity1ParameterNamePlural #>;
+        }
+
+        public <#= Entity1Name #> Get<#= Entity1Name #>(int id) {
+            <#= Entity1Name #> <#= Entity1ParameterName #> = <#= Entity1ParameterName #>Repository.Get<#= Entity1Name #>(id);
+            return <#= Entity1ParameterName #>;
+        }
+
+        public int SaveGraph(<#= Entity1Name #> root) {
+            int numRowsAffected = <#= Entity1ParameterName #>Repository.SaveGraph(root);
+            return numRowsAffected;
+        }
+
+        #endregion
+	}
+}
