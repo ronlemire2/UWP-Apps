@@ -1,0 +1,159 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#"
+#><#@ output extension=".csharp"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ Assembly name="Microsoft.SqlServer.ConnectionInfo"
+#><#@ Assembly name="Microsoft.SqlServer.Smo"
+#><#@ Assembly Name="Microsoft.SqlServer.Management.Sdk.Sfc"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="Microsoft.SqlServer.Management.Smo"
+#><#string AppName = "AdventureWorks";
+string EntityName = "Person";
+string EntityTableName = "Person";
+string EntityNameParameter = "person";
+string EntityNameParameterPlural = "persons";
+string EntityId = "BusinessEntityID";
+Server server = new Server("Dell7110");
+Database database = new Database(server, "AdventureWorks2012");
+Table table = new Table(database, "Person", "Person");
+table.Refresh();
+#>using Prism.Windows.Mvvm;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Prism.Windows.Navigation;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using Prism.Commands;
+using <#= AppName #>.Services;
+using <#= AppName #>.Repositories;
+using Prism.Windows.Validation;
+using Windows.UI.Popups;
+
+namespace <#= AppName #>.ViewModels {
+    public class Browse<#= EntityName #>PageViewModel :ViewModelBase {
+        private readonly I<#= EntityName #>Repository <#= EntityNameParameter #>Repository;
+        private readonly INavigationService navigationService;
+        private bool isInEditMode;
+        int saveSelected<#= EntityName #>Id;
+
+        public DelegateCommand CancelCommand { get; private set; }
+        public DelegateCommand EditCommand { get; private set; }
+        public DelegateCommand DeleteCommand { get; private set; }
+
+        #region Constructors
+
+        public Browse<#= EntityName #>PageViewModel(I<#= EntityName #>Repository <#= EntityNameParameter #>Repository, INavigationService navigationService) {
+            this.<#= EntityNameParameter #>Repository = <#= EntityNameParameter #>Repository;
+            this.navigationService = navigationService;
+
+            CancelCommand = new DelegateCommand(Cancel<#= EntityName #>, CanCancel<#= EntityName #>);
+            EditCommand = new DelegateCommand(Edit<#= EntityName #>, CanEdit<#= EntityName #>);
+            DeleteCommand = new DelegateCommand(Delete<#= EntityName #>, CanDelete<#= EntityName #>);
+
+            IsInEditMode = false;
+            AllErrors = BindableValidator.EmptyErrorsCollection;
+        }
+
+        public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState) {
+            Selected<#= EntityName #>VM = e.Parameter as <#= EntityName #>VM;
+            base.OnNavigatedTo(e, viewModelState);
+        }
+
+        #endregion
+
+        #region Properties
+
+        private <#= EntityName #>VM selected<#= EntityName #>VM;
+        public <#= EntityName #>VM Selected<#= EntityName #>VM {
+            get { return selected<#= EntityName #>VM; }
+            set {
+                SetProperty<<#= EntityName #>VM>(ref selected<#= EntityName #>VM, value);
+                if (Selected<#= EntityName #>VM != null) {
+                    Selected<#= EntityName #>VM.ErrorsChanged += OnErrorsChanged;
+                }
+                RunAllCanExecuteChanged();
+            }
+        }
+
+        private ReadOnlyCollection<string> _allErrors;
+        public ReadOnlyCollection<string> AllErrors {
+            get { return _allErrors; }
+            set { SetProperty(ref _allErrors, value); }
+        }
+
+        public bool IsInEditMode {
+            get {
+                return isInEditMode;
+            }
+
+            set {
+                SetProperty(ref isInEditMode, value);
+                EditCommand.RaiseCanExecuteChanged();
+                DeleteCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        private void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e) {
+            AllErrors = new ReadOnlyCollection<string>(Selected<#= EntityName #>VM.GetAllErrors().Values.SelectMany(c => c).ToList());
+        }
+
+        #endregion
+
+        #region Commands
+
+        // Cancel AppBarButton
+        private void Cancel<#= EntityName #>() {
+            if (navigationService.CanGoBack()) {
+                navigationService.GoBack();
+            }
+            AllErrors = BindableValidator.EmptyErrorsCollection;
+        }
+        private bool CanCancel<#= EntityName #>() {
+            return true;
+        }
+
+        // Edit AppBarButton
+        protected void Edit<#= EntityName #>() {
+            navigationService.Navigate("<#= EntityName #>Edit", Selected<#= EntityName #>VM);
+            RunAllCanExecuteChanged();
+        }
+        protected bool CanEdit<#= EntityName #>() {
+            return Selected<#= EntityName #>VM != null && !this.IsInEditMode;
+        }
+
+        // Delete AppBarButton
+        private async void Delete<#= EntityName #>() {
+            var dialog = new MessageDialog(string.Format("Delete {0}?", Selected<#= EntityName #>VM.<#= EntityId #>));
+            dialog.Title = "Are you sure?";
+            dialog.Commands.Add(new UICommand { Label = "Delete", Id = 1 });
+            dialog.Commands.Add(new UICommand { Label = "Cancel", Id = 0 });
+            var res = await dialog.ShowAsync();
+
+            if ((int)res.Id == 1) {
+                await <#= EntityNameParameter #>Repository.Delete<#= EntityName #>Async(Selected<#= EntityName #>VM);
+            }
+            if (navigationService.CanGoBack()) {
+                navigationService.GoBack();
+            }
+        }
+        protected bool CanDelete<#= EntityName #>() {
+            return Selected<#= EntityName #>VM != null && !this.IsInEditMode;
+        }
+
+        // Refresh Can delegates
+        private void RunAllCanExecuteChanged() {
+            CancelCommand.RaiseCanExecuteChanged();
+            EditCommand.RaiseCanExecuteChanged();
+            DeleteCommand.RaiseCanExecuteChanged();
+        }
+
+        #endregion
+
+
+    }
+}

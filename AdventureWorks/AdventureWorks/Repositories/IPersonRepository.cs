@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdventureWorks.Repositories {
     public interface IPersonRepository {
-        Task<List<PersonVM>> GetPeopleAsync();
+        Task<List<PersonVM>> GetPersonVMsAsync();
         Task<int> EditPersonAsync(PersonVM personVM);
         Task<int> AddPersonAsync(PersonVM personVM);
         Task<int> DeletePersonAsync(PersonVM personVM);

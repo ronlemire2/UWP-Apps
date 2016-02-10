@@ -1,0 +1,145 @@
+﻿<Page x:Name="BrowsePerson"
+    x:Class="AdventureWorks.Views.BrowsePersonPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AdventureWorks.Views"
+    xmlns:converters="using:AdventureWorks.Converters"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Dark"
+    mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <Page.Resources>
+        <converters:BooleanNegationConverter x:Key="BooleanNegationConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" IsReversed="True" />
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+        <converters:StringToDecimalConverter x:Key="StringToDecimalConverter" />
+        <converters:FirstErrorConverter x:Key="FirstErrorConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Edit Buttons -->
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Visibility="{Binding IsInEditMode, Converter={StaticResource ReverseBooleanToVisibilityConverter}}">
+            <AppBarButton Command="{Binding CancelCommand}"
+                          Icon="Back"
+                          Label="Back" />
+            <AppBarButton Command="{Binding EditCommand}"
+                          Icon="Edit"
+                          Label="Edit" />
+            <AppBarButton Command="{Binding DeleteCommand}"
+                          Icon="Delete"
+                          Label="Delete" />
+        </StackPanel>
+
+        <!-- Browse -->
+        <Border Grid.Row="1"
+                Visibility="{Binding IsInEditMode, Converter={StaticResource ReverseBooleanToVisibilityConverter}}"  
+                Margin="75,20,20,20">
+            <Grid>
+                <Grid.RowDefinitions>
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+					<!-- BusinessEntityID -->
+					<TextBox Grid.Row="0"
+					        Margin="0,0,0,20"
+					        Header="BusinessEntityID: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.BusinessEntityID}"
+					        FontSize="20"/>
+					<!-- PersonType -->
+					<TextBox Grid.Row="1"
+					        Margin="0,0,0,20"
+					        Header="PersonType: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.PersonType}"
+					        FontSize="20"/>
+					<!-- NameStyle -->
+					<TextBox Grid.Row="2"
+					        Margin="0,0,0,20"
+					        Header="NameStyle: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.NameStyle}"
+					        FontSize="20"/>
+					<!-- Title -->
+					<TextBox Grid.Row="3"
+					        Margin="0,0,0,20"
+					        Header="Title: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.Title}"
+					        FontSize="20"/>
+					<!-- FirstName -->
+					<TextBox Grid.Row="4"
+					        Margin="0,0,0,20"
+					        Header="FirstName: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.FirstName}"
+					        FontSize="20"/>
+					<!-- MiddleName -->
+					<TextBox Grid.Row="5"
+					        Margin="0,0,0,20"
+					        Header="MiddleName: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.MiddleName}"
+					        FontSize="20"/>
+					<!-- LastName -->
+					<TextBox Grid.Row="6"
+					        Margin="0,0,0,20"
+					        Header="LastName: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.LastName}"
+					        FontSize="20"/>
+					<!-- Suffix -->
+					<TextBox Grid.Row="7"
+					        Margin="0,0,0,20"
+					        Header="Suffix: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.Suffix}"
+					        FontSize="20"/>
+					<!-- EmailPromotion -->
+					<TextBox Grid.Row="8"
+					        Margin="0,0,0,20"
+					        Header="EmailPromotion: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.EmailPromotion}"
+					        FontSize="20"/>
+					<!-- AdditionalContactInfo -->
+					<TextBox Grid.Row="9"
+					        Margin="0,0,0,20"
+					        Header="AdditionalContactInfo: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.AdditionalContactInfo}"
+					        FontSize="20"/>
+					<!-- Demographics -->
+					<TextBox Grid.Row="10"
+					        Margin="0,0,0,20"
+					        Header="Demographics: "
+					        IsEnabled="False"
+					        Text="{Binding SelectedPersonVM.Demographics}"
+					        FontSize="20"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

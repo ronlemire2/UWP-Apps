@@ -1,0 +1,169 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#"
+#><#@ output extension=".csharp"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ Assembly name="Microsoft.SqlServer.ConnectionInfo"
+#><#@ Assembly name="Microsoft.SqlServer.Smo"
+#><#@ Assembly Name="Microsoft.SqlServer.Management.Sdk.Sfc"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="Microsoft.SqlServer.Management.Smo"
+#><#string AppName = "AdventureWorks";
+string EntityName = "Person";
+string EntityNamePlural = "Persons";
+string EntityTableName = "Person";
+string EntityNameParameter = "person";
+string EntityNameParameterPlural = "persons";
+Server server = new Server("Dell7110");
+Database database = new Database(server, "AdventureWorks2012");
+Table table = new Table(database, "Person", "Person");
+table.Refresh();
+#>using Prism.Commands;
+using Prism.Windows.Mvvm;
+using Prism.Windows.Navigation;
+using Prism.Windows.Validation;
+using <#= AppName #>.Models;
+using <#= AppName #>.Services;
+using <#= AppName #>.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace <#= AppName #>.ViewModels {
+    public class <#= EntityName #>PageViewModel : ViewModelBase {
+        private readonly I<#= EntityName #>Repository <#= EntityNameParameter #>Repository;
+        private readonly INavigationService navigationService;
+        public DelegateCommand AddCommand { get; private set; }
+        public DelegateCommand EditCommand { get; private set; }
+        public DelegateCommand SaveCommand { get; private set; }
+        public DelegateCommand CancelCommand { get; private set; }
+        public DelegateCommand DeleteCommand { get; private set; }
+        public DelegateCommand ValidateCommand { get; private set; }
+        public DelegateCommand <#= EntityNamePlural #>ListViewSelectionChangedCommand { get; set; }
+
+        #region Constructors
+
+        public <#= EntityName #>PageViewModel(I<#= EntityName #>Repository <#= EntityNameParameter #>Repository, INavigationService navigationService) {
+            this.<#= EntityNameParameter #>Repository = <#= EntityNameParameter #>Repository;
+            this.navigationService = navigationService;
+
+            AddCommand = new DelegateCommand(Add<#= EntityName #>, CanAdd<#= EntityName #>);
+            <#= EntityNamePlural #>ListViewSelectionChangedCommand = new DelegateCommand(Execute<#= EntityNamePlural #>ListViewSelectionChangedCommand,
+    CanExecute<#= EntityNamePlural #>ListViewSelectionChangedCommand);
+
+            AllErrors = BindableValidator.EmptyErrorsCollection;
+        }
+
+        public async override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState) {
+			Loading = true;
+            <#= EntityName #>VMs = new ObservableCollection<<#= EntityName #>VM>(await <#= EntityNameParameter #>Repository.Get<#= EntityName #>VMsAsync());
+            if ((<#= EntityName #>VM)e.Parameter != null) {
+                Selected<#= EntityName #>VM = e.Parameter as <#= EntityName #>VM;
+            }
+			Loading = false;
+            base.OnNavigatedTo(e, viewModelState);
+        }
+
+        #endregion
+
+        #region Properties
+
+        private ObservableCollection<<#= EntityName #>VM> <#= EntityNameParameter #>VMs;
+        public ObservableCollection<<#= EntityName #>VM> <#= EntityName #>VMs {
+            get { return <#= EntityNameParameter #>VMs; }
+            set { SetProperty<ObservableCollection<<#= EntityName #>VM>>(ref <#= EntityNameParameter #>VMs, value); }
+        }
+
+        private <#= EntityName #>VM selected<#= EntityName #>VM;
+        public <#= EntityName #>VM Selected<#= EntityName #>VM {
+            get { return selected<#= EntityName #>VM; }
+            set {
+                SetProperty<<#= EntityName #>VM>(ref selected<#= EntityName #>VM, value);
+                if (Selected<#= EntityName #>VM != null) {
+                    Selected<#= EntityName #>VM.ErrorsChanged += OnErrorsChanged;
+                }
+                RunAllCanExecuteChanged();
+            }
+        }
+
+        private ReadOnlyCollection<string> _allErrors;
+        public ReadOnlyCollection<string> AllErrors {
+            get { return _allErrors; }
+            set { SetProperty(ref _allErrors, value); }
+        }
+
+        private bool loading;
+        public bool Loading {
+            get { return loading; }
+            set {
+                SetProperty<bool>(ref loading, value);
+            }
+        }
+
+        #endregion
+
+        #region Commands
+
+        private async void Get<#= EntityName #>VMs() {
+            List<<#= EntityName #>VM> <#= EntityNameParameter #>VMs = await <#= EntityNameParameter #>Repository.Get<#= EntityName #>VMsAsync();
+        }
+
+        // Add AppBarButton
+        private void Add<#= EntityName #>() {
+            Selected<#= EntityName #>VM = new <#= EntityName #>VM();
+            navigationService.Navigate("Add<#= EntityName #>", Selected<#= EntityName #>VM);
+        }
+        private bool CanAdd<#= EntityName #>() {
+            return true;
+        }
+
+        // ListView SelectionChanged
+        private void Execute<#= EntityNamePlural #>ListViewSelectionChangedCommand() {
+            navigationService.Navigate("Browse<#= EntityName #>", Selected<#= EntityName #>VM);
+        }
+        private bool CanExecute<#= EntityNamePlural #>ListViewSelectionChangedCommand() {
+            return true;
+        }
+
+        // Refresh Can delegates
+        private void RunAllCanExecuteChanged() {
+            AddCommand.RaiseCanExecuteChanged();
+        }
+
+        #endregion
+
+        #region Utils
+
+        // TODO: Simulate Server Validation errors 
+        private void DisplayServerErrorMessages(ModelValidationResult validationResult) {
+            var serverErrors = new Dictionary<string, ReadOnlyCollection<string>>();
+
+            // Property keys of the form. Format: <#= EntityNameParameter #>.{Property}
+            foreach (var propkey in validationResult.ModelState.Keys) {
+                //string <#= EntityNameParameter #>PropAndEntityProp = propkey.Substring(propkey.IndexOf('.') + 1); // strip off <#= EntityNameParameter #>. prefix
+                string <#= EntityNameParameter #>Property = propkey.Substring(0, propkey.IndexOf('.') + 1);
+                string entityProperty = propkey.Substring(<#= EntityNameParameter #>Property.IndexOf('.') + 1);
+
+                if (<#= EntityNameParameter #>Property.ToLower().Contains("<#= EntityNameParameter #>")) {
+                    serverErrors.Add(entityProperty, new ReadOnlyCollection<string>(validationResult.ModelState[propkey]));
+                }
+            }
+
+            if (serverErrors.Count > 0) {
+                Selected<#= EntityName #>VM.Errors.SetAllErrors(serverErrors);
+            }
+        }
+
+        private void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e) {
+            AllErrors = new ReadOnlyCollection<string>(Selected<#= EntityName #>VM.GetAllErrors().Values.SelectMany(c => c).ToList());
+        }
+
+
+        #endregion
+    }
+}

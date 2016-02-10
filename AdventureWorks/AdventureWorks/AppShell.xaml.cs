@@ -40,6 +40,13 @@ namespace AdventureWorks {
                     DestPage = typeof(HumanResourcesPage),
                     PageToken = "HumanResources"
                 },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact2,
+                    Label = "Person",
+                    DestPage = typeof(PersonPage),
+                    PageToken = "Person"
+                },
             });
 
         public static AppShell Current = null;

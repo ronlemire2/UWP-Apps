@@ -122,6 +122,8 @@
     <Compile Include="Models\CrudState.cs" />
     <Compile Include="Models\ModelValidationResult.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="ViewModels\BrowsePersonPageViewModel.cs" />
+    <Compile Include="ViewModels\PersonPageViewModel.cs" />
     <Compile Include="ViewModels\PersonVM.cs" />
     <Compile Include="NavMenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +135,9 @@
     <Compile Include="ViewModels\EditPersonPageViewModel.cs" />
     <Compile Include="ViewModels\HumanResourcesPageViewModel.cs" />
     <Compile Include="ViewModels\LandingPageViewModel.cs" />
+    <Compile Include="Views\BrowsePersonPage.xaml.cs">
+      <DependentUpon>BrowsePersonPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditPersonPage.xaml.cs">
       <DependentUpon>EditPersonPage.xaml</DependentUpon>
     </Compile>
@@ -141,6 +146,9 @@
     </Compile>
     <Compile Include="Views\LandingPage.xaml.cs">
       <DependentUpon>LandingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonPage.xaml.cs">
+      <DependentUpon>PersonPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +201,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BrowsePersonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditPersonPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LandingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -24,8 +24,8 @@
                          Visibility="{Binding Loading, Converter={StaticResource TrueToVisibleConverter}}" />-->
         
         <ProgressRing x:Name="progressRing"
-                      Visibility="{Binding Loading, Converter={StaticResource TrueToVisibleConverter}}"
-                      IsActive="{Binding Loading}"
+                      Visibility="{Binding Loading, Converter={StaticResource TrueToVisibleConverter}, Mode=TwoWay}"
+                      IsActive="{Binding Loading, Mode=TwoWay}"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
                       Foreground="Black"
@@ -35,8 +35,8 @@
         <syncfusion:SfDataGrid x:Name="sfDataGrid"
                         Grid.Column="0"
                         Margin="10,13,10,15"
-                        Visibility="{Binding Loading, Converter={StaticResource FalseToVisibleConverter}}"
-                        ItemsSource="{Binding PersonVMs}"
+                        Visibility="{Binding Loading, Converter={StaticResource FalseToVisibleConverter}, Mode=TwoWay}"
+                        ItemsSource="{Binding PersonVMs, Mode=TwoWay}"
                         AllowDraggingColumns="True"
                         AllowEditing="True"
                         AllowFiltering="True"

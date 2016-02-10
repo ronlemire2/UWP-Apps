@@ -183,12 +183,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IPersonRepository.tt</DependentUpon>
     </None>
-    <None Include="UWP\EditPersonPageViewModel.csharp">
+    <None Include="UWP\Views\BrowsePersonPage.zaml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BrowsePersonPage.tt</DependentUpon>
+    </None>
+    <None Include="UWP\ViewModels\BrowsePersonPageViewModel.csharp">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BrowsePersonPageViewModel.tt</DependentUpon>
+    </None>
+    <None Include="UWP\ViewModels\EditPersonPageViewModel.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EditPersonPageViewModel.tt</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="UWP\Views\PersonPage.zaml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PersonPage.tt</DependentUpon>
+    </None>
+    <None Include="UWP\ViewModels\PersonPageViewModel.csharp">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PersonPageViewModel.tt</DependentUpon>
+    </None>
     <None Include="WebAPI\PersonController.csharp">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -276,13 +296,29 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IPersonRepository.csharp</LastGenOutput>
     </Content>
-    <Content Include="UWP\EditPersonPage.tt">
+    <Content Include="UWP\Views\BrowsePersonPage.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BrowsePersonPage.zaml</LastGenOutput>
+    </Content>
+    <Content Include="UWP\ViewModels\BrowsePersonPageViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BrowsePersonPageViewModel.csharp</LastGenOutput>
+    </Content>
+    <Content Include="UWP\Views\EditPersonPage.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EditPersonPage.xaml</LastGenOutput>
     </Content>
-    <Content Include="UWP\EditPersonPageViewModel.tt">
+    <Content Include="UWP\ViewModels\EditPersonPageViewModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EditPersonPageViewModel.csharp</LastGenOutput>
+    </Content>
+    <Content Include="UWP\Views\PersonPage.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PersonPage.zaml</LastGenOutput>
+    </Content>
+    <Content Include="UWP\ViewModels\PersonPageViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PersonPageViewModel.csharp</LastGenOutput>
     </Content>
     <Content Include="WebAPI\PersonController.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -293,7 +329,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="UWP\EditPersonPage.xaml">
+    <Page Include="UWP\Views\EditPersonPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
