@@ -1,11 +1,12 @@
-﻿using Prism.Windows.Validation;
+﻿using AdventureWorks.Models;
+using Prism.Windows.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventureWorks.Models {
+namespace AdventureWorks.ViewModels {
     public class PersonVM : ValidatableBindableBase {
         public PersonVM() {
             //this.BusinessEntityContacts = new List<BusinessEntityContact>();

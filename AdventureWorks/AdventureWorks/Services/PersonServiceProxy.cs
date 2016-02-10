@@ -7,6 +7,7 @@ using AdventureWorks.Models;
 using System.Globalization;
 using System.Net.Http;
 using Newtonsoft.Json;
+using AdventureWorks.ViewModels;
 
 namespace AdventureWorks.Services {
     public class PersonServiceProxy : IPersonServiceProxy {

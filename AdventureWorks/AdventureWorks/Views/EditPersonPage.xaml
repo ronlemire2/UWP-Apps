@@ -1,0 +1,266 @@
+﻿<Page x:Name="EditPerson"
+    x:Class="AdventureWorks.Views.EditPersonPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AdventureWorks.Views"
+    xmlns:behaviors="using:AdventureWorks.Behaviors"
+    xmlns:converters="using:AdventureWorks.Converters"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Dark"
+    mvvm:ViewModelLocator.AutoWireViewModel="True" >
+
+    <Page.Resources>
+        <converters:BooleanNegationConverter x:Key="BooleanNegationConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" IsReversed="True" />
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+        <converters:StringToDecimalConverter x:Key="StringToDecimalConverter" />
+        <converters:FirstErrorConverter x:Key="FirstErrorConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Cancel and Save Buttons -->
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <AppBarButton Command="{Binding CancelCommand}"
+                          Icon="Cancel"
+                          Label="Cancel" />
+            <AppBarButton Command="{Binding SaveCommand}"
+                          Icon="Save"
+                          Label="Save" />
+        </StackPanel>
+
+        <!-- Edit -->
+        <StackPanel Grid.Row="1"
+                    Margin="75,20,20,20">
+            <Border>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <!-- BusinessEntityID -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="BusinessEntityID"
+					        Text="{Binding SelectedPersonVM.BusinessEntityID, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[BusinessEntityID]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsBusinessEntityID"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[BusinessEntityID],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                    <!-- PersonType -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="PersonType"
+					        Text="{Binding SelectedPersonVM.PersonType, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[PersonType]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsPersonType"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[PersonType],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                    <!-- NameStyle -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="NameStyle"
+					        Text="{Binding SelectedPersonVM.NameStyle, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[NameStyle]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsNameStyle"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[NameStyle],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                    <!-- Title -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="Title"
+					        Text="{Binding SelectedPersonVM.Title, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[Title]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsTitle"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[Title],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                    <!-- FirstName -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="FirstName"
+					        Text="{Binding SelectedPersonVM.FirstName, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[FirstName]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsFirstName"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[FirstName],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                    <!-- MiddleName -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="MiddleName"
+					        Text="{Binding SelectedPersonVM.MiddleName, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[MiddleName]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsMiddleName"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[MiddleName],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                    <!-- LastName -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="LastName"
+					        Text="{Binding SelectedPersonVM.LastName, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[LastName]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsLastName"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[LastName],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                    <!-- Suffix -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="Suffix"
+					        Text="{Binding SelectedPersonVM.Suffix, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[Suffix]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsSuffix"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[Suffix],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                    <!-- EmailPromotion -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="EmailPromotion"
+					        Text="{Binding SelectedPersonVM.EmailPromotion, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[EmailPromotion]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsEmailPromotion"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[EmailPromotion],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                    <!-- AdditionalContactInfo -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="AdditionalContactInfo"
+					        Text="{Binding SelectedPersonVM.AdditionalContactInfo, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[AdditionalContactInfo]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsAdditionalContactInfo"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[AdditionalContactInfo],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                    <!-- Demographics -->
+                    <TextBox 
+					        Grid.Row="0"
+					        Header="Demographics"
+					        Text="{Binding SelectedPersonVM.Demographics, Mode=TwoWay}"
+					        FontSize="20">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding SelectedPersonVM.Errors[Demographics]}" />
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBlock x:Name="ErrorsDemographics"
+					            Grid.Row="1"
+					            Margin="0,0,0,20"
+					            Style="{StaticResource ErrorMessageStyle}"
+					            Text="{Binding SelectedPersonVM.Errors[Demographics],Converter={StaticResource FirstErrorConverter}}"
+					            TextWrapping="Wrap" />
+
+                </Grid>
+            </Border>
+
+            <!-- Validate Button -->
+            <Button x:Name="ValidatePerson"
+                    x:Uid="ValidatePerson"
+                    Command="{Binding ValidateCommand}"
+                    Visibility="{Binding IsInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Margin="0,31">Validate</Button>
+
+        </StackPanel>
+    </Grid>
+</Page>
+
+

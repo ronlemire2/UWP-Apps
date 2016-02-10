@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AdventureWorks.Models;
 using AdventureWorks.Services;
+using AdventureWorks.ViewModels;
 
 namespace AdventureWorks.Repositories {
     public class PersonRepository : IPersonRepository {

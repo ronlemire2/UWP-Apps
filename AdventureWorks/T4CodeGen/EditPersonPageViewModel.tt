@@ -1,0 +1,236 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#"
+#><#@ output extension=".csharp"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ Assembly name="Microsoft.SqlServer.ConnectionInfo"
+#><#@ Assembly name="Microsoft.SqlServer.Smo"
+#><#@ Assembly Name="Microsoft.SqlServer.Management.Sdk.Sfc"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="Microsoft.SqlServer.Management.Smo"
+#><#string AppName = "AdventureWorks";
+string EntityName = "Person";
+string EntityTableName = "Person";
+string EntityNameParameter = "person";
+string EntityNameParameterPlural = "persons";
+Server server = new Server("Dell7110");
+Database database = new Database(server, "AdventureWorks2012");
+Table table = new Table(database, "Person", "Person");
+table.Refresh();
+#>using Prism.Commands;
+using Prism.Windows.Mvvm;
+using Prism.Windows.Navigation;
+using Prism.Windows.Validation;
+using <#= AppName #>.Models;
+using <#= AppName #>.Services;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace <#= AppName #>.ViewModels {
+    public class Edit<#= EntityName #>PageViewModel : ViewModelBase {
+        private readonly I<#= EntityName #>Repository <#= EntityNameParameter #>Repository;
+        private readonly INavigationService navigationService;
+        public DelegateCommand SaveCommand { get; private set; }
+        public DelegateCommand CancelCommand { get; private set; }
+        public DelegateCommand ValidateCommand { get; private set; }
+
+        #region Constructors
+
+        public Edit<#= EntityName #>PageViewModel(I<#= EntityName #>Repository <#= EntityNameParameter #>Repository, INavigationService navigationService) {
+            this.<#= EntityNameParameter #>Repository = <#= EntityNameParameter #>Repository;
+            this.navigationService = navigationService;
+
+            SaveCommand = new DelegateCommand(Save<#= EntityName #>, CanSave<#= EntityName #>);
+            CancelCommand = new DelegateCommand(Cancel<#= EntityName #>, CanCancel<#= EntityName #>);
+            ValidateCommand = new DelegateCommand(Validate<#= EntityName #>);
+
+            AllErrors = BindableValidator.EmptyErrorsCollection;
+        }
+
+        public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState) {
+            Selected<#= EntityName #>VM = e.Parameter as <#= EntityName #>VM;
+            base.OnNavigatedTo(e, viewModelState);
+        }
+
+        #endregion
+
+        #region Properties
+
+        private <#= EntityName #>VM selected<#= EntityName #>VM;
+        public <#= EntityName #>VM Selected<#= EntityName #>VM {
+            get { return selected<#= EntityName #>VM; }
+            set {
+                SetProperty<<#= EntityName #>VM>(ref selected<#= EntityName #>VM, value);
+                if (Selected<#= EntityName #>VM != null) {
+                    Selected<#= EntityName #>VM.ErrorsChanged += OnErrorsChanged;
+                }
+                RunAllCanExecuteChanged();
+            }
+        }
+
+        private ReadOnlyCollection<string> _allErrors;
+        public ReadOnlyCollection<string> AllErrors {
+            get { return _allErrors; }
+            set { SetProperty(ref _allErrors, value); }
+        }
+
+        #endregion
+
+        #region Commands
+
+        // Save AppBarButton
+        private async void Save<#= EntityName #>() {
+            Validate<#= EntityName #>();
+            if (Selected<#= EntityName #>VM.Errors.Errors.Count > 0) {
+                return;
+            }
+
+            try {
+                // Update <#= EntityName #>
+                int numberOfRowsAffected = await <#= EntityNameParameter #>Repository.Edit<#= EntityName #>Async(Selected<#= EntityName #>VM);
+            }
+            // Catch Server-Side Errors
+            catch (ModelValidationException mvex) {
+                DisplayServerErrorMessages(mvex.ValidationResult);
+            }
+
+            if (Selected<#= EntityName #>VM.Errors.Errors.Count == 0) {
+                AllErrors = BindableValidator.EmptyErrorsCollection;
+                if (navigationService.CanGoBack()) {
+                    navigationService.GoBack();
+                }
+                RunAllCanExecuteChanged();
+            }
+        }
+        private bool CanSave<#= EntityName #>() {
+            return AllErrors.Count == 0;
+        }
+
+        // Cancel AppBarButton
+        private void Cancel<#= EntityName #>() {
+            if (navigationService.CanGoBack()) {
+                navigationService.GoBack();
+            }
+            AllErrors = BindableValidator.EmptyErrorsCollection;
+            RunAllCanExecuteChanged();
+        }
+        private bool CanCancel<#= EntityName #>() {
+            return true;
+        }
+
+        // Refresh Can delegates
+        private void RunAllCanExecuteChanged() {
+            SaveCommand.RaiseCanExecuteChanged();
+            CancelCommand.RaiseCanExecuteChanged();
+        }
+
+        // Validate
+        private void Validate<#= EntityName #>() {
+            Selected<#= EntityName #>VM.ValidateProperties();
+        }
+
+        #endregion
+
+        #region Utils
+
+        // TODO: Simulate Server Validation errors 
+        private void DisplayServerErrorMessages(ModelValidationResult validationResult) {
+            var serverErrors = new Dictionary<string, ReadOnlyCollection<string>>();
+
+            // Property keys of the form. Format: <#= EntityNameParameter #>.{Property}
+            foreach (var propkey in validationResult.ModelState.Keys) {
+                //string orderPropAndEntityProp = propkey.Substring(propkey.IndexOf('.') + 1); // strip off order. prefix
+                string <#= EntityNameParameter #>Property = propkey.Substring(0, propkey.IndexOf('.') + 1);
+                string entityProperty = propkey.Substring(<#= EntityNameParameter #>Property.IndexOf('.') + 1);
+
+                if (<#= EntityNameParameter #>Property.ToLower().Contains("<#= EntityNameParameter #>")) {
+                    serverErrors.Add(entityProperty, new ReadOnlyCollection<string>(validationResult.ModelState[propkey]));
+                }
+            }
+
+            if (serverErrors.Count > 0) {
+                Selected<#= EntityName #>VM.Errors.SetAllErrors(serverErrors);
+            }
+        }
+
+        private void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e) {
+            AllErrors = new ReadOnlyCollection<string>(Selected<#= EntityName #>VM.GetAllErrors().Values.SelectMany(c => c).ToList());
+        }
+
+        #endregion
+
+    }
+}
+<#+
+    private string SqlTypeToString(string sqlType, string columnName, bool isNullable) {
+        string toString = string.Empty;
+
+        switch (sqlType) {
+            case "int":
+                if (columnName != "BusinessEntityID") {
+                    toString = ".ToString()";
+                }
+                break;
+            case "bit":
+                toString = ".ToString()";
+                break;
+            case "NameStyle":
+                toString = ".ToString()";
+                break;
+            case "datetime":
+                toString = isNullable ? ".ToString()" : ".ToShortDateString()";
+                break;
+            case "money":
+                toString = ".ToString()";
+                break;
+            case "uniqueidentifier":
+                toString = ".ToString()";
+                break;
+            default:
+                break;
+        }
+
+        return toString;
+    }
+
+    private string SqlTypeParsedToString(string sqlType, string entityName, string columnName, string prefix) {
+        string parsedToString = string.Empty;
+
+        switch (sqlType) {
+            case "int":
+                if (columnName != "BusinessEntityID") {
+                    parsedToString = string.Format("int.Parse({0}.{1})", prefix, columnName);
+                }
+                else {
+                    parsedToString = string.Format("{0}.{1}", prefix, columnName);
+                }
+                break;
+            case "bit":
+                parsedToString = string.Format("bool.Parse({0}.{1})", prefix, columnName);
+                break;
+            case "NameStyle":
+                parsedToString = string.Format("bool.Parse({0}.{1})", prefix, columnName);
+                break;
+            case "datetime":
+                parsedToString = string.Format("DateTime.Parse({0}.{1})", prefix, columnName);
+                break;
+            case "money":
+                parsedToString = string.Format("decimal.Parse({0}.{1})", prefix, columnName);
+                break;
+            case "uniqueidentifier":
+                parsedToString = string.Format("Guid.Parse({0}.{1})", prefix, columnName);
+                break;
+            default:
+                parsedToString = string.Format("{0}.{1}", prefix, columnName);
+                break;
+        }
+
+        return parsedToString;
+    }
+ #>

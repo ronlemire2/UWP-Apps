@@ -1,0 +1,126 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#"
+#><#@ output extension=".xaml"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ Assembly name="Microsoft.SqlServer.ConnectionInfo"
+#><#@ Assembly name="Microsoft.SqlServer.Smo"
+#><#@ Assembly Name="Microsoft.SqlServer.Management.Sdk.Sfc"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="Microsoft.SqlServer.Management.Smo"
+#><#string AppName = "AdventureWorks";
+string EntityName = "Person";
+string EntityTableName = "Person";
+Server server = new Server("Dell7110");
+Database database = new Database(server, "AdventureWorks2012");
+Table table = new Table(database, "Person", "Person");
+table.Refresh();
+#>
+<Page x:Name="Edit<#= EntityName #>"
+    x:Class="<#= AppName #>.Views.Edit<#= EntityName #>Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:<#= AppName #>.Views"
+    xmlns:behaviors="using:<#= AppName #>.Behaviors"
+    xmlns:converters="using:<#= AppName #>.Converters"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Dark"
+    mvvm:ViewModelLocator.AutoWireViewModel="True" >
+
+    <Page.Resources>
+        <converters:BooleanNegationConverter x:Key="BooleanNegationConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter" IsReversed="True" />
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+        <converters:StringToDecimalConverter x:Key="StringToDecimalConverter" />
+        <converters:FirstErrorConverter x:Key="FirstErrorConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Cancel and Save Buttons -->
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <AppBarButton Command="{Binding CancelCommand}"
+                          Icon="Cancel"
+                          Label="Cancel" />
+            <AppBarButton Command="{Binding SaveCommand}"
+                          Icon="Save"
+                          Label="Save" />
+        </StackPanel>
+
+        <!-- Edit -->
+        <StackPanel Grid.Row="1"
+                    Margin="75,20,20,20">
+            <Border>
+                <Grid>
+                    <Grid.RowDefinitions>
+<#
+PushIndent("\t\t\t\t\t");
+foreach (Column column in table.Columns)
+{
+	if (column.Name != "rowguid" && column.Name != "ModifiedDate") {
+#>
+	<RowDefinition Height="auto" />
+<#
+	}
+}      
+PopIndent();
+#>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+<#
+PushIndent("\t\t\t\t\t");
+foreach (Column column in table.Columns)
+{
+	if (column.Name != "rowguid" && column.Name != "ModifiedDate") {
+#>
+<!-- <#= column.Name #> -->
+<TextBox 
+        Grid.Row="0"
+        Header="<#= column.Name #>"
+        Text="{Binding Selected<#= EntityName #>VM.<#= column.Name #>, Mode=TwoWay}"
+        FontSize="20">
+    <interactivity:Interaction.Behaviors>
+        <behaviors:HighlightFormFieldOnErrors PropertyErrors="{Binding Selected<#= EntityName #>VM.Errors[<#= column.Name #>]}" />
+    </interactivity:Interaction.Behaviors>
+</TextBox>
+<TextBlock x:Name="Errors<#= column.Name #>"
+            Grid.Row="1"
+            Margin="0,0,0,20"
+            Style="{StaticResource ErrorMessageStyle}"
+            Text="{Binding Selected<#= EntityName #>VM.Errors[<#= column.Name #>],Converter={StaticResource FirstErrorConverter}}"
+            TextWrapping="Wrap" />
+
+<#
+	}
+}      
+PopIndent();
+#>
+                </Grid>
+            </Border>
+
+            <!-- Validate Button -->
+            <Button x:Name="Validate<#= EntityName #>"
+                    x:Uid="Validate<#= EntityName #>"
+                    Command="{Binding ValidateCommand}"
+                    Visibility="{Binding IsInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Margin="0,31">Validate</Button>
+
+        </StackPanel>
+    </Grid>
+</Page>
+
