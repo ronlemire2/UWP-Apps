@@ -16,9 +16,9 @@ namespace AdventureWorks.Repositories {
         }
 
 
-        public async Task<List<PersonVM>> GetPersonVMsAsync() {
-            var people = await personServiceProxy.GetPeopleAsync();
-            return people;
+        public async Task<List<PersonVM>> GetPersonsAsync() {
+            var persons = await personServiceProxy.GetPersonsAsync();
+            return persons;
         }
 
         public async Task<int> AddPersonAsync(PersonVM personVM) {

@@ -28,9 +28,9 @@ namespace AW.BL {
         // the mapping files between the model and the database and 
         // how to connect to the database using the underlying data provider.
 
-        IList<PersonPOCO> GetAllPeople();
-        PersonPOCO GetDepartmentById(int businessEntityID);
-        void SaveGraph<TEntity>(TEntity root) where TEntity : class, IEntityWithCrudState;
+        IList<PersonPOCO> GetPersons();
+        PersonPOCO GetPersonById(int businessEntityId);
+        int SavePersonGraph(PersonPOCO personPOCO);
 
     }
 }

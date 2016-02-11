@@ -10,9 +10,9 @@
 #><#@ import namespace="System.Collections.Generic"
 #><#@ import namespace="Microsoft.SqlServer.Management.Smo"
 #><#string EntityName = "Person";
-	string EntityNamePlural = "People";
+	string EntityNamePlural = "Persons";
 	string EntityParameterName = "person";
-	string EntityParameterNamePlural = "people";
+	string EntityParameterNamePlural = "persons";
 	string EntityKey = "BusinessEntityID";
 	string EntityKeyParam = "businessEntityID";
 	string BLNamespace = "AW.BL";

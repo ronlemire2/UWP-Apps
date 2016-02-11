@@ -21,7 +21,7 @@ namespace AdventureWorks.ViewModels {
 
         public async override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState) {
             Loading = true;
-            PersonVMs = new ObservableCollection<PersonVM>(await personRepository.GetPersonVMsAsync());
+            PersonVMs = new ObservableCollection<PersonVM>(await personRepository.GetPersonsAsync());
             Loading = false;
             base.OnNavigatedTo(e, viewModelState);
         }

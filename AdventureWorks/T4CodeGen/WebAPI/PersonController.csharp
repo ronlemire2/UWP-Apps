@@ -21,8 +21,8 @@ namespace AW.WebAPI2
 
         public HttpResponseMessage Get() {
             try {
-                IList<Person> people = businessLayer.GetPeople();
-                return Request.CreateResponse<IList<Person>>(HttpStatusCode.OK, people);
+                IList<Person> persons = businessLayer.GetPersons();
+                return Request.CreateResponse<IList<Person>>(HttpStatusCode.OK, persons);
             }
             catch (Exception ex) {
                 return Request.CreateErrorResponse(HttpStatusCode.NoContent, ex.Message);

@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace <#= AppName #>.Services {
     public interface I<#= EntityName #>ServiceProxy {
-        Task<List<<#= EntityName #>VM>> GetPeopleAsync();
+        Task<List<<#= EntityName #>VM>> GetPersonsAsync();
         Task<int> Edit<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM);
         Task<int> Add<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM);
         Task<int> Delete<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM);

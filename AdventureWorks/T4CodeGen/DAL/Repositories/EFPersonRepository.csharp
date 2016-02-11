@@ -9,25 +9,25 @@ using AW.EF;
 
 namespace AW.DAL.Repositories {
     public class EFPersonRepository : IPersonRepository {
-        public IList<AW.DAL.Models.Person> GetPeople() {
-            List<AW.EF.Person> efPeople;
+        public IList<AW.DAL.Models.Person> GetPersons() {
+            List<AW.EF.Person> efPersons;
             using (var context = new AdventureWorks2012Entities()) {
-                IQueryable<AW.EF.Person> dbQuery = context.People;
-                efPeople = dbQuery
+                IQueryable<AW.EF.Person> dbQuery = context.Persons;
+                efPersons = dbQuery
                     .AsNoTracking()
                     .ToList();
             }
 
-            List<AW.DAL.Models.Person> dalPeople;
-            dalPeople = EFPersonMapper.MapAllEFtoDAL(efPeople).ToList();
+            List<AW.DAL.Models.Person> dalPersons;
+            dalPersons = EFPersonMapper.MapAllEFtoDAL(efPersons).ToList();
 
-            return dalPeople;
+            return dalPersons;
         }
 
         public AW.DAL.Models.Person GetPerson(int businessEntityID) {
             AW.EF.Person efPerson;
             using (var context = new AdventureWorks2012Entities()) {
-                efPerson = context.People.Where(p => p.BusinessEntityID == businessEntityID)
+                efPerson = context.Persons.Where(p => p.BusinessEntityID == businessEntityID)
                     .AsNoTracking()
                     .FirstOrDefault();
             }

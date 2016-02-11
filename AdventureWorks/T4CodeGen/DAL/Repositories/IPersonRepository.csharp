@@ -8,7 +8,7 @@ using AW.DAL.Models;
 
 namespace AW.DAL.Repositories {
     public interface IPersonRepository {
-        IList<Person> GetPeople();
+        IList<Person> GetPersons();
         Person GetPerson(int id);
         int SaveGraph(Person root);
     }

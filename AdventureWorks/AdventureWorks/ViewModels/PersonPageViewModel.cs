@@ -41,7 +41,7 @@ namespace AdventureWorks.ViewModels {
         public async override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState) {
             if (e.NavigationMode != Windows.UI.Xaml.Navigation.NavigationMode.Back) {
                 Loading = true;
-                List<PersonVM> personVMs = await personRepository.GetPersonVMsAsync();
+                List<PersonVM> personVMs = await personRepository.GetPersonsAsync();
                 PersonVMs = new ObservableCollection<PersonVM>(personVMs.OrderBy(p => p.LastName));
                 SelectedPersonVM = null;
                 Loading = false;
@@ -90,7 +90,7 @@ namespace AdventureWorks.ViewModels {
         #region Commands
 
         private async void GetPersonVMs() {
-            List<PersonVM> personVMs = await personRepository.GetPersonVMsAsync();
+            List<PersonVM> personVMs = await personRepository.GetPersonsAsync();
         }
 
         // Add AppBarButton

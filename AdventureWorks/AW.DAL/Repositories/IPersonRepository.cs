@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AW.DAL.Repositories {
-    public interface IPersonRepository : IGenericDataRepository<Person> {
-        IList<PersonPOCO> GetAllPeople();
+    public interface IPersonRepository {
+        IList<PersonPOCO> GetPersons();
+        PersonPOCO GetPersonById(int businessEntityId);
+        int SavePersonGraph(PersonPOCO personPOCO);
     }
 }

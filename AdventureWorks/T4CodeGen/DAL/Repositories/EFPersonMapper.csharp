@@ -8,14 +8,14 @@ namespace AW.DAL.Repositories {
     public class EFPersonMapper {
         #region Map EF to DAL
 
-        public static IEnumerable<AW.DAL.Models.Person> MapAllEFtoDAL(IEnumerable<AW.EF.Person> efPeople) {
-            List<AW.DAL.Models.Person> dalPeople = new List<AW.DAL.Models.Person>();
+        public static IEnumerable<AW.DAL.Models.Person> MapAllEFtoDAL(IEnumerable<AW.EF.Person> efPersons) {
+            List<AW.DAL.Models.Person> dalPersons = new List<AW.DAL.Models.Person>();
 
-            foreach (AW.EF.Person efPerson in efPeople) {
-                dalPeople.Add(EFPersonMapper.MapOneEFtoDAL(efPerson));
+            foreach (AW.EF.Person efPerson in efPersons) {
+                dalPersons.Add(EFPersonMapper.MapOneEFtoDAL(efPerson));
             }
 
-            return dalPeople;
+            return dalPersons;
         }
 
         public static AW.DAL.Models.Person MapOneEFtoDAL(AW.EF.Person efPerson) {

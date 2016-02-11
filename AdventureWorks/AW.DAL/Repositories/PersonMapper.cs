@@ -27,14 +27,14 @@ namespace AW.DAL.Repositories {
 
         #region Map EF to DAL
 
-        public static IEnumerable<PersonPOCO> MapAllEFtoDAL(IEnumerable<Person> efPeople) {
-            List<PersonPOCO> dalPeople = new List<PersonPOCO>();
+        public static IEnumerable<PersonPOCO> MapAllEFtoDAL(IEnumerable<Person> efPersons) {
+            List<PersonPOCO> dalPersons = new List<PersonPOCO>();
 
-            foreach (Person efPerson in efPeople) {
-                dalPeople.Add(PersonMapper.MapOneEFtoDAL(efPerson));
+            foreach (Person efPerson in efPersons) {
+                dalPersons.Add(PersonMapper.MapOneEFtoDAL(efPerson));
             }
 
-            return dalPeople;
+            return dalPersons;
         }
 
         public static PersonPOCO MapOneEFtoDAL(Person efPerson) {

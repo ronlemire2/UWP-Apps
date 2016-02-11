@@ -23,7 +23,7 @@ namespace <#= AppName #>.Services {
     public class <#= EntityName #>ServiceProxy : I<#= EntityName #>ServiceProxy {
         private string <#= EntityNameParameter #>BaseUri = string.Format(CultureInfo.InvariantCulture, "{0}/api/<#= EntityName #>/", Constants.ServerAddress);
 
-        public async Task<List<<#= EntityName #>VM>> GetPeopleAsync() {
+        public async Task<List<<#= EntityName #>VM>> GetPersonsAsync() {
             using (var httpClient = new HttpClient()) {
                 var response = await httpClient.GetAsync(new Uri(string.Format("{0}", <#= EntityNameParameter #>BaseUri)));
                 response.EnsureSuccessStatusCode();

@@ -14,7 +14,7 @@ namespace AdventureWorks.Services {
     public class PersonServiceProxy : IPersonServiceProxy {
         private string personBaseUri = string.Format(CultureInfo.InvariantCulture, "{0}/api/Person/", Constants.ServerAddress);
 
-        public async Task<List<PersonVM>> GetPeopleAsync() {
+        public async Task<List<PersonVM>> GetPersonsAsync() {
             using (var httpClient = new HttpClient()) {
                 var response = await httpClient.GetAsync(new Uri(string.Format("{0}", personBaseUri)));
                 response.EnsureSuccessStatusCode();
@@ -24,6 +24,7 @@ namespace AdventureWorks.Services {
             }
         }
 
+        // Needs Microsoft.AspNet.WebApi.Client package for .PostAsJsonAsync
         public async Task<int> AddPersonAsync(PersonVM personVM) {
             using (HttpClientHandler handler = new HttpClientHandler { CookieContainer = new CookieContainer() }) {
                 using (var httpClient = new HttpClient()) {

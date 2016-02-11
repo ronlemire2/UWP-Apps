@@ -27,8 +27,8 @@ namespace <#= AppName #>.Repositories {
 
 
         public async Task<List<<#= EntityName #>VM>> Get<#= EntityName #>VMsAsync() {
-            var people = await <#= EntityNameParameter #>ServiceProxy.GetPeopleAsync();
-            return people;
+            var persons = await <#= EntityNameParameter #>ServiceProxy.GetPersonsAsync();
+            return persons;
         }
 
         public async Task<int> Add<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM) {

@@ -21,10 +21,10 @@ namespace AW.BL {
 
         #region Person
 
-        public IList<Person> GetPeople() {
-            IList<Person> people = null;
-            people = personRepository.GetPeople();
-            return people;
+        public IList<Person> GetPersons() {
+            IList<Person> persons = null;
+            persons = personRepository.GetPersons();
+            return persons;
         }
 
         public Person GetPerson(int id) {

@@ -11,52 +11,26 @@ namespace AW.BL {
         private readonly IPersonRepository personRepository;
 
         // TODO: Unity.WebAPI
-        public BusinessLayer() : this(new PersonRepository()) {
+        public BusinessLayer() : this(new EFPersonRepository()) {
         }
 
         public BusinessLayer(IPersonRepository personRepository) {
             this.personRepository = personRepository;
         }
 
-        public IList<PersonPOCO> GetAllPeople() {
-            IList<PersonPOCO> people = personRepository.GetAllPeople();
-            return people;
+        public IList<PersonPOCO> GetPersons() {
+            IList<PersonPOCO> persons = personRepository.GetPersons();
+            return persons;
         }
 
-        public PersonPOCO GetDepartmentById(int businessEntityID) {
-            throw new NotImplementedException();
+        public PersonPOCO GetPersonById(int businessEntityId) {
+            PersonPOCO personPOCO = personRepository.GetPersonById(businessEntityId);
+            return personPOCO;
         }
 
-        void IBusinessLayer.SaveGraph<TEntity>(TEntity root) {
-            throw new NotImplementedException();
+        public int SavePersonGraph(PersonPOCO personPOCO) {
+            int numRowsAffected = personRepository.SavePersonGraph(personPOCO);
+            return numRowsAffected;
         }
-
-        //public Department GetDepartmentByName(string departmentName) {
-        //    Department dept = _deptRepository.GetSingle(
-        //        d => d.Name.Equals(departmentName),
-        //        d => d.Employees); //include related employees
-        //    SetDepartmentStateUnchanged(dept);
-        //    return dept;
-        //}
-
-        //// Currently not being used by Mm.WebApi.
-        //public Department GetDepartmentById(int departmentId) {
-        //    Department dept = _deptRepository.GetSingle(
-        //        d => d.Id.Equals(departmentId),
-        //        d => d.Employees); //include related employees
-        //    SetDepartmentStateUnchanged(dept);
-        //    return dept;
-        //}
-
-        //public void SaveGraph<TEntity>(TEntity root) where TEntity : class, IObjectWithState {
-        //    _deptRepository.SaveGraph(root);
-        //}
-
-        //private void SetDepartmentStateUnchanged(Department dept) {
-        //    dept.State = State.Unchanged;
-        //    foreach (Employee emp in dept.Employees) {
-        //        emp.State = State.Unchanged;
-        //    }
-        //}
     }
 }

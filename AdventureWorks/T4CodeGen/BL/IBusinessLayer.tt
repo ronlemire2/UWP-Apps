@@ -10,7 +10,7 @@
 #><#@ import namespace="System.Collections.Generic"
 #><#@ import namespace="Microsoft.SqlServer.Management.Smo"
 #><#string Entity1Name = "Person";
-	string Entity1NamePlural = "People";
+	string Entity1NamePlural = "Persons";
 	string BLNamespace = "AW.BL";
 	string DALModelsNamespace = "AW.DAL.Models";
 #>using System;

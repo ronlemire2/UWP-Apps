@@ -7,7 +7,7 @@ using AW.DAL.Models;
 
 namespace AW.BL {
     public interface IBusinessLayer {
-        IList<Person> GetPeople();
+        IList<Person> GetPersons();
         Person GetPerson(int id);
         int SaveGraph(Person root);
     }
