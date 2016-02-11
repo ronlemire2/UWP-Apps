@@ -8,7 +8,6 @@ using System.Globalization;
 using System.Net.Http;
 using Newtonsoft.Json;
 using AdventureWorks.ViewModels;
-using System.Net;
 
 namespace AdventureWorks.Services {
     public class PersonServiceProxy : IPersonServiceProxy {
@@ -36,7 +35,7 @@ namespace AdventureWorks.Services {
         }
 
         public async Task<int> EditPersonAsync(PersonVM personVM) {
-            using (HttpClientHandler handler = new HttpClientHandler { CookieContainer = new CookieContainer() }) {
+            using (HttpClientHandler handler = new HttpClientHandler { CookieContainer = new CookieContainer()}) {
                 using (var httpClient = new HttpClient()) {
 
                     // just for testing WebAPI.ProductController ModelState.IsValid

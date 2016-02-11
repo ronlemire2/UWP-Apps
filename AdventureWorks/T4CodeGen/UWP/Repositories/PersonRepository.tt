@@ -1,0 +1,49 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#"
+#><#@ output extension=".csharp"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#string AppName = "AdventureWorks";
+string EntityName = "Person";
+string EntityNameParameter = "person";
+#>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using <#= AppName #>.Models;
+using <#= AppName #>.Services;
+using <#= AppName #>.ViewModels;
+
+namespace <#= AppName #>.Repositories {
+    public class <#= EntityName #>Repository : I<#= EntityName #>Repository {
+        private readonly I<#= EntityName #>ServiceProxy <#= EntityNameParameter #>ServiceProxy;
+
+        public <#= EntityName #>Repository(I<#= EntityName #>ServiceProxy <#= EntityNameParameter #>ServiceProxy) {
+            this.<#= EntityNameParameter #>ServiceProxy = <#= EntityNameParameter #>ServiceProxy;
+        }
+
+
+        public async Task<List<<#= EntityName #>VM>> Get<#= EntityName #>VMsAsync() {
+            var people = await <#= EntityNameParameter #>ServiceProxy.GetPeopleAsync();
+            return people;
+        }
+
+        public async Task<int> Add<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM) {
+            int numRowsAffected = await <#= EntityNameParameter #>ServiceProxy.Add<#= EntityName #>Async(<#= EntityNameParameter #>VM);
+            return numRowsAffected;
+        }
+
+        public async Task<int> Edit<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM) {
+            int numRowsAffected = await <#= EntityNameParameter #>ServiceProxy.Edit<#= EntityName #>Async(<#= EntityNameParameter #>VM);
+            return numRowsAffected;
+        }
+
+        public async Task<int> Delete<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM) {
+            int numRowsAffected = await <#= EntityNameParameter #>ServiceProxy.Delete<#= EntityName #>Async(<#= EntityNameParameter #>VM);
+            return numRowsAffected;
+        }
+    }
+}

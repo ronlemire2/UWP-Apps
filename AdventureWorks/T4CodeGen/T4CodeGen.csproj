@@ -183,6 +183,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IPersonRepository.tt</DependentUpon>
     </None>
+    <None Include="UWP\Repositories\IPersonRepository.csharp">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IPersonRepository.tt</DependentUpon>
+    </None>
+    <None Include="UWP\Repositories\PersonRepository.csharp">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PersonRepository.tt</DependentUpon>
+    </None>
+    <None Include="UWP\Services\IPersonServiceProxy.csharp">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IPersonServiceProxy.tt</DependentUpon>
+    </None>
+    <None Include="UWP\Services\PersonServiceProxy.csharp">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PersonServiceProxy.tt</DependentUpon>
+    </None>
     <None Include="UWP\Views\BrowsePersonPage.zaml">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -295,6 +315,22 @@
     <Content Include="DAL\Repositories\IPersonRepository.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IPersonRepository.csharp</LastGenOutput>
+    </Content>
+    <Content Include="UWP\Repositories\IPersonRepository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IPersonRepository.csharp</LastGenOutput>
+    </Content>
+    <Content Include="UWP\Repositories\PersonRepository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PersonRepository.csharp</LastGenOutput>
+    </Content>
+    <Content Include="UWP\Services\IPersonServiceProxy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IPersonServiceProxy.csharp</LastGenOutput>
+    </Content>
+    <Content Include="UWP\Services\PersonServiceProxy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PersonServiceProxy.csharp</LastGenOutput>
     </Content>
     <Content Include="UWP\Views\BrowsePersonPage.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

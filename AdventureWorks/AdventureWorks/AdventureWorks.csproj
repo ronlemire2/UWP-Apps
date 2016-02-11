@@ -122,6 +122,7 @@
     <Compile Include="Models\CrudState.cs" />
     <Compile Include="Models\ModelValidationResult.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Services\HttpResponseMessageExtensions.cs" />
     <Compile Include="ViewModels\BrowsePersonPageViewModel.cs" />
     <Compile Include="ViewModels\PersonPageViewModel.cs" />
     <Compile Include="ViewModels\PersonVM.cs" />

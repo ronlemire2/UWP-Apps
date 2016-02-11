@@ -1,0 +1,26 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#"
+#><#@ output extension=".csharp"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#string AppName = "AdventureWorks";
+string EntityName = "Person";
+string EntityNameParameter = "person";
+#>using <#= AppName #>.Models;
+using <#= AppName #>.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace <#= AppName #>.Services {
+    public interface I<#= EntityName #>ServiceProxy {
+        Task<List<<#= EntityName #>VM>> GetPeopleAsync();
+        Task<int> Edit<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM);
+        Task<int> Add<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM);
+        Task<int> Delete<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM);
+    }
+}

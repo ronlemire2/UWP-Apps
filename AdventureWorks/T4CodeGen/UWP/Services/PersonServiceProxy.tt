@@ -1,0 +1,74 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#"
+#><#@ output extension=".csharp"
+#><#@ Assembly name="System.Core"
+#><#@ Assembly Name="System.Xml"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#string AppName = "AdventureWorks";
+string EntityName = "Person";
+string EntityNameParameter = "person";
+#>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using <#= AppName #>.Models;
+using System.Globalization;
+using System.Net.Http;
+using Newtonsoft.Json;
+using <#= AppName #>.ViewModels;
+
+namespace <#= AppName #>.Services {
+    public class <#= EntityName #>ServiceProxy : I<#= EntityName #>ServiceProxy {
+        private string <#= EntityNameParameter #>BaseUri = string.Format(CultureInfo.InvariantCulture, "{0}/api/<#= EntityName #>/", Constants.ServerAddress);
+
+        public async Task<List<<#= EntityName #>VM>> GetPeopleAsync() {
+            using (var httpClient = new HttpClient()) {
+                var response = await httpClient.GetAsync(new Uri(string.Format("{0}", <#= EntityNameParameter #>BaseUri)));
+                response.EnsureSuccessStatusCode();
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<List<<#= EntityName #>VM>>(responseContent);
+                return result;
+            }
+        }
+
+        public async Task<int> Add<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM) {
+            using (HttpClientHandler handler = new HttpClientHandler { CookieContainer = new CookieContainer() }) {
+                using (var httpClient = new HttpClient()) {
+                    var response = await httpClient.PostAsJsonAsync<<#= EntityName #>VM>(<#= EntityNameParameter #>BaseUri, <#= EntityNameParameter #>VM);
+                    await response.EnsureSuccessWithValidationSupportAsync();
+                    var numRowsAffected = await response.Content.ReadAsAsync<int>();
+                    return numRowsAffected;
+                }
+            }
+        }
+
+        public async Task<int> Edit<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM) {
+            using (HttpClientHandler handler = new HttpClientHandler { CookieContainer = new CookieContainer()}) {
+                using (var httpClient = new HttpClient()) {
+
+                    // just for testing WebAPI.ProductController ModelState.IsValid
+                    //product.Name = "123";
+
+                    var response = await httpClient.PutAsJsonAsync<<#= EntityName #>VM>(<#= EntityNameParameter #>BaseUri, <#= EntityNameParameter #>VM);
+                    await response.EnsureSuccessWithValidationSupportAsync();
+                    var numRowsAffected = await response.Content.ReadAsAsync<int>();
+                    return numRowsAffected;
+                }
+            }
+        }
+
+        public async Task<int> Delete<#= EntityName #>Async(<#= EntityName #>VM <#= EntityNameParameter #>VM) {
+            using (HttpClientHandler handler = new HttpClientHandler { CookieContainer = new CookieContainer() }) {
+                using (var httpClient = new HttpClient()) {
+                    var response = await httpClient.PutAsJsonAsync<<#= EntityName #>VM>(<#= EntityNameParameter #>BaseUri, <#= EntityNameParameter #>VM);
+                    await response.EnsureSuccessWithValidationSupportAsync();
+                    var numRowsAffected = await response.Content.ReadAsAsync<int>();
+                    return numRowsAffected;
+                }
+            }
+        }
+
+    }
+}

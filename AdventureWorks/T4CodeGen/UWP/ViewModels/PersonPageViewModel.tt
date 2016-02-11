@@ -15,6 +15,7 @@ string EntityNamePlural = "Persons";
 string EntityTableName = "Person";
 string EntityNameParameter = "person";
 string EntityNameParameterPlural = "persons";
+string OrderBy = "LastName";
 Server server = new Server("Dell7110");
 Database database = new Database(server, "AdventureWorks2012");
 Table table = new Table(database, "Person", "Person");
@@ -60,12 +61,13 @@ namespace <#= AppName #>.ViewModels {
         }
 
         public async override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState) {
-			Loading = true;
-            <#= EntityName #>VMs = new ObservableCollection<<#= EntityName #>VM>(await <#= EntityNameParameter #>Repository.Get<#= EntityName #>VMsAsync());
-            if ((<#= EntityName #>VM)e.Parameter != null) {
-                Selected<#= EntityName #>VM = e.Parameter as <#= EntityName #>VM;
-            }
-			Loading = false;
+            if (e.NavigationMode != Windows.UI.Xaml.Navigation.NavigationMode.Back) {
+				Loading = true;
+                List<<#= EntityName #>VM> <#= EntityNameParameter #>VMs = await <#= EntityNameParameter #>Repository.Get<#= EntityName #>VMsAsync();
+                <#= EntityName #>VMs = new ObservableCollection<<#= EntityName #>VM>(<#= EntityNameParameter #>VMs.OrderBy(p => p.<#= OrderBy #>));
+				Selected<#= EntityName #>VM = null;
+				Loading = false;
+			}
             base.OnNavigatedTo(e, viewModelState);
         }
 

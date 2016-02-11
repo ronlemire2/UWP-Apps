@@ -39,12 +39,13 @@ namespace AdventureWorks.ViewModels {
         }
 
         public async override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState) {
-            Loading = true;
-            PersonVMs = new ObservableCollection<PersonVM>(await personRepository.GetPersonVMsAsync());
-            if ((PersonVM)e.Parameter != null) {
-                SelectedPersonVM = e.Parameter as PersonVM;
+            if (e.NavigationMode != Windows.UI.Xaml.Navigation.NavigationMode.Back) {
+                Loading = true;
+                List<PersonVM> personVMs = await personRepository.GetPersonVMsAsync();
+                PersonVMs = new ObservableCollection<PersonVM>(personVMs.OrderBy(p => p.LastName));
+                SelectedPersonVM = null;
+                Loading = false;
             }
-            Loading = false;
             base.OnNavigatedTo(e, viewModelState);
         }
 

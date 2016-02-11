@@ -39,7 +39,6 @@ namespace <#= AppName #>.ViewModels {
         private readonly I<#= EntityName #>Repository <#= EntityNameParameter #>Repository;
         private readonly INavigationService navigationService;
         private bool isInEditMode;
-        int saveSelected<#= EntityName #>Id;
 
         public DelegateCommand CancelCommand { get; private set; }
         public DelegateCommand EditCommand { get; private set; }
@@ -119,7 +118,8 @@ namespace <#= AppName #>.ViewModels {
 
         // Edit AppBarButton
         protected void Edit<#= EntityName #>() {
-            navigationService.Navigate("<#= EntityName #>Edit", Selected<#= EntityName #>VM);
+            SelectedPersonVM.CrudState = Models.CrudState.Modified;
+            navigationService.Navigate("Edit<#= EntityName #>", Selected<#= EntityName #>VM);
             RunAllCanExecuteChanged();
         }
         protected bool CanEdit<#= EntityName #>() {
@@ -135,6 +135,7 @@ namespace <#= AppName #>.ViewModels {
             var res = await dialog.ShowAsync();
 
             if ((int)res.Id == 1) {
+                SelectedPersonVM.CrudState = Models.CrudState.Deleted;
                 await <#= EntityNameParameter #>Repository.Delete<#= EntityName #>Async(Selected<#= EntityName #>VM);
             }
             if (navigationService.CanGoBack()) {

@@ -18,7 +18,6 @@ namespace AdventureWorks.ViewModels {
         private readonly IPersonRepository personRepository;
         private readonly INavigationService navigationService;
         private bool isInEditMode;
-        int saveSelectedPersonId;
 
         public DelegateCommand CancelCommand { get; private set; }
         public DelegateCommand EditCommand { get; private set; }
@@ -98,7 +97,8 @@ namespace AdventureWorks.ViewModels {
 
         // Edit AppBarButton
         protected void EditPerson() {
-            navigationService.Navigate("PersonEdit", SelectedPersonVM);
+            SelectedPersonVM.CrudState = Models.CrudState.Modified;
+            navigationService.Navigate("EditPerson", SelectedPersonVM);
             RunAllCanExecuteChanged();
         }
         protected bool CanEditPerson() {
@@ -114,6 +114,7 @@ namespace AdventureWorks.ViewModels {
             var res = await dialog.ShowAsync();
 
             if ((int)res.Id == 1) {
+                SelectedPersonVM.CrudState = Models.CrudState.Deleted;
                 await personRepository.DeletePersonAsync(SelectedPersonVM);
             }
             if (navigationService.CanGoBack()) {

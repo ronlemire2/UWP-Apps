@@ -16,6 +16,7 @@ I have not used any of the SqlLite code but the basic controls and logic switche
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
     RequestedTheme="Light"
     mvvm:ViewModelLocator.AutoWireViewModel="True">
 
@@ -38,7 +39,7 @@ I have not used any of the SqlLite code but the basic controls and logic switche
                     Height="100"
                     Width="100" />
 
-        <StackPanel Visibility="{Binding Loading, Converter={StaticResource FalseToVisibleConverter}, Mode=TwoWay}">
+        <Border Visibility="{Binding Loading, Converter={StaticResource FalseToVisibleConverter}, Mode=TwoWay}">
             <Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="auto" />
@@ -57,7 +58,7 @@ I have not used any of the SqlLite code but the basic controls and logic switche
 				</StackPanel>
 
 				<!-- Person ListView -->
-				<StackPanel Grid.Row="1" 
+				<Border Grid.Row="1" 
 							Grid.Column="0">
 					<ListView Margin="0,15,0,0"
 							  IsItemClickEnabled="True"
@@ -77,9 +78,9 @@ I have not used any of the SqlLite code but the basic controls and logic switche
 							</DataTemplate>
 						</ListView.ItemTemplate>
 					</ListView>
-				</StackPanel>
+				</Border>
 
             </Grid>            
-        </StackPanel>
+        </Border>
     </Grid>
 </Page>
