@@ -11,6 +11,7 @@
 #><#@ import namespace="Microsoft.SqlServer.Management.Smo"
 #><#string EntityName = "Person";
 	string EntityNamePlural = "Persons";
+	string EntityNameParameter = "person";
 	string DALModelsNamespace = "AW.DAL.Models";
 	string DALRepositoriesNamespace = "AW.DAL.Repositories";
 #>using System;
@@ -23,8 +24,8 @@ using <#= DALModelsNamespace #>;
 
 namespace <#= DALRepositoriesNamespace #> {
     public interface I<#= EntityName #>Repository {
-        IList<<#= EntityName #>> Get<#= EntityNamePlural #>();
-        <#= EntityName #> Get<#= EntityName #>(int id);
-        int SaveGraph(<#= EntityName #> root);
+        IList<<#= EntityName #>POCO> Get<#= EntityNamePlural #>();
+        <#= EntityName #>POCO Get<#= EntityName #>ById(int id);
+        int Save<#= EntityName #>Graph(<#= EntityName #>POCO <#= EntityNameParameter #>POCO);
     }
 }

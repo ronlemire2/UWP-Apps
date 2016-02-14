@@ -11,6 +11,8 @@
 #><#@ import namespace="Microsoft.SqlServer.Management.Smo"
 #><#string EntityName = "Person";
 	string EntityNamePlural = "Persons";
+	string EntityNameParameter = "person";
+	string EntityNameParameterPlural = "persons";
 	string EntityKey = "BusinessEntityID";
 	string EntityKeyParam = "businessEntityID";
 	string EFNamespace = "AW.EF";
@@ -28,19 +30,21 @@ using <#= EFNamespace #>;
 
 namespace <#= DALRepositoriesNamespace #> {
     public class EF<#= EntityName #>Repository : I<#= EntityName #>Repository {
-        public IList<<#= DALModelsNamespace #>.<#= EntityName #>> Get<#= EntityNamePlural #>() {
-            List<<#= EFNamespace #>.<#= EntityName #>> ef<#= EntityNamePlural #>;
-            using (var context = new <#= DataContextName #>()) {
-                IQueryable<<#= EFNamespace #>.<#= EntityName #>> dbQuery = context.<#= EntityNamePlural #>;
-                ef<#= EntityNamePlural #> = dbQuery
+        public IList<<#= EntityName #>POCO> Get<#= EntityNamePlural #>() {
+            List<<#= EntityName #>POCO> <#= EntityNameParameter #>POCOs;
+
+			// Get <#= EntityNamePlural #> from database.
+            List<<#= EntityName #>> <#= EntityNameParameterPlural #>;
+            using (var context = new AdventureWorks2012Entities()) {
+                IQueryable<<#= EntityName #>> dbQuery = context.<#= EntityNamePlural #>;
+                <#= EntityNameParameterPlural #> = dbQuery
                     .AsNoTracking()
                     .ToList();
             }
 
-            List<<#= DALModelsNamespace #>.<#= EntityName #>> dal<#= EntityNamePlural #>;
-            dal<#= EntityNamePlural #> = EF<#= EntityName #>Mapper.MapAllEFtoDAL(ef<#= EntityNamePlural #>).ToList();
-
-            return dal<#= EntityNamePlural #>;
+            // Map <#= EntityNamePlural #> from database into <#= EntityName #>POCOs.
+            <#= EntityNameParameter #>POCOs = <#= EntityName #>Mapper.MapAllEFtoDAL(<#= EntityNameParameterPlural #>).ToList();
+            return <#= EntityNameParameter #>POCOs;
         }
 
         public <#= DALModelsNamespace #>.<#= EntityName #> Get<#= EntityName #>(int <#= EntityKeyParam #>) {

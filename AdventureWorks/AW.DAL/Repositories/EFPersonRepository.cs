@@ -1,21 +1,21 @@
-﻿using System;
+﻿using AW.DAL.POCOs;
+using AW.EF;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
-using AW.DAL.Models;
-using AW.EF;
 
 namespace AW.DAL.Repositories {
     public class EFPersonRepository : IPersonRepository {
         public IList<PersonPOCO> GetPersons() {
             List<PersonPOCO> personPOCOs;
 
-			// Get Persons from database.
+            // Get Persons from database.
             List<Person> persons;
             using (var context = new AdventureWorks2012Entities()) {
-                IQueryable<Person> dbQuery = context.Persons;
+                IQueryable<EF.Person> dbQuery = context.People;
                 persons = dbQuery
                     .AsNoTracking()
                     .ToList();
@@ -26,29 +26,32 @@ namespace AW.DAL.Repositories {
             return personPOCOs;
         }
 
-        public AW.DAL.Models.Person GetPerson(int businessEntityID) {
-            AW.EF.Person efPerson;
+        public PersonPOCO GetPersonById(int businessEntityId) {
+            PersonPOCO personPOCO = null;
+
+            // Get Person from database.
+            Person person;
             using (var context = new AdventureWorks2012Entities()) {
-                efPerson = context.Persons.Where(p => p.BusinessEntityID == businessEntityID)
+                person = context.People.Where(p => p.BusinessEntityID == businessEntityId)
                     .AsNoTracking()
                     .FirstOrDefault();
             }
 
-            AW.DAL.Models.Person dalPerson;
-            dalPerson = EFPersonMapper.MapOneEFtoDAL(efPerson);
-            return dalPerson;
+            // Map Person from database into PersonPOCO.
+            personPOCO = PersonMapper.MapOneEFtoDAL(person);
+            return personPOCO;
         }
 
-        public int SaveGraph(AW.DAL.Models.Person dalPerson) {
+        public int SavePersonGraph(PersonPOCO personPOCO) {
             int numRowsAffected = 0;
 
-            AW.EF.Person efPerson = EFPersonMapper.MapOneDALtoEF(dalPerson);
+            Person person = PersonMapper.MapOneDALtoEF(personPOCO);
             try {
                 using (var context = new AdventureWorks2012Entities()) {
-                    context.Set<AW.EF.Person>().Add(efPerson);
-                    var entry = context.ChangeTracker.Entries<AW.EF.Person>().Where(e => e.Entity.BusinessEntityID == dalPerson.BusinessEntityID).FirstOrDefault();
-                    entry.State = ConvertState(dalPerson.CrudState);
-                    if (dalPerson.CrudState == CrudState.Unchanged) {
+                    context.Set<Person>().Add(person);
+                    var entry = context.ChangeTracker.Entries<Person>().Where(e => e.Entity.BusinessEntityID == personPOCO.BusinessEntityID).FirstOrDefault();
+                    entry.State = ConvertState(personPOCO.CrudState);
+                    if (personPOCO.CrudState == CrudState.Unchanged) {
                         var databaseValues = entry.GetDatabaseValues();
                         entry.OriginalValues.SetValues(databaseValues);
                     }
