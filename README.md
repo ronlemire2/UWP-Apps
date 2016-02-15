@@ -77,7 +77,7 @@ A UWP Client written in C# XAML that is based on the MVVM pattern. In order to r
 # Prism UWP-ProjectTemplates
 Visual Studio 2015 Project Templates for Universal Windows Platform (UWP)
 
-**PrismShellTemplate and PrismSimpleTemplate are an evolution of 2 other UWP Project Templates. Please read the README.md in ronlemire2/UWP-Testers for notes on UWPShellTemplate and UWPSimpleTemplate.**
+**PrismShellTemplate and PrismSimpleTemplate are an evolution of 2 other UWP Project Templates: UWPShellTemplate and UWPSimpleTemplate which can be found with their notes in ronlemire2/UWP-Testers.
 
 **PrismShellTemplate**
 
@@ -108,3 +108,19 @@ When the Visual C# Project Template is used to create a New Project all the name
 	* Package display name
 	* Delete the Package name GUID and replace with a new one from Tools->Create GUID->#4 Registry removing the brackets
 3. If not using ARM device, switch Solution Platform to x86 or x64 
+ 
+# UWP-ScreenshotViewer
+**Description**
+
+ScreenshotViewer is a UWP Single Page App whose purpose is to centralized all my UWP App screenshots. The screenshots are displayed in a CoverFlow control. They are also listed in a ListView on the left of the CoverFlow. The ListView is binded to a CollectionViewSource for grouping purposes and is part of a SemanticZoom control. The ListView items in the ZoomedIn view are synchronized with the CoverFlow.
+
+**Setup**
+
+Screenshots are located at ronlemire2/UWP-ScreenshotViewer. **ScreenshotViewer does not work from this folder.** It works from the Local Data folder which allows adding more screenshots without rebuilding the app. To view the screenshots with the ScreenshotViewer, copy the contents of the UWP-ScreenshotViewer folder (including all .png files and the .json file) and place them in the App's Local Data folder (e.g. C:\Users\Ron\AppData\Local\Packages\EA5A52BD-749F-4151-9C37-6D5BC4D269FF_y2prydnfg9dzy\LocalState). Get the package part of this path from the Package.appmanifest's Packaging tab. **Note that the Local Data folder does not exist until ScreenshotViewer has been deployed.**
+
+
+**Use**
+
+The ListView starts in ZoomedIn view. Group Headers have a black background, white border and large font. Group Items have no border and a smaller font. Click a Group Header to zoom out. This will display only the groups in a list. Click a group item to go back to the ZoomedIn view positioned at that group. Click a Group Item to see it in the CoverFlow. ListView works with keyboard (up/down keys) and mousewheel. 
+Below the CoverFlow are details about the Selected Screenshot. Below the details is a slider to move through the CoverFlow. Slider works with keyboard (left/right keys). Clicking a non-selected Screenshot in the CoverFlow will make it the Selected Screenshot. Mousewheel over the CoverFlow will move through screenshots. To add additional screenshots, add screenshot to Local Data folder and update screenshots.json.
+
