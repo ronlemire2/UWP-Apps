@@ -74,3 +74,37 @@ A UWP Client written in C# XAML that is based on the MVVM pattern. In order to r
 4. Maps (future)
 
 
+# Prism UWP-ProjectTemplates
+Visual Studio 2015 Project Templates for Universal Windows Platform (UWP)
+
+**PrismShellTemplate and PrismSimpleTemplate are an evolution of 2 other UWP Project Templates. Please read the README.md in ronlemire2/UWP-Testers for notes on UWPShellTemplate and UWPSimpleTemplate.**
+
+**PrismShellTemplate**
+
+For some unknown reason even though the PrismShellTemplate builds successfully, there are some code squiggles and the Prism.Unity reference is missing. If that is the case, close Visual Studio then restart it and rebuild the solution.
+
+**Steps to make any of solutions a Visual Studio Project Template:**
+
+1. Open solution in Visual Studio
+2. Go to Main Menu->File menu
+2. Select Export Template
+3. Choose Template Type (select Project Template)
+4. Select Template Options (enter a Description)
+5. Press Finish button
+6. Project Template appears in Visual Studio under Installed -> Templates -> Visual C# Visual Studio creates a .zip file in:
+	* ..\Users\(user)\Documents\Visual Studio 2015\Templates\ProjectTemplates
+	* ..\Users\(user)\Documents\Visual Studio 2015\MyExportedTemplates
+	* ..\Users\(user)\AppData\Roaming\Microsoft\VisualStudio\14.0\ProjectTemplatesCache (after it has been used)
+7. To remove the Project Template just delete the .zip files from the above 3 locations.
+
+FixUps:
+
+When the Visual C# Project Template is used to create a New Project all the namespaces are converted to the New Project name but the Packages.appxmanifest still contains template names so replace the word UWPShellTemplate with <New Project Name> in these places:
+1. Application tab
+	* Display name
+	* Entry point - keep the .App
+	* Description
+2. Packaging tab
+	* Package display name
+	* Delete the Package name GUID and replace with a new one from Tools->Create GUID->#4 Registry removing the brackets
+3. If not using ARM device, switch Solution Platform to x86 or x64 
