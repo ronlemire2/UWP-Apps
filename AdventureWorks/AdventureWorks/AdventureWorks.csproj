@@ -234,7 +234,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Syncfusion Controls for UWP XAML, Version=13.4.0.53">
+    <SDKReference Include="Syncfusion Controls for UWP XAML, Version=13.4.0.58">
       <Name>Syncfusion Controls for UWP XAML</Name>
     </SDKReference>
   </ItemGroup>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Web.Syndication;
 
@@ -52,6 +53,16 @@ namespace FeedReader.Services {
 
         private List<Feed> ParseWebPageForComicsLinks(string html) {
             List<Feed> feeds = new List<Feed>();
+
+            //MatchCollection matches = Regex.Matches(html, @"""/Feed(.*?)""");
+            //List<string> FeedNames = new List<string>();
+            //string match = string.Empty;
+            //string feedName = string.Empty;
+            //for (int i = 0; i < matches.Count; i = i + 3) {
+            //    match = matches[i].Value;
+            //    feedName = match.Replace(@"/Feed/", "").Replace("%20", " ").Replace("%40", " ").Replace("%26", " ").Replace("%39", " ").Replace("%2C", " ");
+            //    FeedNames.Add(feedName);
+            //}
 
             int pos1 = 0;   // start of link
             int pos2 = 0;   // end of link

@@ -72,8 +72,10 @@ I have not used any of the SqlLite code but the basic controls and logic switche
                         </interactivity:Interaction.Behaviors>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="6">
+                                <StackPanel Orientation="Horizontal" Margin="6">
                                     <TextBlock Text="{Binding LastName}" />
+                                    <TextBlock Text="{Binding FirstName}"
+                                               Margin="15,0,0,0" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
