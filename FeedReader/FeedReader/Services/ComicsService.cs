@@ -54,16 +54,6 @@ namespace FeedReader.Services {
         private List<Feed> ParseWebPageForComicsLinks(string html) {
             List<Feed> feeds = new List<Feed>();
 
-            //MatchCollection matches = Regex.Matches(html, @"""/Feed(.*?)""");
-            //List<string> FeedNames = new List<string>();
-            //string match = string.Empty;
-            //string feedName = string.Empty;
-            //for (int i = 0; i < matches.Count; i = i + 3) {
-            //    match = matches[i].Value;
-            //    feedName = match.Replace(@"/Feed/", "").Replace("%20", " ").Replace("%40", " ").Replace("%26", " ").Replace("%39", " ").Replace("%2C", " ");
-            //    FeedNames.Add(feedName);
-            //}
-
             int pos1 = 0;   // start of link
             int pos2 = 0;   // end of link
             int pos3 = 0;   // start of age
@@ -105,5 +95,34 @@ namespace FeedReader.Services {
 
             return feeds;
         }
+
+        /*
+        Algorithm notes:
+        1) Search for /Feed - pos1
+        2) Search for \ - pos2
+        3) Substring from pos1 to pos2
+        4) Concatenate http?//www.comicsyndicate.org to 3 - this gets whole link
+        5) Substring 4 from start+35 to end - this gets name
+        6) Replace %20 with space in name
+        7) Replace %40 with space in name
+        8) Replace %26 with space in name
+        9) Replace %39 with space in name
+        10) Replace %2C with space in name
+
+        Example:
+        3) /Feed/1977%20The%20comic\
+        4) http://www.comicsyndicate.org/Feed/1977%20The%20comic - link
+        5) 1977%20The%20comic - name
+        10) 1977 The comic
+
+        Each link/name repeats 3 times so skip occurrence 2 and 3
+
+        After the 3rd repetition search for LastUpdated:
+        1) Search for >
+        2) Search for </a>
+        3) Substring from start+1 to end-1
+        4) Trim from both ends
+        
+        */
     }
 }
