@@ -30,6 +30,7 @@ namespace AW.WebAPI.Controllers
             }
         }
 
+        // Get one Person
         public HttpResponseMessage GetPerson(int id) {
             try {
                 PersonPOCO personPOCO = businessLayer.GetPersonById(id);
