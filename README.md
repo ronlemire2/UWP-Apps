@@ -23,7 +23,7 @@ In order to run NFLWatcher Highlights you must enter your YouTube API key into t
 7. Event Aggregator
 8. Testing
 
-Screenshots at https://github.com/ronlemire2/UWP-ScreenshotViewer.
+Screenshots at https://github.com/ronlemire2/UWP-Apps/tree/master/ScreenshotViewer.
 
 **Syncfusion Community Edition**
 
