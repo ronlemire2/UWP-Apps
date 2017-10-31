@@ -8,7 +8,7 @@
 
 **NFLWatcher**
 
-A UWP Prism Client written in C# XAML that is based on the MVVM pattern. Its purpose is to display NFL Schedule and GameScore data. It does not do any updating of this data. NFLService uses HttpClient to get NFL data from a public feed. Currently it displays the Weekly Schedules of NFL games by Year, SeasonType, and Week in a ListView. Select a Game in the ListView and you will be taken to Game's BoxScore. On the BoxScore Page press the Hightlights button to get game videos from YouTube. Future enhancements include PlayByPlay and PlayerStats. Go to ronlemire/ScreenshotViewer to see some sample schedule and box score data.
+A UWP Prism Client written in C# XAML that is based on the MVVM pattern. Its purpose is to display NFL Schedule and GameScore data. It does not do any updating of this data. NFLService uses HttpClient to get NFL data from a public feed. Currently it displays the Weekly Schedules of NFL games by Year, SeasonType, and Week in a ListView. Select a Game in the ListView and you will be taken to Game's BoxScore. On the BoxScore Page press the Hightlights button to get game videos from YouTube. Future enhancements include PlayByPlay and PlayerStats. Go to ronlemire/UWP-APPS/ScreenshotViewer to see some sample schedule and box score data.
 
 In order to run NFLWatcher Highlights you must enter your YouTube API key into the SearchYouTube method of the MyYouTubeService class. To get a free YouTube API Key go to: https://developers.google.com/youtube/v3/getting-started. There is a usage limit on the free account. The Hightlights Page is also a YouTube search page. Enter any text in the Search textbox and press the Search button to get YouTube videos on that search item.
 
